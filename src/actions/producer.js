@@ -35,6 +35,6 @@ export const producerFetchData = (id: string) => (dispatch: Function) => {
       return response
     })
     .then(response => response.json())
-    .then(producer => dispatch(producerFetchDataSuccess(producer)))
+    .then(data => dispatch(producerFetchDataSuccess(data.data.producer)))
     .catch(() => dispatch(producerHasErrored(true)))
 }

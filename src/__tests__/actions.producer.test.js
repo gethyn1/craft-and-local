@@ -15,9 +15,11 @@ const mockStore = configureMockStore([thunkMiddleware])
 
 /* eslint-disable */
 const mockJSON = {
-  "producer": {
-    "id": "1",
-    "title": "Test producer",
+  "data": {
+    "producer": {
+      "id": "1",
+      "title": "Test producer",
+    }
   }
 }
 /* eslint-enable */
@@ -35,7 +37,7 @@ test('Fetch producer from API: success', () => {
       expect(store.getActions()).toEqual([
         producerIsLoading(true),
         producerIsLoading(false),
-        producerFetchDataSuccess(mockJSON),
+        producerFetchDataSuccess(mockJSON.data.producer),
       ])
     })
 })

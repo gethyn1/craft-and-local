@@ -15,12 +15,14 @@ const mockStore = configureMockStore([thunkMiddleware])
 
 /* eslint-disable */
 const mockJSON = {
-  "categories": [
-    {
-      "id": "1",
-      "title": "Test category",
-    }
-  ]
+  "data": {
+    "categories": [
+      {
+        "id": "1",
+        "title": "Test category",
+      }
+    ]
+  }
 }
 /* eslint-enable */
 
@@ -37,7 +39,7 @@ test('Fetch categories from API: success', () => {
       expect(store.getActions()).toEqual([
         categoriesIsLoading(true),
         categoriesIsLoading(false),
-        categoriesFetchDataSuccess(mockJSON),
+        categoriesFetchDataSuccess(mockJSON.data.categories),
       ])
     })
 })

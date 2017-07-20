@@ -35,6 +35,6 @@ export const categoriesFetchData = () => (dispatch: Function) => {
       return response
     })
     .then(response => response.json())
-    .then(categories => dispatch(categoriesFetchDataSuccess(categories)))
+    .then(data => dispatch(categoriesFetchDataSuccess(data.data.categories)))
     .catch(() => dispatch(categoriesHasErrored(true)))
 }
