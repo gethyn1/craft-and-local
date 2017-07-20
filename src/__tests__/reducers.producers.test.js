@@ -1,4 +1,4 @@
-import { initialState, producers } from '../reducers/producers'
+import { initialState, producers, createProducerMarkers } from '../reducers/producers'
 
 import {
   PRODUCERS_IS_LOADING,
@@ -6,6 +6,8 @@ import {
   PRODUCERS_FETCH_DATA_SUCCESS,
   PRODUCERS_FILTER_BY_CATEGORY,
 } from '../actions/producers'
+
+import mockProducers from '../data/mock-producers'
 
 const loadingTestState = Object.assign({}, initialState, {
   isLoading: true,
@@ -16,10 +18,11 @@ const erroredTestState = Object.assign({}, initialState, {
 })
 
 const producersTestState = Object.assign({}, initialState, {
-  producers: [{ id: '123', title: 'test title', categories: ['1', '2'] }],
+  producers: mockProducers,
+  markers: createProducerMarkers(mockProducers),
 })
 
-describe('Categories reducer', () => {
+describe('Producers reducer', () => {
   it('should return the initial state', () => {
     expect(producers(undefined, {})).toEqual(initialState)
   })
@@ -48,7 +51,7 @@ describe('Categories reducer', () => {
     expect(
       producers(initialState, {
         type: PRODUCERS_FETCH_DATA_SUCCESS,
-        payload: [{ id: '123', title: 'test title', categories: ['1', '2'] }],
+        payload: mockProducers,
       }),
     )
     .toEqual(producersTestState)
@@ -58,7 +61,7 @@ describe('Categories reducer', () => {
     expect(
       producers(producersTestState, {
         type: PRODUCERS_FILTER_BY_CATEGORY,
-        payload: '1',
+        payload: mockProducers[0].categories[0],
       }),
     )
     .toEqual(producersTestState)

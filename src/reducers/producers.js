@@ -4,14 +4,23 @@ import {
   PRODUCERS_IS_LOADING,
   PRODUCERS_HAS_ERRORED,
   PRODUCERS_FETCH_DATA_SUCCESS,
-  PRODUCERS_FILTER_BY_CATEGORY,
 } from '../actions/producers'
 
 export const initialState = {
   isLoading: false,
   hasErrored: false,
   producers: [],
+  markers: [],
 }
+
+// Generate an array of markers to place on Google Map.
+export const createProducerMarkers = (producers: Array<Object>) => (
+  producers.map(producer => ({
+    lat: producer.location.coordinates[1],
+    lng: producer.location.coordinates[0],
+    title: producer.title,
+  }))
+)
 
 export const producers = (state: Object = initialState, action: { type: string, payload: any }) => {
   switch (action.type) {
@@ -25,11 +34,8 @@ export const producers = (state: Object = initialState, action: { type: string, 
       })
     case PRODUCERS_FETCH_DATA_SUCCESS:
       return Object.assign({}, state, {
+        markers: createProducerMarkers(action.payload),
         producers: action.payload,
-      })
-    case PRODUCERS_FILTER_BY_CATEGORY:
-      return Object.assign({}, state, {
-        producers: state.producers.filter(producer => producer.categories.includes(action.payload)),
       })
     default:
       return state

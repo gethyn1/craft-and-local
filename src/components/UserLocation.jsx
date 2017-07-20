@@ -11,6 +11,7 @@ type Props = {
   latitude: number,
   address: string,
   getUserLocation: Function,
+  markers: Array<Object>,
 }
 
 class UserLocation extends React.Component {
@@ -24,7 +25,7 @@ class UserLocation extends React.Component {
   props: Props
 
   render() {
-    const { isLoading, hasErrored, latitude, longitude, address } = this.props
+    const { isLoading, hasErrored, latitude, longitude, address, markers } = this.props
 
     if (isLoading) {
       return <p>Finding your location ...</p>
@@ -36,13 +37,14 @@ class UserLocation extends React.Component {
 
     return (
       <div>
-        <p>
-          Your location:<br />
-          <strong>latitude:</strong> {latitude}<br />
-          <strong>longitude:</strong> {longitude}<br />
-          {address}
-        </p>
-        <GoogleMap longitude={longitude} latitude={latitude} zoom={15} />
+        <p>Your location: {address}</p>
+        <GoogleMap
+          longitude={longitude}
+          latitude={latitude}
+          zoom={12}
+          markers={markers}
+          addCenterMarker={false}
+        />
       </div>
     )
   }

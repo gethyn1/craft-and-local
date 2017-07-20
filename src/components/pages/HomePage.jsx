@@ -7,6 +7,7 @@ import { APP_NAME } from '../../config'
 
 import AllProducers from '../../containers/AllProducers'
 import Categories from '../../containers/Categories'
+import CurrentLocation from '../../containers/CurrentLocation'
 
 const title = 'Home'
 
@@ -19,6 +20,7 @@ const HomePage = () => (
         { property: 'og:title', content: `${APP_NAME}: ${title}` },
       ]}
     />
+    <CurrentLocation />
     <Categories />
     <AllProducers />
   </div>

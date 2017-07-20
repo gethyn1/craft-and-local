@@ -42,8 +42,8 @@ export const producersFetchData = (latLng: Object) => (dispatch: Function) => {
 }
 
 export const producersFilterByCategory = (id: string, latLng: Object) => (dispatch: Function) => {
+  // If a category ID is not specified, return an empty array.
   if (!id) {
-    // If a category ID is not specified, return an empty array.
     return []
   }
 

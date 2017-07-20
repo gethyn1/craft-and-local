@@ -10,6 +10,7 @@ const mapStateToProps = state => ({
   latitude: state.location.latitude,
   longitude: state.location.longitude,
   address: state.location.address,
+  markers: state.producers.markers,
 })
 
 const mapDispatchToProps = dispatch => ({
