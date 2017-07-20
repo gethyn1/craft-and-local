@@ -43,7 +43,7 @@ class ProducersList extends React.Component {
 
       return (
         <li key={producer._id} className={styles.item}>
-          <Link to={`/producer/${producer._id}`} className={styles.link}>{producer.title}</Link><br />
+          <Link to={`/producer/${producer.user_id}`} className={styles.link}>{producer.title}</Link><br />
           <Distance
             from={{ lat: this.props.lat, lng: this.props.lng }}
             to={{ lat: coords[1], lng: coords[0] }}

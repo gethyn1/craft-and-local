@@ -8,7 +8,7 @@ import { producerFetchData } from '../actions/producer'
 import Producer from '../components/Producer'
 
 const mapStateToProps = (state, ownProps) => ({
-  producerId: ownProps.match.params.producerId,
+  producerId: ownProps.match.params.userId,
   producer: state.producer.producer,
 })
 

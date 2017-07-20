@@ -15,7 +15,7 @@ const App = () => (
     <TopBar />
     <Switch>
       <Route exact path={'/'} render={() => <HomePage />} />
-      <Route path={'/producer/:producerId'} render={() => <ProducerPage />} />
+      <Route path={'/producer/:userId'} render={() => <ProducerPage />} />
     </Switch>
   </Container>
 )
