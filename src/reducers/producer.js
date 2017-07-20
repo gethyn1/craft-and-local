@@ -12,9 +12,8 @@ export const initialState = {
   producer: {
     title: '',
     description: '',
-    latLng: {
-      lat: 0,
-      lng: 0,
+    location: {
+      coordinates: [0, 0],
     },
   },
 }

@@ -38,12 +38,19 @@ class ProducersList extends React.Component {
   props: Props
 
   render() {
-    const producers = this.props.producers.map(producer => (
-      <li key={producer._id} className={styles.item}>
-        <Link to={`/producer/${producer._id}`} className={styles.link}>{producer.title}</Link><br />
-        <Distance from={{ lat: this.props.lat, lng: this.props.lng }} to={producer.latLng} />
-      </li>
-    ))
+    const producers = this.props.producers.map((producer) => {
+      const coords = producer.location.coordinates
+
+      return (
+        <li key={producer._id} className={styles.item}>
+          <Link to={`/producer/${producer._id}`} className={styles.link}>{producer.title}</Link><br />
+          <Distance
+            from={{ lat: this.props.lat, lng: this.props.lng }}
+            to={{ lat: coords[1], lng: coords[0] }}
+          />
+        </li>
+      )
+    })
 
     if (this.props.hasErrored) {
       return <p>There was an error getting producers</p>

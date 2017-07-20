@@ -25,22 +25,15 @@ class Producer extends React.Component {
     return (
       <div>
         <h1>{producer.title}</h1>
-        <GoogleMap longitude={producer.latLng.lng} latitude={producer.latLng.lat} zoom={15} />
+        <GoogleMap
+          longitude={producer.location.coordinates[0]}
+          latitude={producer.location.coordinates[1]}
+          zoom={15}
+        />
         <p>{producer.description}</p>
       </div>
     )
   }
-}
-
-Producer.defaultProps = {
-  producer: {
-    title: '',
-    description: '',
-    latLng: {
-      lat: 0,
-      lng: 0,
-    },
-  },
 }
 
 export default Producer
