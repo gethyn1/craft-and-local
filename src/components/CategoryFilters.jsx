@@ -10,6 +10,8 @@ type Props = {
   categories: Array<Object>,
   fetchData: Function,
   onClickFilter: Function,
+  lat: number,
+  lng: number,
 }
 
 class CategoryFilters extends React.Component {
@@ -20,18 +22,20 @@ class CategoryFilters extends React.Component {
   props: Props
 
   render() {
-    const { categories, onClickFilter } = this.props
+    const { categories, onClickFilter, lat, lng } = this.props
 
     const filters = categories.map(category => (
-      <li key={category.id}>
-        <button onClick={() => { onClickFilter(category.id) }}>{category.title}</button>
+      <li key={category._id}>
+        <button onClick={() => { onClickFilter({ lat, lng }, category._id) }}>
+          {category.title}
+        </button>
       </li>
     ))
 
     return (
       <ListInline>
         <li>
-          <button onClick={() => { onClickFilter() }}>All</button>
+          <button onClick={() => { onClickFilter({ lat, lng }) }}>All</button>
         </li>
         {filters}
       </ListInline>

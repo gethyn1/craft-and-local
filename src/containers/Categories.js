@@ -14,17 +14,19 @@ const mapStateToProps = state => ({
   categories: state.categories.categories,
   hasErrored: state.categories.hasErrored,
   isLoading: state.categories.isLoading,
+  lat: state.location.latitude,
+  lng: state.location.longitude,
 })
 
 const mapDispatchToProps = dispatch => ({
   fetchData: () => {
     dispatch(categoriesFetchData())
   },
-  onClickFilter: (id: ?string) => {
+  onClickFilter: (latLng: Object, id: ?string) => {
     if (id) {
-      dispatch(producersFilterByCategory(id))
+      dispatch(producersFilterByCategory(id, latLng))
     } else {
-      dispatch(producersFetchData())
+      dispatch(producersFetchData(latLng))
     }
   },
 })

@@ -9,7 +9,14 @@ import {
 export const initialState = {
   isLoading: false,
   hasErrored: false,
-  producer: {},
+  producer: {
+    title: '',
+    description: '',
+    latLng: {
+      lat: 0,
+      lng: 0,
+    },
+  },
 }
 
 export const producer = (state: Object = initialState, action: { type: string, payload: any }) => {

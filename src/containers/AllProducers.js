@@ -1,3 +1,5 @@
+// @flow
+
 import { connect } from 'react-redux'
 
 import { producersFetchData } from '../actions/producers'
@@ -13,8 +15,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchData: () => {
-    dispatch(producersFetchData())
+  fetchData: (latLng: Object) => {
+    dispatch(producersFetchData(latLng))
   },
 })
 

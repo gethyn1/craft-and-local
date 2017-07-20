@@ -22,8 +22,9 @@ export const producersFetchDataSuccess = (payload: Array<Object>) => ({
   payload,
 })
 
-export const producersFetchData = () => (dispatch: Function) => {
-  const url = API_URL_PRODUCERS
+export const producersFetchData = (latLng: Object) => (dispatch: Function) => {
+  const url = latLng ? `${API_URL_PRODUCERS}?latlng=${latLng.lat},${latLng.lng}` : API_URL_PRODUCERS
+
   dispatch(producersIsLoading(true))
 
   return fetch(url, { method: 'GET' })
@@ -40,8 +41,16 @@ export const producersFetchData = () => (dispatch: Function) => {
     .catch(() => dispatch(producersHasErrored(true)))
 }
 
-export const producersFilterByCategory = (id: string) => (dispatch: Function) => {
-  const url = `${API_URL_PRODUCERS}?categories_like=${id}`
+export const producersFilterByCategory = (id: string, latLng: Object) => (dispatch: Function) => {
+  if (!id) {
+    // If a category ID is not specified, return an empty array.
+    return []
+  }
+
+  const url = latLng
+    ? `${API_URL_PRODUCERS}?categories_like=${id}&latlng=${latLng.lat},${latLng.lng}`
+    : `${API_URL_PRODUCERS}?categories_like=${id}`
+
   dispatch(producersIsLoading(true))
 
   return fetch(url, { method: 'GET' })

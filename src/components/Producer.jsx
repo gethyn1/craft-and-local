@@ -2,6 +2,8 @@
 
 import React from 'react'
 
+import GoogleMap from './GoogleMap'
+
 type Props = {
   producerId: string,
   producer: Object,
@@ -9,6 +11,8 @@ type Props = {
 }
 
 class Producer extends React.Component {
+  static defaultProps: Object
+
   componentDidMount() {
     this.props.fetchData(this.props.producerId)
   }
@@ -21,10 +25,22 @@ class Producer extends React.Component {
     return (
       <div>
         <h1>{producer.title}</h1>
+        <GoogleMap longitude={producer.latLng.lng} latitude={producer.latLng.lat} zoom={15} />
         <p>{producer.description}</p>
       </div>
     )
   }
+}
+
+Producer.defaultProps = {
+  producer: {
+    title: '',
+    description: '',
+    latLng: {
+      lat: 0,
+      lng: 0,
+    },
+  },
 }
 
 export default Producer

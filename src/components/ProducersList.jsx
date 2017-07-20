@@ -18,17 +18,29 @@ type Props = {
 
 }
 
-class PostsList extends React.Component {
+class ProducersList extends React.Component {
   componentDidMount() {
-    this.props.fetchData()
+    const { lat, lng } = this.props
+
+    if (lat && lng) {
+      this.props.fetchData({ lat, lng })
+    }
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    const { lat, lng } = nextProps
+
+    if (lat !== this.props.lat && lng !== this.props.lng) {
+      this.props.fetchData({ lat, lng })
+    }
   }
 
   props: Props
 
   render() {
     const producers = this.props.producers.map(producer => (
-      <li key={producer.id} className={styles.item}>
-        <Link to={`/producer/${producer.id}`} className={styles.link}>{producer.title}</Link><br />
+      <li key={producer._id} className={styles.item}>
+        <Link to={`/producer/${producer._id}`} className={styles.link}>{producer.title}</Link><br />
         <Distance from={{ lat: this.props.lat, lng: this.props.lng }} to={producer.latLng} />
       </li>
     ))
@@ -55,4 +67,4 @@ class PostsList extends React.Component {
   }
 }
 
-export default PostsList
+export default ProducersList
