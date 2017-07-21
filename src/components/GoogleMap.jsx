@@ -45,15 +45,17 @@ class GoogleMap extends React.Component {
     this.mapContainer = null
   }
 
-  componentWillReceiveProps({
-    latitude,
-    longitude,
-    zoom,
-    markers,
-    addCenterMarker,
-    isScriptLoaded,
-    isScriptLoadSucceed,
-  }: Props) {
+  componentWillReceiveProps(nextProps: Props) {
+    const {
+      latitude,
+      longitude,
+      zoom,
+      markers,
+      addCenterMarker,
+      isScriptLoaded,
+      isScriptLoadSucceed,
+    } = nextProps
+
     if (isScriptLoaded && isScriptLoadSucceed) {
       // flow-disable-next-line
       this.map = new google.maps.Map(this.mapContainer, {

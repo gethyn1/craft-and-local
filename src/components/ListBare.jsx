@@ -9,7 +9,7 @@ type Props = {
 }
 
 const ListBare = ({ children }: Props) => (
-  <ul className={styles.list}>
+  <ul className={styles['o-list-bare']}>
     {children}
   </ul>
 )
