@@ -1,0 +1,34 @@
+/* ==========================================================================
+   #BUTTON
+   ========================================================================== */
+
+@import '../global-import';
+
+.card {
+  border: 1px solid $silver-satin;
+  border-radius: $global-radius;
+  color: inherit;
+  display: block;
+  padding: rem($global-spacing-unit);
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    .title {
+      color: $palette-primary;
+    }
+  }
+}
+
+.icon {
+  margin-bottom: rem($global-spacing-unit-sm);
+}
+
+.title {
+  font-size: rem(16);
+  text-transform: uppercase;
+}
+
+.distance {
+  font-size: rem($small-font-size);
+}

@@ -7,7 +7,7 @@
 
 /// Specify heights for svg icon classes
 /// @group icons
-$icon-sizes: 20 32;
+$icon-sizes: 20 32 50;
 
 /// Specify ratios for irregular width icons (height / width). Icons widths
 /// are calculated based on specified heights so irregular width icons can
@@ -20,5 +20,6 @@ $icon-ratios: (
 	handbag: 1.5,
 	instagram: 1,
 	search: 1.1347,
-	twitter: 1.125
+	twitter: 1.125,
+	wine: 1.25,
 );

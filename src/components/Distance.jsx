@@ -62,7 +62,7 @@ class Distance extends React.Component {
 
   render() {
     return (
-      <p>Distance: {this.distance} miles</p>
+      <span>{this.distance} miles</span>
     )
   }
 }

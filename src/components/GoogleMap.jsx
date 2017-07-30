@@ -98,7 +98,7 @@ class GoogleMap extends React.Component {
 
   render() {
     const mapStyles = {
-      height: '30%',
+      height: '400px',
       width: '100%',
     }
 

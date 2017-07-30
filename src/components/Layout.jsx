@@ -12,6 +12,7 @@ type Props = {
 type ItemProps = {
   children: React.Element<*>,
   cols: string,
+  className?: string,
 }
 
 export const Layout = ({ children, size }: Props) => {
@@ -28,12 +29,16 @@ Layout.defaultProps = {
   size: '',
 }
 
-export const LayoutItem = ({ children, cols }: ItemProps) => {
+export const LayoutItem = ({ children, cols, className }: ItemProps) => {
   const widthClass = cols ? `u-${cols}` : ''
 
   return (
-    <div className={`${styles['o-layout__item']} ${String(widthClass)}`}>
+    <div className={`${styles['o-layout__item']} ${String(widthClass)} ${String(className)}`}>
       {children}
     </div>
   )
+}
+
+LayoutItem.defaultProps = {
+  className: '',
 }

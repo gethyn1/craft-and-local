@@ -1,12 +1,9 @@
 // @flow
 
 import React from 'react'
-import { Link } from 'react-router-dom'
 
-import Distance from './Distance'
-import ListBare from './ListBare'
-
-import styles from '../styles/6-components/_components.producers-list.scss'
+import { Layout, LayoutItem } from './Layout'
+import ProducerCard from './ProducerCard'
 
 type Props = {
   producers: Array<Object>,
@@ -38,19 +35,11 @@ class ProducersList extends React.Component {
   props: Props
 
   render() {
-    const producers = this.props.producers.map((producer) => {
-      const coords = producer.location.coordinates
-
-      return (
-        <li key={producer._id} className={styles.item}>
-          <Link to={`/producer/${producer.user_id}`} className={styles.link}>{producer.title}</Link><br />
-          <Distance
-            from={{ lat: this.props.lat, lng: this.props.lng }}
-            to={{ lat: coords[1], lng: coords[0] }}
-          />
-        </li>
-      )
-    })
+    const producers = this.props.producers.map(producer => (
+      <LayoutItem key={producer._id} cols="1/3@tablet" className="u-margin-bottom">
+        <ProducerCard producer={producer} {...this.props} />
+      </LayoutItem>
+    ))
 
     if (this.props.hasErrored) {
       return <p>There was an error getting producers</p>
@@ -66,9 +55,9 @@ class ProducersList extends React.Component {
 
     return (
       <div>
-        <ListBare>
+        <Layout>
           {producers}
-        </ListBare>
+        </Layout>
       </div>
     )
   }
