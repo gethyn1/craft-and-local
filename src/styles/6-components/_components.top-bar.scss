@@ -5,8 +5,9 @@
 @import '../global-import';
 
 .root {
-  margin-bottom: rem($global-spacing-unit-lg);
+  border-bottom: 1px solid rgba(0,0,0,.0975);
   padding-top: rem($global-spacing-unit);
+  padding-bottom: rem($global-spacing-unit);
   position: relative;
 }
 
@@ -16,8 +17,7 @@
 
 .branding {
   display: block;
-  margin-bottom: rem($global-spacing-unit-sm);
-  text-align: center;
+  margin-bottom: -10px; /* Magic number */
 }
 
 .logo {
@@ -25,7 +25,7 @@
   display: inline-block;
   font-weight: normal;
   font-family: 'Quotes Script', sans-serif;
-  font-size: rem(50);
+  font-size: rem(30);
   text-decoration: none;
 
   &:hover {

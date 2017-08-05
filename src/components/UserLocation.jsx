@@ -5,11 +5,11 @@ import React from 'react'
 import GoogleMap from './GoogleMap'
 
 type Props = {
+  address: string,
   isLoading: boolean,
   hasErrored: boolean,
   longitude: number,
   latitude: number,
-  address: string,
   getUserLocation: Function,
   markers: Array<Object>,
 }
@@ -25,7 +25,7 @@ class UserLocation extends React.Component {
   props: Props
 
   render() {
-    const { isLoading, hasErrored, latitude, longitude, address, markers } = this.props
+    const { isLoading, hasErrored, latitude, longitude, markers } = this.props
 
     if (isLoading) {
       return <p>Finding your location ...</p>
@@ -37,7 +37,6 @@ class UserLocation extends React.Component {
 
     return (
       <div>
-        <p>Your location: {address}</p>
         <GoogleMap
           longitude={longitude}
           latitude={latitude}

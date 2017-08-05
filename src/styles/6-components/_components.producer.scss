@@ -1,5 +1,15 @@
 /* ==========================================================================
-   #PRODUCERS
+   #PRODUCER
    ========================================================================== */
 
 @import '../global-import';
+
+.root {
+  background: #fafafa;
+  padding-bottom: rem($global-spacing-unit-lg);
+  padding-top: rem($global-spacing-unit-lg);
+}
+
+.title {
+  font-weight: normal;
+}

@@ -13,7 +13,7 @@ const InstagramFeed = ({ items }: Props) => {
     const caption = item.caption ? item.caption.text : ''
 
     return (
-      <LayoutItem key={item.id} cols="1/5">
+      <LayoutItem key={item.id} cols="1/4">
         <img src={item.images.standard_resolution.url} alt={caption} />
       </LayoutItem>
     )

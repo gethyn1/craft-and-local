@@ -15,7 +15,9 @@
   cursor: pointer;
   border-radius: $global-radius;
   height: rem(40);
+  font-size: rem($small-font-size);
   padding: 0 rem($global-spacing-unit);
+  white-space: nowrap;
 
   &:hover,
   &.active {
