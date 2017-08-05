@@ -1,0 +1,29 @@
+/* ==========================================================================
+   #BUTTON
+   ========================================================================== */
+
+@import '../global-import';
+
+.filter-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter {
+  background: rgba(0,0,0,0.05);
+  border: none;
+  cursor: pointer;
+  border-radius: $global-radius;
+  height: rem(40);
+  padding: 0 rem($global-spacing-unit);
+
+  &:hover,
+  &.active {
+    background: $palette-primary;
+    color: #fff;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

@@ -11,7 +11,7 @@ type Props = {
 }
 
 const ListInline = ({ children, className, bare }: Props) => (
-  <ul className={`${styles.list} ${String(className)} ${bare ? 'bare' : ''}`}>
+  <ul className={`${styles.list} ${String(className)} ${bare ? styles.bare : ''}`}>
     {children}
   </ul>
 )

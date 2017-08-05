@@ -60,6 +60,7 @@ class GoogleMap extends React.Component {
       // flow-disable-next-line
       this.map = new google.maps.Map(this.mapContainer, {
         zoom,
+        scrollwheel: false,
       })
 
       if (this.map && latitude && longitude) {

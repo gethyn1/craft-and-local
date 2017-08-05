@@ -12,7 +12,6 @@ const TopBar = () => (
     <h1 className={styles.branding}>
       <Link to="/" className={styles.logo}>{APP_NAME}</Link>
     </h1>
-    <p>Local producers in your area ...</p>
   </div>
 )
 

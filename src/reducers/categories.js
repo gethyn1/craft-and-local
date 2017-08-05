@@ -4,12 +4,14 @@ import {
   CATEGORIES_IS_LOADING,
   CATEGORIES_HAS_ERRORED,
   CATEGORIES_FETCH_DATA_SUCCESS,
+  CATEGORIES_SET_ACTIVE_CATEGORY,
 } from '../actions/categories'
 
 export const initialState = {
   isLoading: false,
   hasErrored: false,
   categories: [],
+  active: null,
 }
 
 export const categories = (
@@ -28,6 +30,10 @@ export const categories = (
     case CATEGORIES_FETCH_DATA_SUCCESS:
       return Object.assign({}, state, {
         categories: action.payload,
+      })
+    case CATEGORIES_SET_ACTIVE_CATEGORY:
+      return Object.assign({}, state, {
+        active: action.payload,
       })
     default:
       return state

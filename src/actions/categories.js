@@ -5,6 +5,7 @@ import { API_URL_CATEGORIES } from '../config'
 export const CATEGORIES_IS_LOADING = 'CATEGORIES_IS_LOADING'
 export const CATEGORIES_HAS_ERRORED = 'CATEGORIES_HAS_ERRORED'
 export const CATEGORIES_FETCH_DATA_SUCCESS = 'CATEGORIES_FETCH_DATA_SUCCESS'
+export const CATEGORIES_SET_ACTIVE_CATEGORY = 'CATEGORIES_SET_ACTIVE_CATEGORY'
 
 export const categoriesIsLoading = (payload: boolean) => ({
   type: CATEGORIES_IS_LOADING,
@@ -18,6 +19,11 @@ export const categoriesHasErrored = (payload: boolean) => ({
 
 export const categoriesFetchDataSuccess = (payload: Array<Object>) => ({
   type: CATEGORIES_FETCH_DATA_SUCCESS,
+  payload,
+})
+
+export const categoriesSetActiveCategory = (payload: ?string) => ({
+  type: CATEGORIES_SET_ACTIVE_CATEGORY,
   payload,
 })
 

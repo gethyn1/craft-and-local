@@ -2,7 +2,10 @@
 
 import { connect } from 'react-redux'
 
-import { categoriesFetchData } from '../actions/categories'
+import {
+  categoriesFetchData,
+  categoriesSetActiveCategory,
+} from '../actions/categories'
 import {
   producersFetchData,
   producersFilterByCategory,
@@ -11,6 +14,7 @@ import {
 import CategoryFilters from '../components/CategoryFilters'
 
 const mapStateToProps = state => ({
+  active: state.categories.active,
   categories: state.categories.categories,
   hasErrored: state.categories.hasErrored,
   isLoading: state.categories.isLoading,
@@ -25,8 +29,10 @@ const mapDispatchToProps = dispatch => ({
   onClickFilter: (latLng: Object, id: ?string) => {
     if (id) {
       dispatch(producersFilterByCategory(id, latLng))
+      dispatch(categoriesSetActiveCategory(id))
     } else {
       dispatch(producersFetchData(latLng))
+      dispatch(categoriesSetActiveCategory(null))
     }
   },
 })
