@@ -85,11 +85,19 @@ class Producer extends React.Component {
       return <p>Loading producer ...</p>
     }
 
+    const categories = producer.categories.map((category, i) => (
+      <span key={category._id}>
+        <span>{category.title}</span>
+        {i + 1 === producer.categories.length ? null : ', '}
+      </span>
+    ))
+
     return (
       <div className={styles.root}>
         <Container>
           <div className="u-margin-bottom-lg">
             <h1 className={`${styles.title} u-h1`}>{producer.title}</h1>
+            <p>{categories}</p>
             <Button>Share</Button>
             <p>{producer.description}</p>
           </div>

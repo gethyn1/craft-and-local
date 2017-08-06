@@ -3,7 +3,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import Icon from './Icon'
+// import Icon from './Icon'
 import Distance from './Distance'
 
 // eslint-disable-next-line no-unused-vars
@@ -20,12 +20,20 @@ type Props = {
 const ProducerCard = ({ producer, lat, lng }: Props) => {
   const coords = producer.location.coordinates
 
+  const categories = producer.categories.map((category, i) => (
+    <span key={category._id}>
+      <span>{category.title}</span>
+      {i + 1 === producer.categories.length ? null : ', '}
+    </span>
+  ))
+
   return (
     <Link className={styles.card} to={`/producer/${producer.user_id}`}>
       <div className={styles.icon}>
-        <Icon type="wine" size="50" />
+        {/* <Icon type="wine" size="50" /> */}
       </div>
       <h2 className={styles.title}>{producer.title}</h2>
+      <p>{categories}</p>
       <div className={styles.distance}>
         <Distance
           from={{ lat, lng }}
