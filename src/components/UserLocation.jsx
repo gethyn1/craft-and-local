@@ -36,7 +36,7 @@ class UserLocation extends React.Component {
     }
 
     return (
-      <div>
+      <div style={{ height: '400px' }}>
         <GoogleMap
           longitude={longitude}
           latitude={latitude}

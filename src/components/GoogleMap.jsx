@@ -98,8 +98,9 @@ class GoogleMap extends React.Component {
   }
 
   render() {
+    // Ensure map fills 100% of parent's width and height.
     const mapStyles = {
-      height: '400px',
+      height: '100%',
       width: '100%',
     }
 

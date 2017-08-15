@@ -14,10 +14,11 @@ import App from './components/App'
 import sass from './styles/style.scss'
 
 // Redux
+import * as categories from './reducers/categories'
+import * as createProducer from './reducers/createProducer'
 import * as location from './reducers/location'
 import * as producer from './reducers/producer'
 import * as producers from './reducers/producers'
-import * as categories from './reducers/categories'
 import rootReducer from './reducers/index'
 
 /* eslint-disable no-underscore-dangle */
@@ -25,10 +26,11 @@ const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMP
 /* eslint-enable no-underscore-dangle */
 
 const defaultState = {
+  categories: categories.initialState,
+  createProducer: createProducer.initialState,
   location: location.initialState,
   producer: producer.initialState,
   producers: producers.initialState,
-  categories: categories.initialState,
 }
 
 const store = createStore(
