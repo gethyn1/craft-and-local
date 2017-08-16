@@ -7,6 +7,7 @@ import { createProducer } from './createProducer'
 import { location } from './location'
 import { producer } from './producer'
 import { producers } from './producers'
+import { session } from './session'
 
 const rootReducer = combineReducers({
   categories,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   location,
   producer,
   producers,
+  session,
 })
 
 export default rootReducer

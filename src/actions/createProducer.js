@@ -26,12 +26,21 @@ export const createProducerPostData = (producer: Object) => (dispatch: Function)
   dispatch(createProducerHasErrored(false))
   dispatch(createProducerIsLoading(true))
 
+  const headers = new Headers({
+    'Content-Type': 'application/json',
+  })
+
+  const jwtToken = sessionStorage.getItem('jwt')
+
+  if (jwtToken !== null) {
+    // flow-disable-next-line
+    headers.set('Authorization', jwtToken)
+  }
+
   return fetch(url, {
     method: 'POST',
     body: JSON.stringify(producer),
-    headers: new Headers({
-      'Content-Type': 'application/json',
-    }),
+    headers,
   })
     .then((response) => {
       if (!response.ok) {

@@ -19,6 +19,7 @@ import * as createProducer from './reducers/createProducer'
 import * as location from './reducers/location'
 import * as producer from './reducers/producer'
 import * as producers from './reducers/producers'
+import * as session from './reducers/session'
 import rootReducer from './reducers/index'
 
 /* eslint-disable no-underscore-dangle */
@@ -31,6 +32,7 @@ const defaultState = {
   location: location.initialState,
   producer: producer.initialState,
   producers: producers.initialState,
+  session: session.initialState,
 }
 
 const store = createStore(
