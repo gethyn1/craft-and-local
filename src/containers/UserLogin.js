@@ -12,6 +12,7 @@ const mapStateToProps = (state: Object) => ({
   isLoading: state.session.isLoading,
   hasErrored: state.session.hasErrored,
   isLoggedIn: state.session.isLoggedIn,
+  referrerPath: state.session.authReferrerPath,
 })
 
 const mapDispatchToProps = (dispatch: Function) => ({

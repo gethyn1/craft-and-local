@@ -5,6 +5,7 @@ import { API_URL_USER_AUTH } from '../config'
 export const SESSION_LOGIN_IS_LOADING = 'SESSION_LOGIN_IS_LOADING'
 export const SESSION_LOGIN_HAS_ERRORED = 'SESSION_LOGIN_HAS_ERRORED'
 export const SESSION_LOGIN_SUCCESS = 'SESSION_LOGIN_SUCCESS'
+export const SESSION_LOGIN_SET_REFERRER_PATH = 'SESSION_LOGIN_SET_REFERRER_PATH'
 
 export const sessionLoginIsLoading = (payload: boolean) => ({
   type: SESSION_LOGIN_IS_LOADING,
@@ -18,6 +19,11 @@ export const sessionLoginHasErrored = (payload: boolean) => ({
 
 export const sessionLoginSuccess = () => ({
   type: SESSION_LOGIN_SUCCESS,
+})
+
+export const sessionLoginSetReferrerPath = (payload: ?string) => ({
+  type: SESSION_LOGIN_SET_REFERRER_PATH,
+  payload,
 })
 
 export const sessionPostLoginCredentials = (

@@ -1,12 +1,14 @@
 // @flow
 
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 
 type Props = {
   isLoading: boolean,
   hasErrored: boolean,
   isLoggedIn: boolean,
   loginUser: Function,
+  referrerPath: ?string,
 }
 
 type State = {
@@ -70,6 +72,13 @@ class LoginForm extends React.Component {
   }
 
   render() {
+    const from = this.props.referrerPath || '/'
+
+    // Redirect to referrer path if user is logged in
+    if (this.props.isLoggedIn) {
+      return <Redirect to={from} />
+    }
+
     return (
       <form onSubmit={this.handleSubmit}>
         {this.renderLoginStatus()}
