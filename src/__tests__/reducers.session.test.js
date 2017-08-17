@@ -5,6 +5,7 @@ import {
   SESSION_LOGIN_HAS_ERRORED,
   SESSION_LOGIN_SUCCESS,
   SESSION_LOGIN_SET_REFERRER_PATH,
+  SESSION_LOGOUT_SUCCESS,
 } from '../actions/session'
 
 const loadingTestState = Object.assign({}, initialState, {
@@ -70,5 +71,14 @@ describe('Session reducer', () => {
       }),
     )
     .toEqual(referrerPathTestState)
+  })
+
+  it(`should handle ${SESSION_LOGOUT_SUCCESS}`, () => {
+    expect(
+      session(initialState, {
+        type: SESSION_LOGOUT_SUCCESS,
+      }),
+    )
+    .toEqual(initialState)
   })
 })

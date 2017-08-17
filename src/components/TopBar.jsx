@@ -3,6 +3,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import UserLogout from '../containers/UserLogout'
+
 import Container from './Container'
 
 import styles from '../styles/6-components/_components.top-bar.scss'
@@ -15,6 +17,7 @@ const TopBar = () => (
       <h1 className={styles.branding}>
         <Link to="/" className={styles.logo}>{APP_NAME}</Link>
       </h1>
+      <UserLogout />
     </Container>
   </div>
 )

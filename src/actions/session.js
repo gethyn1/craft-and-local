@@ -6,6 +6,7 @@ export const SESSION_LOGIN_IS_LOADING = 'SESSION_LOGIN_IS_LOADING'
 export const SESSION_LOGIN_HAS_ERRORED = 'SESSION_LOGIN_HAS_ERRORED'
 export const SESSION_LOGIN_SUCCESS = 'SESSION_LOGIN_SUCCESS'
 export const SESSION_LOGIN_SET_REFERRER_PATH = 'SESSION_LOGIN_SET_REFERRER_PATH'
+export const SESSION_LOGOUT_SUCCESS = 'SESSION_LOGOUT_SUCCESS'
 
 export const sessionLoginIsLoading = (payload: boolean) => ({
   type: SESSION_LOGIN_IS_LOADING,
@@ -26,6 +27,16 @@ export const sessionLoginSetReferrerPath = (payload: ?string) => ({
   type: SESSION_LOGIN_SET_REFERRER_PATH,
   payload,
 })
+
+export const sessionLogoutSuccess = () => ({
+  type: SESSION_LOGOUT_SUCCESS,
+})
+
+export const sessionLogout = () => (dispatch: Function) => {
+  // Remove the json web token in local storage
+  sessionStorage.removeItem('jwt')
+  dispatch(sessionLogoutSuccess())
+}
 
 export const sessionPostLoginCredentials = (
   username: string,

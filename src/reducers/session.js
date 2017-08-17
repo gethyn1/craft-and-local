@@ -5,6 +5,7 @@ import {
   SESSION_LOGIN_HAS_ERRORED,
   SESSION_LOGIN_SUCCESS,
   SESSION_LOGIN_SET_REFERRER_PATH,
+  SESSION_LOGOUT_SUCCESS,
 } from '../actions/session'
 
 export const initialState = {
@@ -36,6 +37,13 @@ export const session = (state: Object = initialState, action: { type: string, pa
     case SESSION_LOGIN_SET_REFERRER_PATH:
       return Object.assign({}, state, {
         authReferrerPath: action.payload,
+      })
+    case SESSION_LOGOUT_SUCCESS:
+      return Object.assign({}, state, {
+        isLoggedIn: !!sessionStorage.getItem('jwt'),
+        isAdmin: false,
+        userEmail: null,
+        authReferrerPath: null,
       })
     default:
       return state
