@@ -11,6 +11,8 @@ export const initialState = {
   isLoading: false,
   hasErrored: false,
   isLoggedIn: !!sessionStorage.getItem('jwt'),
+  isAdmin: false,
+  userEmail: null,
   authReferrerPath: null,
 }
 
@@ -28,6 +30,8 @@ export const session = (state: Object = initialState, action: { type: string, pa
       // Set isLoggedIn boolean based on presence of jwt in session storage
       return Object.assign({}, state, {
         isLoggedIn: !!sessionStorage.getItem('jwt'),
+        isAdmin: action.payload.isAdmin,
+        userEmail: action.payload.email,
       })
     case SESSION_LOGIN_SET_REFERRER_PATH:
       return Object.assign({}, state, {

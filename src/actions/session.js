@@ -17,8 +17,9 @@ export const sessionLoginHasErrored = (payload: boolean) => ({
   payload,
 })
 
-export const sessionLoginSuccess = () => ({
+export const sessionLoginSuccess = (payload: { email: string, isAdmin: boolean }) => ({
   type: SESSION_LOGIN_SUCCESS,
+  payload,
 })
 
 export const sessionLoginSetReferrerPath = (payload: ?string) => ({
@@ -57,9 +58,11 @@ export const sessionPostLoginCredentials = (
       if (data.status === 'error') {
         dispatch(sessionLoginHasErrored(true))
       } else {
+        const { token, isAdmin, email } = data.data
+
         // Set the json web token in local storage
-        sessionStorage.setItem('jwt', data.data.token)
-        dispatch(sessionLoginSuccess())
+        sessionStorage.setItem('jwt', token)
+        dispatch(sessionLoginSuccess({ email, isAdmin }))
       }
     })
     .catch(() => dispatch(sessionLoginHasErrored(true)))

@@ -20,7 +20,7 @@ const App = () => (
     <Switch>
       <Route exact path={'/'} render={() => <HomePage />} />
       <Route exact path={'/login'} render={() => <LoginPage />} />
-      <Authenticated path={'/producer/create'} component={NewProducerPage} />
+      <Authenticated path={'/producer/create'} component={NewProducerPage} adminComponent />
       <Route path={'/producer/:userId'} render={() => <ProducerPage />} />
     </Switch>
   </div>

@@ -8,7 +8,9 @@ import AuthenticatedRoute from '../components/AuthenticatedRoute'
 
 const mapStateToProps = (state: Object, ownProps: Object) => ({
   isAuthenticated: state.session.isLoggedIn,
+  isAdmin: state.session.isAdmin,
   Component: ownProps.component,
+  isAdminComponent: ownProps.adminComponent,
 })
 
 const mapDispatchToProps = (dispatch: Function) => ({
