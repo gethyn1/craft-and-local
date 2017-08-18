@@ -12,6 +12,7 @@ import Authenticated from '../containers/Authenticated'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import NewProducerPage from './pages/NewProducerPage'
+import NotFoundPage from './pages/NotFoundPage'
 import ProducerPage from './pages/ProducerPage'
 
 const App = () => (
@@ -22,6 +23,7 @@ const App = () => (
       <Route exact path={'/login'} render={() => <LoginPage />} />
       <Authenticated path={'/producer/create'} component={NewProducerPage} adminComponent />
       <Route path={'/producer/:userId'} render={() => <ProducerPage />} />
+      <Route render={() => <NotFoundPage />} />
     </Switch>
   </div>
 )
