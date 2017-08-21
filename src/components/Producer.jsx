@@ -12,9 +12,11 @@ import styles from '../styles/6-components/_components.producer.scss'
 type Props = {
   fetchData: Function,
   fetchInstagramFeed: Function,
+  hasErrored: boolean,
   instagramFeed: Array<Object>,
   instagramFeedHasErrored: boolean,
   instagramFeedIsLoading: boolean,
+  isLoading: boolean,
   producerId: string,
   producer: Object,
   resetProducerState: Function,
@@ -79,9 +81,13 @@ class Producer extends React.Component {
   }
 
   render() {
-    const { producer } = this.props
+    const { producer, isLoading, hasErrored } = this.props
 
-    if (!producer) {
+    if (hasErrored) {
+      return <p>There was an error loading the producer</p>
+    }
+
+    if (!producer || isLoading) {
       return <p>Loading producer ...</p>
     }
 

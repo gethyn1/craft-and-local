@@ -38,7 +38,10 @@ export const producersFetchData = (latLng: Object) => (dispatch: Function) => {
     })
     .then(response => response.json())
     .then(data => dispatch(producersFetchDataSuccess(data.data.producers)))
-    .catch(() => dispatch(producersHasErrored(true)))
+    .catch(() => {
+      producersIsLoading(false)
+      dispatch(producersHasErrored(true))
+    })
 }
 
 export const producersFilterByCategory = (id: string, latLng: Object) => (dispatch: Function) => {

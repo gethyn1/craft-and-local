@@ -9,6 +9,7 @@ import {
 import ProducerForm from '../components/ProducerForm'
 
 const mapStateToProps = state => ({
+  categories: state.categories.categories,
   isLoading: state.createProducer.isLoading,
   hasErrored: state.createProducer.hasErrored,
 })

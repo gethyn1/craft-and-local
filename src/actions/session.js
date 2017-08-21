@@ -1,6 +1,11 @@
 // @flow
 
-import { API_URL_USER_AUTH } from '../config'
+import {
+  API_URL_USER_AUTH,
+  STORAGE_JSON_WEB_TOKEN,
+  STORAGE_IS_ADMIN,
+  STORAGE_USER_EMAIL,
+} from '../config'
 
 export const SESSION_LOGIN_IS_LOADING = 'SESSION_LOGIN_IS_LOADING'
 export const SESSION_LOGIN_HAS_ERRORED = 'SESSION_LOGIN_HAS_ERRORED'
@@ -18,9 +23,8 @@ export const sessionLoginHasErrored = (payload: boolean) => ({
   payload,
 })
 
-export const sessionLoginSuccess = (payload: { email: string, isAdmin: boolean }) => ({
+export const sessionLoginSuccess = () => ({
   type: SESSION_LOGIN_SUCCESS,
-  payload,
 })
 
 export const sessionLoginSetReferrerPath = (payload: ?string) => ({
@@ -33,8 +37,10 @@ export const sessionLogoutSuccess = () => ({
 })
 
 export const sessionLogout = () => (dispatch: Function) => {
-  // Remove the json web token in local storage
-  sessionStorage.removeItem('jwt')
+  // Remove json web token and user settings from session storage
+  sessionStorage.removeItem(STORAGE_JSON_WEB_TOKEN)
+  sessionStorage.removeItem(STORAGE_IS_ADMIN)
+  sessionStorage.removeItem(STORAGE_USER_EMAIL)
   dispatch(sessionLogoutSuccess())
 }
 
@@ -71,9 +77,11 @@ export const sessionPostLoginCredentials = (
       } else {
         const { token, isAdmin, email } = data.data
 
-        // Set the json web token in local storage
-        sessionStorage.setItem('jwt', token)
-        dispatch(sessionLoginSuccess({ email, isAdmin }))
+        // Set json web token and user settings in session storage
+        sessionStorage.setItem(STORAGE_JSON_WEB_TOKEN, token)
+        sessionStorage.setItem(STORAGE_IS_ADMIN, isAdmin)
+        sessionStorage.setItem(STORAGE_USER_EMAIL, email)
+        dispatch(sessionLoginSuccess())
       }
     })
     .catch(() => dispatch(sessionLoginHasErrored(true)))

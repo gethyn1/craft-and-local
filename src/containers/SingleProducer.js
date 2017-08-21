@@ -13,6 +13,8 @@ import {
 import Producer from '../components/Producer'
 
 const mapStateToProps = (state, ownProps) => ({
+  isLoading: state.producer.isLoading,
+  hasErrored: state.producer.hasErrored,
   producerId: ownProps.match.params.userId,
   producer: state.producer.producer,
   instagramFeedIsLoading: state.producer.instagramFeedIsLoading,

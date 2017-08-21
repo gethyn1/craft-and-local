@@ -35,6 +35,7 @@ test('Fetch producer from API: success', () => {
   return store.dispatch(producerFetchData(1))
     .then(() => {
       expect(store.getActions()).toEqual([
+        producerHasErrored(false),
         producerIsLoading(true),
         producerIsLoading(false),
         producerFetchDataSuccess(mockJSON.data.producer),
@@ -49,7 +50,9 @@ test('Fetch producer from API: 404', () => {
   return store.dispatch(producerFetchData(1))
     .then(() => {
       expect(store.getActions()).toEqual([
+        producerHasErrored(false),
         producerIsLoading(true),
+        producerIsLoading(false),
         producerHasErrored(true),
       ])
     })

@@ -51,7 +51,7 @@ export const producerFetchInstagramFeedClearState = () => ({
 
 export const producerFetchData = (id: string) => (dispatch: Function) => {
   const url = `${API_URL_PRODUCERS}/${id}`
-
+  dispatch(producerHasErrored(false))
   dispatch(producerIsLoading(true))
 
   return fetch(url, { method: 'GET' })
@@ -64,7 +64,10 @@ export const producerFetchData = (id: string) => (dispatch: Function) => {
     })
     .then(response => response.json())
     .then(data => dispatch(producerFetchDataSuccess(data.data.producer)))
-    .catch(() => dispatch(producerHasErrored(true)))
+    .catch(() => {
+      dispatch(producerIsLoading(false))
+      dispatch(producerHasErrored(true))
+    })
 }
 
 export const producerFetchInstagramFeed = (handle: string) => (dispatch: Function) => {

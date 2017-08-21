@@ -103,6 +103,9 @@ class ProducerForm extends React.Component {
           <input onChange={this.handleChange} type="text" name="lat" value={this.state.lat} />
         </div>
         <div>
+          <p>Categories:</p>
+        </div>
+        <div>
           <label htmlFor="instagram_handle">Instagram</label><br />
           <input onChange={this.handleChange} type="text" name="instagram_handle" value={this.state.instagram_handle} />
         </div>

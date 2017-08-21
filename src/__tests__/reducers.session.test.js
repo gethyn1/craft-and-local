@@ -1,3 +1,8 @@
+import {
+  STORAGE_IS_ADMIN,
+  STORAGE_USER_EMAIL,
+} from '../config'
+
 import { initialState, session } from '../reducers/session'
 
 import {
@@ -51,6 +56,9 @@ describe('Session reducer', () => {
   })
 
   it(`should handle ${SESSION_LOGIN_SUCCESS}`, () => {
+    sessionStorage.setItem(STORAGE_IS_ADMIN, true)
+    sessionStorage.setItem(STORAGE_USER_EMAIL, 'user@user.com')
+
     expect(
       session(initialState, {
         type: SESSION_LOGIN_SUCCESS,
@@ -74,6 +82,9 @@ describe('Session reducer', () => {
   })
 
   it(`should handle ${SESSION_LOGOUT_SUCCESS}`, () => {
+    sessionStorage.setItem(STORAGE_IS_ADMIN, false)
+    sessionStorage.setItem(STORAGE_USER_EMAIL, null)
+
     expect(
       session(initialState, {
         type: SESSION_LOGOUT_SUCCESS,
