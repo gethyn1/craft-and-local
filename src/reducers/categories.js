@@ -10,7 +10,7 @@ import {
 export const initialState = {
   isLoading: false,
   hasErrored: false,
-  categories: [],
+  categories: null,
   active: null,
 }
 

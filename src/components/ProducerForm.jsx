@@ -3,6 +3,8 @@
 import React from 'react'
 
 type Props = {
+  getCategories: Function,
+  categories: Array<Object>,
   isLoading: boolean,
   hasErrored: boolean,
   onSubmit: Function,
@@ -12,7 +14,7 @@ type State = {
   title: ?string,
   user_id: ?string,
   description: ?string,
-  categories: Array<string>,
+  categories: ?Array<string>,
   delivery: boolean,
   box_scheme: boolean,
   lng: number,
@@ -30,7 +32,7 @@ class ProducerForm extends React.Component {
       title: '',
       user_id: '',
       description: '',
-      categories: [],
+      categories: null,
       delivery: false,
       box_scheme: false,
       lng: 0,
@@ -41,19 +43,45 @@ class ProducerForm extends React.Component {
     }
 
     this.handleChange = this.handleChange.bind(this)
+    this.handleCategoryChange = this.handleCategoryChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.renderStatus = this.renderStatus.bind(this)
   }
 
   state: State
+
+  componentDidMount() {
+    if (!this.props.categories) {
+      this.props.getCategories()
+    }
+  }
+
   props: Props
   handleChange: Function
+  handleCategoryChange: Function
   handleSubmit: Function
 
   handleChange(event: Event & { target: HTMLInputElement }) {
     const name = event.target.name
     this.setState({
       [name]: event.target.value,
+    })
+  }
+
+  handleCategoryChange(event: Event & { target: HTMLInputElement }) {
+    const { categories } = this.state
+    let newCategories = categories || []
+
+    if (event.target.type !== 'checkbox') return
+
+    if (event.target.checked) {
+      newCategories.push(event.target.value)
+    } else if (categories) {
+      newCategories = categories.filter(cat => cat !== event.target.value)
+    }
+
+    this.setState({
+      categories: newCategories.length ? newCategories : null,
     })
   }
 
@@ -64,6 +92,21 @@ class ProducerForm extends React.Component {
   }
 
   renderStatus: Function
+  renderCategories: Function
+
+  renderCategories() {
+    const { categories } = this.props
+    if (categories) {
+      return categories.map((category: Object) => (
+        <div key={category._id}>
+          <input type="checkbox" onChange={this.handleCategoryChange} id={category._id} value={category._id} name="categories" />&nbsp;
+          <label htmlFor={category._id}>{category.title}</label>
+        </div>
+      ))
+    }
+
+    return null
+  }
 
   renderStatus() {
     if (this.props.isLoading) {
@@ -102,8 +145,9 @@ class ProducerForm extends React.Component {
           <label htmlFor="lat">Latitude</label><br />
           <input onChange={this.handleChange} type="text" name="lat" value={this.state.lat} />
         </div>
-        <div>
+        <div className="u-margin-bottom">
           <p>Categories:</p>
+          {this.renderCategories()}
         </div>
         <div>
           <label htmlFor="instagram_handle">Instagram</label><br />

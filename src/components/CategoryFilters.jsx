@@ -25,7 +25,7 @@ class CategoryFilters extends React.Component {
   render() {
     const { categories, active, onClickFilter, lat, lng } = this.props
 
-    const filters = categories.map(category => (
+    const filters = categories ? categories.map(category => (
       <li key={category._id}>
         <button
           className={`${styles.filter} ${active === category._id ? styles.active : ''}`}
@@ -34,7 +34,7 @@ class CategoryFilters extends React.Component {
           {category.title}
         </button>
       </li>
-    ))
+    )) : null
 
     return (
       <ListBare className={styles['filter-list']}>

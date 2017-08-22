@@ -2,6 +2,8 @@
 
 import { connect } from 'react-redux'
 
+import { categoriesFetchData } from '../actions/categories'
+
 import {
   createProducerPostData,
 } from '../actions/createProducer'
@@ -15,6 +17,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+  getCategories: () => {
+    dispatch(categoriesFetchData())
+  },
   onSubmit: (producer: Object) => {
     dispatch(createProducerPostData(producer))
   },
