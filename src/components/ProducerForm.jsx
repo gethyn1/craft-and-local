@@ -71,12 +71,12 @@ class ProducerForm extends React.Component {
   handleCategoryChange(event: Event & { target: HTMLInputElement }) {
     const { categories } = this.state
     let newCategories = categories || []
-
-    if (event.target.type !== 'checkbox') return
-
+    
     if (event.target.checked) {
+      console.log('checked')
       newCategories.push(event.target.value)
     } else if (categories) {
+      console.log('not checked')
       newCategories = categories.filter(cat => cat !== event.target.value)
     }
 
