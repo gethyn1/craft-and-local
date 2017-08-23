@@ -3,10 +3,11 @@
 import { connect } from 'react-redux'
 
 import { categoriesFetchData } from '../actions/categories'
-
+import { createProducerPostData } from '../actions/createProducer'
 import {
-  createProducerPostData,
-} from '../actions/createProducer'
+  geocodingGetLatLngFromAddress,
+  geocodingAddressLookupReset,
+} from '../actions/geocoding'
 
 import ProducerForm from '../components/ProducerForm'
 
@@ -14,6 +15,12 @@ const mapStateToProps = state => ({
   categories: state.categories.categories,
   isLoading: state.createProducer.isLoading,
   hasErrored: state.createProducer.hasErrored,
+  geoCodingOptions: state.geocoding.addressLookupOptions ?
+    state.geocoding.addressLookupOptions.map(option => ({
+      id: option.id,
+      option: option.address,
+      value: `${option.lng},${option.lat}`,
+    })) : null,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -22,6 +29,12 @@ const mapDispatchToProps = dispatch => ({
   },
   onSubmit: (producer: Object) => {
     dispatch(createProducerPostData(producer))
+  },
+  geoCodingLookup: (address: string) => {
+    dispatch(geocodingGetLatLngFromAddress(address))
+  },
+  onGeoCodingSelect: () => {
+    dispatch(geocodingAddressLookupReset())
   },
 })
 

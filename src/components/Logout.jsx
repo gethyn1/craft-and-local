@@ -12,7 +12,7 @@ const Logout = ({ isLoggedIn, handleLogout, userEmail }: Props) => (
   isLoggedIn ? (
     <div>
       <p>Logged in as {userEmail}</p>
-      <button onClick={() => { handleLogout() }}>Logout</button>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   ) : null
 )

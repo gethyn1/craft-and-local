@@ -1,6 +1,9 @@
 // @flow
 
-import { API_URL_PRODUCERS_CREATE } from '../config'
+import {
+  API_URL_PRODUCERS_CREATE,
+  STORAGE_JSON_WEB_TOKEN,
+} from '../config'
 
 export const CREATE_PRODUCER_IS_LOADING = 'CREATE_PRODUCER_IS_LOADING'
 export const CREATE_PRODUCER_HAS_ERRORED = 'CREATE_PRODUCER_HAS_ERRORED'
@@ -30,7 +33,7 @@ export const createProducerPostData = (producer: Object) => (dispatch: Function)
     'Content-Type': 'application/json',
   })
 
-  const jwtToken = sessionStorage.getItem('jwt')
+  const jwtToken = sessionStorage.getItem(STORAGE_JSON_WEB_TOKEN)
 
   if (jwtToken !== null) {
     // flow-disable-next-line

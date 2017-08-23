@@ -10,6 +10,9 @@ export const initialState = {
   isLoading: false,
   hasErrored: false,
   producer: null,
+  addressLookupIsLoading: false,
+  addressLookupHasErrored: false,
+  geoCodingOptions: null,
 }
 
 export const createProducer = (
@@ -28,6 +31,7 @@ export const createProducer = (
     case CREATE_PRODUCER_SUCCESS:
       return Object.assign({}, state, {
         producer: action.payload,
+        geoCodingOptions: null,
       })
     default:
       return state

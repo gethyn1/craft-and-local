@@ -2,12 +2,17 @@
 
 import React from 'react'
 
+import TextListInput from '../components/TextListInput'
+
 type Props = {
   getCategories: Function,
   categories: Array<Object>,
   isLoading: boolean,
   hasErrored: boolean,
   onSubmit: Function,
+  geoCodingLookup: Function,
+  geoCodingOptions: ?Array<Object>,
+  onGeoCodingSelect: Function,
 }
 
 type State = {
@@ -40,12 +45,14 @@ class ProducerForm extends React.Component {
       instagram_handle: '',
       twitter_handle: '',
       website: '',
+      geoCodingOptions: null,
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleCategoryChange = this.handleCategoryChange.bind(this)
+    this.handleGeoCoding = this.handleGeoCoding.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.renderStatus = this.renderStatus.bind(this)
+    this.handleAddressSelect = this.handleAddressSelect.bind(this)
   }
 
   state: State
@@ -59,7 +66,9 @@ class ProducerForm extends React.Component {
   props: Props
   handleChange: Function
   handleCategoryChange: Function
+  handleGeoCoding: Function
   handleSubmit: Function
+  handleAddressSelect: Function
 
   handleChange(event: Event & { target: HTMLInputElement }) {
     const name = event.target.name
@@ -71,17 +80,30 @@ class ProducerForm extends React.Component {
   handleCategoryChange(event: Event & { target: HTMLInputElement }) {
     const { categories } = this.state
     let newCategories = categories || []
-    
+
     if (event.target.checked) {
-      console.log('checked')
       newCategories.push(event.target.value)
     } else if (categories) {
-      console.log('not checked')
       newCategories = categories.filter(cat => cat !== event.target.value)
     }
 
     this.setState({
       categories: newCategories.length ? newCategories : null,
+    })
+  }
+
+  handleGeoCoding(address: string) {
+    this.props.geoCodingLookup(address)
+  }
+
+  handleAddressSelect(value: string) {
+    const lngLat = value.split(',')
+
+    this.props.onGeoCodingSelect()
+
+    this.setState({
+      lng: parseFloat(lngLat[0]),
+      lat: parseFloat(lngLat[1]),
     })
   }
 
@@ -127,7 +149,6 @@ class ProducerForm extends React.Component {
         <div>
           <label htmlFor="title">Title</label><br />
           <input onChange={this.handleChange} type="text" name="title" value={this.state.title} />
-          <p>Title is required</p>
         </div>
         <div>
           <label htmlFor="user_id">User ID</label><br />
@@ -136,6 +157,15 @@ class ProducerForm extends React.Component {
         <div>
           <label htmlFor="description">Description</label><br />
           <textarea onChange={this.handleChange} name="description" value={this.state.description} />
+        </div>
+        <div>
+          <label htmlFor="address_lookup">Postcode</label><br />
+          <TextListInput
+            options={this.props.geoCodingOptions}
+            onChange={this.handleGeoCoding}
+            onOptionSelect={this.handleAddressSelect}
+            name="address_lookup"
+          />
         </div>
         <div>
           <label htmlFor="lng">Longitude</label><br />

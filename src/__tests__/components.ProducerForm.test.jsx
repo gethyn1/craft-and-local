@@ -3,7 +3,10 @@ import { mount } from 'enzyme'
 
 import ProducerForm from '../components/ProducerForm'
 
-const mockCategories = [{ _id: '1', title: 'category 1' }, { _id: '2', title: 'category 2' }]
+const mockCategories = [
+  { _id: '1', title: 'category 1' },
+  { _id: '2', title: 'category 2' },
+]
 
 describe('<ProducerForm />', () => {
   let props
@@ -26,6 +29,9 @@ describe('<ProducerForm />', () => {
       isLoading: undefined,
       hasErrored: undefined,
       onSubmit: jest.fn(),
+      geoCodingLookup: jest.fn(),
+      geoCodingOptions: undefined,
+      onGeoCodingSelect: jest.fn(),
     }
 
     mountedProducerForm = undefined
@@ -62,5 +68,12 @@ describe('<ProducerForm />', () => {
     categoryCheckbox.simulate('change', { target: { checked: true, value: '1' } })
     categoryCheckbox.simulate('change', { target: { checked: false, value: '1' } })
     expect(component.state('categories')).toEqual(null)
+  })
+
+  it('sets lng and lat state when value is passed to `handleAddressSelect`', () => {
+    const component = producerForm()
+    component.instance().handleAddressSelect('123,456')
+    expect(component.state('lng')).toBe(123)
+    expect(component.state('lat')).toBe(456)
   })
 })

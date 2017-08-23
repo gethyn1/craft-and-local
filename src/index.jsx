@@ -16,6 +16,7 @@ import sass from './styles/style.scss'
 // Redux
 import * as categories from './reducers/categories'
 import * as createProducer from './reducers/createProducer'
+import * as geocoding from './reducers/geocoding'
 import * as location from './reducers/location'
 import * as producer from './reducers/producer'
 import * as producers from './reducers/producers'
@@ -29,6 +30,7 @@ const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMP
 const defaultState = {
   categories: categories.initialState,
   createProducer: createProducer.initialState,
+  geocoding: geocoding.initialState,
   location: location.initialState,
   producer: producer.initialState,
   producers: producers.initialState,
