@@ -23,7 +23,7 @@ export const initialState = {
   isLoading: false,
   hasErrored: false,
   isLoggedIn: !!sessionStorage.getItem(STORAGE_JSON_WEB_TOKEN),
-  isAdmin: !!sessionStorage.getItem(STORAGE_IS_ADMIN),
+  isAdmin: sessionStorage.getItem(STORAGE_IS_ADMIN) === 'true',
   userEmail: setUserEmail(),
   authReferrerPath: null,
 }
@@ -42,7 +42,7 @@ export const session = (state: Object = initialState, action: { type: string, pa
       // Set isLoggedIn boolean based on presence of jwt in session storage
       return Object.assign({}, state, {
         isLoggedIn: !!sessionStorage.getItem(STORAGE_JSON_WEB_TOKEN),
-        isAdmin: !!sessionStorage.getItem(STORAGE_IS_ADMIN),
+        isAdmin: sessionStorage.getItem(STORAGE_IS_ADMIN) === 'true',
         userEmail: setUserEmail(),
       })
     case SESSION_LOGIN_SET_REFERRER_PATH:
@@ -52,7 +52,7 @@ export const session = (state: Object = initialState, action: { type: string, pa
     case SESSION_LOGOUT_SUCCESS:
       return Object.assign({}, state, {
         isLoggedIn: !!sessionStorage.getItem(STORAGE_JSON_WEB_TOKEN),
-        isAdmin: !!sessionStorage.getItem(STORAGE_IS_ADMIN),
+        isAdmin: sessionStorage.getItem(STORAGE_IS_ADMIN) === 'true',
         userEmail: setUserEmail(),
         authReferrerPath: null,
       })

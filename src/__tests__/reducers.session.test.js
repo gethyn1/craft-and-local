@@ -56,7 +56,7 @@ describe('Session reducer', () => {
   })
 
   it(`should handle ${SESSION_LOGIN_SUCCESS}`, () => {
-    sessionStorage.setItem(STORAGE_IS_ADMIN, true)
+    sessionStorage.setItem(STORAGE_IS_ADMIN, 'true')
     sessionStorage.setItem(STORAGE_USER_EMAIL, 'user@user.com')
 
     expect(
