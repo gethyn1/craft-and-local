@@ -13,4 +13,8 @@ export const API_URL_CATEGORIES = `${API_URL}/categories`
 export const API_URL_INSTAGRAM_FEED = `${API_URL}/instagram`
 export const API_URL_USER_AUTH = `${API_URL}/user/authenticate`
 
+export const STORAGE_JSON_WEB_TOKEN = 'jwt'
+export const STORAGE_IS_ADMIN = 'isAdmin'
+export const STORAGE_USER_EMAIL = 'userEmail'
+
 export const isProd = process.env.NODE_ENV === 'production'
