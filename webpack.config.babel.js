@@ -82,6 +82,9 @@ export default {
 		HtmlWebpackPluginConfig,
 		new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
+		new webpack.DefinePlugin({
+			ENV_ENVIRONMENT: JSON.stringify(process.env.NODE_ENV || 'development'),
+		}),
 		new SpriteLoaderPlugin(),
 	],
 	resolve: {
