@@ -3038,6 +3038,10 @@ har-validator@~4.2.1:
     ajv "^4.9.1"
     har-schema "^1.0.5"
 
+harmony-reflect@^1.4.6:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/harmony-reflect/-/harmony-reflect-1.5.1.tgz#b54ca617b00cc8aef559bbb17b3d85431dc7e329"
+
 has-ansi@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/has-ansi/-/has-ansi-2.0.0.tgz#34f5049ce1ecdf2b0649af3ef24e45ed35416d91"
@@ -3262,6 +3266,12 @@ icss-utils@^2.1.0:
   resolved "https://registry.yarnpkg.com/icss-utils/-/icss-utils-2.1.0.tgz#83f0a0ec378bf3246178b6c2ad9136f135b1c962"
   dependencies:
     postcss "^6.0.1"
+
+identity-obj-proxy@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/identity-obj-proxy/-/identity-obj-proxy-3.0.0.tgz#94d2bda96084453ef36fbc5aaec37e0f79f1fc14"
+  dependencies:
+    harmony-reflect "^1.4.6"
 
 ieee754@^1.1.4:
   version "1.1.8"
@@ -7028,13 +7038,9 @@ whatwg-encoding@^1.0.1:
   dependencies:
     iconv-lite "0.4.13"
 
-whatwg-fetch@1.0.0:
+whatwg-fetch@1.0.0, whatwg-fetch@>=0.10.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-1.0.0.tgz#01c2ac4df40e236aaa18480e3be74bd5c8eb798e"
-
-whatwg-fetch@>=0.10.0:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.3.tgz#9c84ec2dcf68187ff00bc64e1274b442176e1c84"
 
 whatwg-url@^4.3.0:
   version "4.8.0"

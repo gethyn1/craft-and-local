@@ -4,10 +4,8 @@ import React from 'react'
 import { Switch } from 'react-router'
 import { Route } from 'react-router-dom'
 
-import TopBar from './TopBar'
-
-// import AuthenticatedRoute from './AuthenticatedRoute'
 import Authenticated from '../containers/Authenticated'
+import UserUtils from '../containers/UserUtils'
 
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
@@ -17,7 +15,7 @@ import ProducerPage from './pages/ProducerPage'
 
 const App = () => (
   <div>
-    <TopBar />
+    <UserUtils />
     <Switch>
       <Route exact path={'/'} render={() => <HomePage />} />
       <Route exact path={'/login'} render={() => <LoginPage />} />

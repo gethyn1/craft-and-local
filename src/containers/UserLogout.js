@@ -7,7 +7,6 @@ import { sessionLogout } from '../actions/session'
 import Logout from '../components/Logout'
 
 const mapStateToProps = (state: Object) => ({
-  userEmail: state.session.userEmail,
   isLoggedIn: state.session.isLoggedIn,
 })
 

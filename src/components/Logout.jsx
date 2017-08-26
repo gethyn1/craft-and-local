@@ -3,17 +3,13 @@
 import React from 'react'
 
 type Props = {
-  userEmail: string,
   isLoggedIn: boolean,
   handleLogout: Function,
 }
 
-const Logout = ({ isLoggedIn, handleLogout, userEmail }: Props) => (
+const Logout = ({ isLoggedIn, handleLogout }: Props) => (
   isLoggedIn ? (
-    <div>
-      <p>Logged in as {userEmail}</p>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+    <button onClick={handleLogout}>Logout</button>
   ) : null
 )
 
