@@ -3,7 +3,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import UserLogout from '../containers/UserLogout'
+import UserLogout from '../containers/session/UserLogout'
 
 import Container from './Container'
 

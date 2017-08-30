@@ -2,9 +2,9 @@
 
 import { connect } from 'react-redux'
 
-import { sessionLoginSetReferrerPath } from '../actions/session'
+import { sessionLoginSetReferrerPath } from './actions'
 
-import AuthenticatedRoute from '../components/AuthenticatedRoute'
+import AuthenticatedRoute from './AuthenticatedRoute'
 
 const mapStateToProps = (state: Object, ownProps: Object) => ({
   isAuthenticated: state.session.isLoggedIn,

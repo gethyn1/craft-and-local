@@ -20,7 +20,8 @@ import * as geocoding from './reducers/geocoding'
 import * as location from './reducers/location'
 import * as producer from './reducers/producer'
 import * as producers from './reducers/producers'
-import * as session from './reducers/session'
+//import * as session from './reducers/session'
+import * as session from './containers/session/reducer'
 import rootReducer from './reducers/index'
 
 /* eslint-disable no-underscore-dangle */

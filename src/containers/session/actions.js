@@ -5,7 +5,7 @@ import {
   STORAGE_JSON_WEB_TOKEN,
   STORAGE_IS_ADMIN,
   STORAGE_USER_EMAIL,
-} from '../config'
+} from '../../config'
 
 export const SESSION_LOGIN_IS_LOADING = 'SESSION_LOGIN_IS_LOADING'
 export const SESSION_LOGIN_HAS_ERRORED = 'SESSION_LOGIN_HAS_ERRORED'

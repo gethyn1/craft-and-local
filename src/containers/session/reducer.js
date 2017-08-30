@@ -4,7 +4,7 @@ import {
   STORAGE_JSON_WEB_TOKEN,
   STORAGE_IS_ADMIN,
   STORAGE_USER_EMAIL,
-} from '../config'
+} from '../../config'
 
 import {
   SESSION_LOGIN_IS_LOADING,
@@ -12,7 +12,7 @@ import {
   SESSION_LOGIN_SUCCESS,
   SESSION_LOGIN_SET_REFERRER_PATH,
   SESSION_LOGOUT_SUCCESS,
-} from '../actions/session'
+} from './actions'
 
 const setUserEmail = () => {
   const emailInSessionStorage = sessionStorage.getItem(STORAGE_USER_EMAIL)

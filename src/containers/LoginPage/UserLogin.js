@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 
 import {
   sessionPostLoginCredentials,
-} from '../actions/session'
+} from '../session/actions'
 
-import LoginForm from '../components/LoginForm'
+import LoginForm from '../../components/LoginForm'
 
 const mapStateToProps = (state: Object) => ({
   isLoading: state.session.isLoading,

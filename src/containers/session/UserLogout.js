@@ -2,9 +2,9 @@
 
 import { connect } from 'react-redux'
 
-import { sessionLogout } from '../actions/session'
+import { sessionLogout } from './actions'
 
-import Logout from '../components/Logout'
+import Logout from '../../components/Logout'
 
 const mapStateToProps = (state: Object) => ({
   isLoggedIn: state.session.isLoggedIn,
