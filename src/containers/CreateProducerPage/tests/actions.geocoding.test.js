@@ -11,7 +11,7 @@ import {
   geocodingAddressLookupSuccess,
   geocodingGetLatLngFromAddress,
   geocodingAddressLookupReset,
-} from '../actions/geocoding'
+} from '../actions.geocoding'
 
 const mockStore = configureMockStore([thunkMiddleware])
 

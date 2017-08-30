@@ -1,10 +1,10 @@
-import { initialState, categories } from '../reducers/categories'
+import { initialState, categories } from '../reducer.categories'
 
 import {
   CATEGORIES_IS_LOADING,
   CATEGORIES_HAS_ERRORED,
   CATEGORIES_FETCH_DATA_SUCCESS,
-} from '../actions/categories'
+} from '../actions.categories'
 
 const loadingTestState = Object.assign({}, initialState, {
   isLoading: true,

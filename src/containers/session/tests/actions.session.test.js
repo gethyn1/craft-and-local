@@ -6,7 +6,7 @@ import {
   sessionLoginHasErrored,
   sessionLoginSuccess,
   sessionPostLoginCredentials,
-} from '../actions/session'
+} from '../actions'
 
 const mockStore = configureMockStore([thunkMiddleware])
 

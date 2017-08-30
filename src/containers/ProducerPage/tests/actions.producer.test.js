@@ -2,14 +2,14 @@ import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
 import fetchMock from 'fetch-mock'
 
-import { API_URL_PRODUCERS } from '../config'
+import { API_URL_PRODUCERS } from '../../../config'
 
 import {
   producerHasErrored,
   producerIsLoading,
   producerFetchData,
   producerFetchDataSuccess,
-} from '../actions/producer'
+} from '../actions'
 
 const mockStore = configureMockStore([thunkMiddleware])
 

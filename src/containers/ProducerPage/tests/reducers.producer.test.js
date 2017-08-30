@@ -1,10 +1,10 @@
-import { initialState, producer } from '../reducers/producer'
+import { initialState, producer } from '../reducer'
 
 import {
   PRODUCER_IS_LOADING,
   PRODUCER_HAS_ERRORED,
   PRODUCER_FETCH_DATA_SUCCESS,
-} from '../actions/producer'
+} from '../actions'
 
 const loadingTestState = Object.assign({}, initialState, {
   isLoading: true,

@@ -2,14 +2,14 @@ import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
 import fetchMock from 'fetch-mock'
 
-import { API_URL_CATEGORIES } from '../config'
+import { API_URL_CATEGORIES } from '../../../config'
 
 import {
   categoriesHasErrored,
   categoriesIsLoading,
   categoriesFetchData,
   categoriesFetchDataSuccess,
-} from '../actions/categories'
+} from '../actions.categories'
 
 const mockStore = configureMockStore([thunkMiddleware])
 

@@ -1,13 +1,13 @@
-import { initialState, producers, createProducerMarkers } from '../reducers/producers'
+import { initialState, producers, createProducerMarkers } from '../reducer.producers'
 
 import {
   PRODUCERS_IS_LOADING,
   PRODUCERS_HAS_ERRORED,
   PRODUCERS_FETCH_DATA_SUCCESS,
   PRODUCERS_FILTER_BY_CATEGORY,
-} from '../actions/producers'
+} from '../actions.producers'
 
-import mockProducers from '../data/mock-producers'
+import mockProducers from '../../../data/mock-producers'
 
 const loadingTestState = Object.assign({}, initialState, {
   isLoading: true,

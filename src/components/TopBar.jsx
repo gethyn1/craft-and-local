@@ -18,7 +18,6 @@ type Props = {
 }
 
 const TopBar = ({ isLoggedIn, isAdmin, user }: Props) => {
-  let userNav = null
   let adminNav = null
 
   if (isAdmin) {

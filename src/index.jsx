@@ -21,7 +21,7 @@ import * as location from './containers/location/reducer'
 import * as producer from './containers/ProducerPage/reducer'
 import * as producers from './containers/ProducersPage/reducer.producers'
 import * as session from './containers/session/reducer'
-import rootReducer from './reducers/index'
+import rootReducer from './app/rootReducer'
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose

@@ -1,9 +1,9 @@
 import {
   STORAGE_IS_ADMIN,
   STORAGE_USER_EMAIL,
-} from '../config'
+} from '../../../config'
 
-import { initialState, session } from '../reducers/session'
+import { initialState, session } from '../reducer'
 
 import {
   SESSION_LOGIN_IS_LOADING,
@@ -11,7 +11,7 @@ import {
   SESSION_LOGIN_SUCCESS,
   SESSION_LOGIN_SET_REFERRER_PATH,
   SESSION_LOGOUT_SUCCESS,
-} from '../actions/session'
+} from '../actions'
 
 const loadingTestState = Object.assign({}, initialState, {
   isLoading: true,

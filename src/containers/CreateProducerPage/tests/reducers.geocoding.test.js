@@ -1,11 +1,11 @@
-import { initialState, geocoding } from '../reducers/geocoding'
+import { initialState, geocoding } from '../reducer.geocoding'
 
 import {
   GEOCODING_ADDRESS_LOOKUP_IS_LOADING,
   GEOCODING_ADDRESS_LOOKUP_HAS_ERRORED,
   GEOCODING_ADDRESS_LOOKUP_SUCCESS,
   GEOCODING_ADDRESS_LOOKUP_RESET,
-} from '../actions/geocoding'
+} from '../actions.geocoding'
 
 const addressLookupLoadingTestState = Object.assign({}, initialState, {
   addressLookupIsLoading: true,
