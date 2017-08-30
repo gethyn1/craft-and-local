@@ -2,14 +2,14 @@
 
 import { connect } from 'react-redux'
 
-import { categoriesFetchData } from './ProducersPage/actions.categories'
-import { createProducerPostData } from '../actions/createProducer'
+import { categoriesFetchData } from '../ProducersPage/actions.categories'
+import { createProducerPostData } from './actions.createProducer'
 import {
   geocodingGetLatLngFromAddress,
   geocodingAddressLookupReset,
-} from '../actions/geocoding'
+} from './actions.geocoding'
 
-import ProducerForm from '../components/ProducerForm'
+import ProducerForm from '../../components/ProducerForm'
 
 const mapStateToProps = state => ({
   categories: state.categories.categories,

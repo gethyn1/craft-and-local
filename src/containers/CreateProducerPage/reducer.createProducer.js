@@ -4,7 +4,7 @@ import {
   CREATE_PRODUCER_IS_LOADING,
   CREATE_PRODUCER_HAS_ERRORED,
   CREATE_PRODUCER_SUCCESS,
-} from '../actions/createProducer'
+} from './actions.createProducer'
 
 export const initialState = {
   isLoading: false,

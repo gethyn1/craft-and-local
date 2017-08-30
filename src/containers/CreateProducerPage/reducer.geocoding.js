@@ -5,7 +5,7 @@ import {
   GEOCODING_ADDRESS_LOOKUP_HAS_ERRORED,
   GEOCODING_ADDRESS_LOOKUP_SUCCESS,
   GEOCODING_ADDRESS_LOOKUP_RESET,
-} from '../actions/geocoding'
+} from './actions.geocoding'
 
 export const initialState = {
   addressLookupIsLoading: false,
