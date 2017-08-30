@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux'
 
-import TopBar from '../components/TopBar'
+import TopBar from '../../components/TopBar'
 
 const mapStateToProps = (state: Object) => ({
   isLoggedIn: state.session.isLoggedIn,

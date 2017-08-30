@@ -6,7 +6,6 @@ import { Route } from 'react-router-dom'
 
 import Authenticated from '../containers/session/Authenticated'
 import UserUtils from '../containers/UserUtils'
-
 import ProducersPage from '../containers/ProducersPage'
 import LoginPage from '../containers/LoginPage'
 import CreateProducerPage from '../containers/CreateProducerPage'
