@@ -5,7 +5,7 @@ import {
   LOCATION_HAS_ERRORED,
   LOCATION_GET_POSITION_SUCCESS,
   LOCATION_GET_ADDRESS_FROM_LAT_LNG_SUCCESS,
-} from '../actions/location'
+} from './actions'
 
 export const initialState = {
   isLoading: false,

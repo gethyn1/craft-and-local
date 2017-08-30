@@ -7,7 +7,7 @@ import { APP_NAME } from '../../config'
 
 import AllProducers from './AllProducers'
 import Categories from './Categories'
-import CurrentLocation from '../CurrentLocation'
+import CurrentLocation from '../location/CurrentLocation'
 
 import Container from '../../components/Container'
 

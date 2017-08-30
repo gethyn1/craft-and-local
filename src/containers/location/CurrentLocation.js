@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 
-import { locationGetUserLocation } from '../actions/location'
+import { locationGetUserLocation } from './actions'
 
-import UserLocation from '../components/UserLocation'
+import UserLocation from '../../components/UserLocation'
 
 const mapStateToProps = state => ({
   isLoading: state.location.isLoading,

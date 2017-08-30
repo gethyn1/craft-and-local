@@ -1,5 +1,5 @@
 // @flow
-import { GOOGLE_MAPS_API_KEY } from '../config'
+import { GOOGLE_MAPS_API_KEY } from '../../config'
 
 export const LOCATION_IS_LOADING = 'LOCATION_IS_LOADING'
 export const LOCATION_HAS_ERRORED = 'LOCATION_HAS_ERRORED'
