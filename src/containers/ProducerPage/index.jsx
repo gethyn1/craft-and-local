@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet'
 
 import { APP_NAME } from '../../config'
 
+import ProducerInstagramFeed from './ProducerInstagramFeed'
 import SingleProducer from './SingleProducer'
 
 const title = 'Producer page'
@@ -19,6 +20,7 @@ const ProducerPage = () => (
       ]}
     />
     <SingleProducer />
+    <ProducerInstagramFeed />
   </div>
 )
 
