@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
-import ProducerForm from '../components/ProducerForm'
+import ProducerForm from '../index'
 
 const mockCategories = [
   { _id: '1', title: 'category 1' },

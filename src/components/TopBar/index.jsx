@@ -3,13 +3,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import UserLogout from '../containers/session/UserLogout'
+import UserLogout from '../../containers/session/UserLogout'
 
-import Container from './Container'
+import Container from '../Container'
 
-import styles from '../styles/6-components/_components.top-bar.scss'
+import styles from '../../styles/6-components/_components.top-bar.scss'
 
-import { APP_NAME } from '../config'
+import { APP_NAME } from '../../config'
 
 type Props = {
   isLoggedIn: boolean,

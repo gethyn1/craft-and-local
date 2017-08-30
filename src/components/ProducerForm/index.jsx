@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import TextListInput from '../components/TextListInput'
+import TextListInput from '../TextListInput'
 
 type Props = {
   getCategories: Function,

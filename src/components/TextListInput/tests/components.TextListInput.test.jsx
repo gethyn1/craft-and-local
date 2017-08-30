@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
-import TextListInput from '../components/TextListInput'
+import TextListInput from '../index'
 
 const mockOptions = [
   { id: '1', option: 'option 1', value: 'value 1' },

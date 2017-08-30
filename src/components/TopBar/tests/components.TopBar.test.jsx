@@ -1,9 +1,9 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import TopBar from '../components/TopBar'
+import TopBar from '../index'
 
-import styles from '../styles/6-components/_components.top-bar.scss'
+import styles from '../../../styles/6-components/_components.top-bar.scss'
 
 describe('<TopBar />', () => {
   let props
