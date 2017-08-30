@@ -8,7 +8,7 @@ import thunkMiddleware from 'redux-thunk'
 
 import { isProd } from './config'
 
-import App from './components/App'
+import App from './containers/App'
 
 // eslint-disable-next-line
 import sass from './styles/style.scss'
@@ -21,7 +21,7 @@ import * as location from './containers/location/reducer'
 import * as producer from './containers/ProducerPage/reducer'
 import * as producers from './containers/ProducersPage/reducer.producers'
 import * as session from './containers/session/reducer'
-import rootReducer from './app/rootReducer'
+import rootReducer from './rootReducer'
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
@@ -59,9 +59,9 @@ ReactDOM.render(wrapApp(App, store), rootEl)
 
 if (module.hot) {
   // flow-disable-next-line
-  module.hot.accept('./components/App', () => {
+  module.hot.accept('./containers/App', () => {
     // eslint-disable-next-line global-require
-    const NextApp = require('./components/App').default
+    const NextApp = require('./containers/App').default
     ReactDOM.render(wrapApp(NextApp, store), rootEl)
   })
 }

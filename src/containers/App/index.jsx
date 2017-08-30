@@ -4,13 +4,13 @@ import React from 'react'
 import { Switch } from 'react-router'
 import { Route } from 'react-router-dom'
 
-import Authenticated from '../containers/session/Authenticated'
-import UserUtils from '../containers/UserUtils'
-import ProducersPage from '../containers/ProducersPage'
-import LoginPage from '../containers/LoginPage'
-import CreateProducerPage from '../containers/CreateProducerPage'
-import NotFoundPage from '../containers/NotFoundPage'
-import ProducerPage from '../containers/ProducerPage'
+import Authenticated from '../session/Authenticated'
+import UserUtils from '../UserUtils'
+import ProducersPage from '../ProducersPage'
+import LoginPage from '../LoginPage'
+import CreateProducerPage from '../CreateProducerPage'
+import NotFoundPage from '../NotFoundPage'
+import ProducerPage from '../ProducerPage'
 
 const App = () => (
   <div>
