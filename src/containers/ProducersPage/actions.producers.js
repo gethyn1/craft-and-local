@@ -1,6 +1,6 @@
 // @flow
 
-import { API_URL_PRODUCERS } from '../config'
+import { API_URL_PRODUCERS } from '../../config'
 
 export const PRODUCERS_IS_LOADING = 'PRODUCERS_IS_LOADING'
 export const PRODUCERS_HAS_ERRORED = 'PRODUCERS_HAS_ERRORED'

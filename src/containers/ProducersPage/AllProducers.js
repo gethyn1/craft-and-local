@@ -2,9 +2,9 @@
 
 import { connect } from 'react-redux'
 
-import { producersFetchData } from '../actions/producers'
+import { producersFetchData } from './actions.producers'
 
-import ProducersList from '../components/ProducersList'
+import ProducersList from '../../components/ProducersList'
 
 const mapStateToProps = state => ({
   producers: state.producers.producers,

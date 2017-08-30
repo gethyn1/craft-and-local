@@ -8,9 +8,9 @@ import {
   producerClearState,
   producerFetchInstagramFeed,
   producerFetchInstagramFeedClearState,
-} from '../actions/producer'
+} from './actions'
 
-import Producer from '../components/Producer'
+import Producer from '../../components/Producer'
 
 const mapStateToProps = (state, ownProps) => ({
   isLoading: state.producer.isLoading,

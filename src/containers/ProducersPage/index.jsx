@@ -5,11 +5,11 @@ import { Helmet } from 'react-helmet'
 
 import { APP_NAME } from '../../config'
 
-import AllProducers from '../../containers/AllProducers'
-import Categories from '../../containers/Categories'
-import CurrentLocation from '../../containers/CurrentLocation'
+import AllProducers from './AllProducers'
+import Categories from './Categories'
+import CurrentLocation from '../CurrentLocation'
 
-import Container from '../Container'
+import Container from '../../components/Container'
 
 const title = 'Home'
 

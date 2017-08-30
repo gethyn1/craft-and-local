@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 import {
   categoriesFetchData,
   categoriesSetActiveCategory,
-} from '../actions/categories'
+} from './actions.categories'
 import {
   producersFetchData,
   producersFilterByCategory,
-} from '../actions/producers'
+} from './actions.producers'
 
-import CategoryFilters from '../components/CategoryFilters'
+import CategoryFilters from '../../components/CategoryFilters'
 
 const mapStateToProps = state => ({
   active: state.categories.active,

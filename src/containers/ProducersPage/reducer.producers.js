@@ -4,7 +4,7 @@ import {
   PRODUCERS_IS_LOADING,
   PRODUCERS_HAS_ERRORED,
   PRODUCERS_FETCH_DATA_SUCCESS,
-} from '../actions/producers'
+} from './actions.producers'
 
 export const initialState = {
   isLoading: false,

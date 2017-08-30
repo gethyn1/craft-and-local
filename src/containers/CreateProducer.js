@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux'
 
-import { categoriesFetchData } from '../actions/categories'
+import { categoriesFetchData } from './ProducersPage/actions.categories'
 import { createProducerPostData } from '../actions/createProducer'
 import {
   geocodingGetLatLngFromAddress,

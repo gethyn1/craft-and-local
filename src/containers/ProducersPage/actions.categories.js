@@ -1,6 +1,6 @@
 // @flow
 
-import { API_URL_CATEGORIES } from '../config'
+import { API_URL_CATEGORIES } from '../../config'
 
 export const CATEGORIES_IS_LOADING = 'CATEGORIES_IS_LOADING'
 export const CATEGORIES_HAS_ERRORED = 'CATEGORIES_HAS_ERRORED'

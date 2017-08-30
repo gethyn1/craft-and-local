@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet'
 
 import { APP_NAME } from '../../config'
 
-import SingleProducer from '../../containers/SingleProducer'
+import SingleProducer from './SingleProducer'
 
 const title = 'Producer page'
 

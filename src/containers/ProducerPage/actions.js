@@ -1,6 +1,6 @@
 // @flow
 
-import { API_URL_PRODUCERS, API_URL_INSTAGRAM_FEED } from '../config'
+import { API_URL_PRODUCERS, API_URL_INSTAGRAM_FEED } from '../../config'
 
 export const PRODUCER_IS_LOADING = 'PRODUCER_IS_LOADING'
 export const PRODUCER_HAS_ERRORED = 'PRODUCER_HAS_ERRORED'

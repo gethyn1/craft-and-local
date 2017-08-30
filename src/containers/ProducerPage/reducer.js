@@ -9,7 +9,7 @@ import {
   PRODUCER_INSTAGRAM_FEED_HAS_ERRORED,
   PRODUCER_FETCH_INSTAGRAM_FEED_SUCCESS,
   PRODUCER_FETCH_INSTAGRAM_FEED_CLEAR_STATE,
-} from '../actions/producer'
+} from './actions'
 
 export const initialState = {
   isLoading: false,

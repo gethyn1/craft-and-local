@@ -5,7 +5,7 @@ import {
   CATEGORIES_HAS_ERRORED,
   CATEGORIES_FETCH_DATA_SUCCESS,
   CATEGORIES_SET_ACTIVE_CATEGORY,
-} from '../actions/categories'
+} from './actions.categories'
 
 export const initialState = {
   isLoading: false,
