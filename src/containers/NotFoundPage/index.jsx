@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet'
 
 import { APP_NAME } from '../../config'
 
-import Container from '../Container'
+import Container from '../../components/Container'
 
 const title = 'Page not found'
 
