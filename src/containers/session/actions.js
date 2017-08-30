@@ -7,33 +7,29 @@ import {
   STORAGE_USER_EMAIL,
 } from '../../config'
 
-export const SESSION_LOGIN_IS_LOADING = 'SESSION_LOGIN_IS_LOADING'
-export const SESSION_LOGIN_HAS_ERRORED = 'SESSION_LOGIN_HAS_ERRORED'
-export const SESSION_LOGIN_SUCCESS = 'SESSION_LOGIN_SUCCESS'
-export const SESSION_LOGIN_SET_REFERRER_PATH = 'SESSION_LOGIN_SET_REFERRER_PATH'
-export const SESSION_LOGOUT_SUCCESS = 'SESSION_LOGOUT_SUCCESS'
+import types from './constants'
 
 export const sessionLoginIsLoading = (payload: boolean) => ({
-  type: SESSION_LOGIN_IS_LOADING,
+  type: types.SESSION_LOGIN_IS_LOADING,
   payload,
 })
 
 export const sessionLoginHasErrored = (payload: boolean) => ({
-  type: SESSION_LOGIN_HAS_ERRORED,
+  type: types.SESSION_LOGIN_HAS_ERRORED,
   payload,
 })
 
 export const sessionLoginSuccess = () => ({
-  type: SESSION_LOGIN_SUCCESS,
+  type: types.SESSION_LOGIN_SUCCESS,
 })
 
 export const sessionLoginSetReferrerPath = (payload: ?string) => ({
-  type: SESSION_LOGIN_SET_REFERRER_PATH,
+  type: types.SESSION_LOGIN_SET_REFERRER_PATH,
   payload,
 })
 
 export const sessionLogoutSuccess = () => ({
-  type: SESSION_LOGOUT_SUCCESS,
+  type: types.SESSION_LOGOUT_SUCCESS,
 })
 
 export const sessionLogout = () => (dispatch: Function) => {

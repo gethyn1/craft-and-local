@@ -1,28 +1,25 @@
 // @flow
 import { GOOGLE_MAPS_API_KEY } from '../../config'
 
-export const LOCATION_IS_LOADING = 'LOCATION_IS_LOADING'
-export const LOCATION_HAS_ERRORED = 'LOCATION_HAS_ERRORED'
-export const LOCATION_GET_POSITION_SUCCESS = 'LOCATION_GET_POSITION_SUCCESS'
-export const LOCATION_GET_ADDRESS_FROM_LAT_LNG_SUCCESS = 'LOCATION_GET_ADDRESS_FROM_LAT_LNG_SUCCESS'
+import types from './constants'
 
 export const locationIsLoading = (payload: boolean) => ({
-  type: LOCATION_IS_LOADING,
+  type: types.LOCATION_IS_LOADING,
   payload,
 })
 
 export const locationHasErrored = (payload: boolean) => ({
-  type: LOCATION_HAS_ERRORED,
+  type: types.LOCATION_HAS_ERRORED,
   payload,
 })
 
 export const locationGetPositionSuccess = (payload: Object) => ({
-  type: LOCATION_GET_POSITION_SUCCESS,
+  type: types.LOCATION_GET_POSITION_SUCCESS,
   payload,
 })
 
 export const locationGetAddressFromLatLngSuccess = (payload: string) => ({
-  type: LOCATION_GET_ADDRESS_FROM_LAT_LNG_SUCCESS,
+  type: types.LOCATION_GET_ADDRESS_FROM_LAT_LNG_SUCCESS,
   payload,
 })
 

@@ -5,13 +5,7 @@ import {
 
 import { initialState, session } from '../reducer'
 
-import {
-  SESSION_LOGIN_IS_LOADING,
-  SESSION_LOGIN_HAS_ERRORED,
-  SESSION_LOGIN_SUCCESS,
-  SESSION_LOGIN_SET_REFERRER_PATH,
-  SESSION_LOGOUT_SUCCESS,
-} from '../actions'
+import types from '../constants'
 
 const loadingTestState = Object.assign({}, initialState, {
   isLoading: true,
@@ -35,33 +29,33 @@ describe('Session reducer', () => {
     expect(session(undefined, {})).toEqual(initialState)
   })
 
-  it(`should handle ${SESSION_LOGIN_IS_LOADING}`, () => {
+  it(`should handle ${types.SESSION_LOGIN_IS_LOADING}`, () => {
     expect(
       session(initialState, {
-        type: SESSION_LOGIN_IS_LOADING,
+        type: types.SESSION_LOGIN_IS_LOADING,
         payload: true,
       }),
     )
     .toEqual(loadingTestState)
   })
 
-  it(`should handle ${SESSION_LOGIN_HAS_ERRORED}`, () => {
+  it(`should handle ${types.SESSION_LOGIN_HAS_ERRORED}`, () => {
     expect(
       session(initialState, {
-        type: SESSION_LOGIN_HAS_ERRORED,
+        type: types.SESSION_LOGIN_HAS_ERRORED,
         payload: true,
       }),
     )
     .toEqual(erroredTestState)
   })
 
-  it(`should handle ${SESSION_LOGIN_SUCCESS}`, () => {
+  it(`should handle ${types.SESSION_LOGIN_SUCCESS}`, () => {
     sessionStorage.setItem(STORAGE_IS_ADMIN, 'true')
     sessionStorage.setItem(STORAGE_USER_EMAIL, 'user@user.com')
 
     expect(
       session(initialState, {
-        type: SESSION_LOGIN_SUCCESS,
+        type: types.SESSION_LOGIN_SUCCESS,
         payload: {
           isAdmin: true,
           email: 'user@user.com',
@@ -71,23 +65,23 @@ describe('Session reducer', () => {
     .toEqual(loginSuccessTestState)
   })
 
-  it(`should handle ${SESSION_LOGIN_SET_REFERRER_PATH}`, () => {
+  it(`should handle ${types.SESSION_LOGIN_SET_REFERRER_PATH}`, () => {
     expect(
       session(initialState, {
-        type: SESSION_LOGIN_SET_REFERRER_PATH,
+        type: types.SESSION_LOGIN_SET_REFERRER_PATH,
         payload: '/',
       }),
     )
     .toEqual(referrerPathTestState)
   })
 
-  it(`should handle ${SESSION_LOGOUT_SUCCESS}`, () => {
+  it(`should handle ${types.SESSION_LOGOUT_SUCCESS}`, () => {
     sessionStorage.setItem(STORAGE_IS_ADMIN, false)
     sessionStorage.setItem(STORAGE_USER_EMAIL, null)
 
     expect(
       session(initialState, {
-        type: SESSION_LOGOUT_SUCCESS,
+        type: types.SESSION_LOGOUT_SUCCESS,
       }),
     )
     .toEqual(initialState)

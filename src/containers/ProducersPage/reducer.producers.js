@@ -1,10 +1,6 @@
 // @flow
 
-import {
-  PRODUCERS_IS_LOADING,
-  PRODUCERS_HAS_ERRORED,
-  PRODUCERS_FETCH_DATA_SUCCESS,
-} from './actions.producers'
+import types from './constants'
 
 export const initialState = {
   isLoading: false,
@@ -24,15 +20,15 @@ export const createProducerMarkers = (producers: Array<Object>) => (
 
 export const producers = (state: Object = initialState, action: { type: string, payload: any }) => {
   switch (action.type) {
-    case PRODUCERS_IS_LOADING:
+    case types.PRODUCERS_IS_LOADING:
       return Object.assign({}, state, {
         isLoading: action.payload,
       })
-    case PRODUCERS_HAS_ERRORED:
+    case types.PRODUCERS_HAS_ERRORED:
       return Object.assign({}, state, {
         hasErrored: action.payload,
       })
-    case PRODUCERS_FETCH_DATA_SUCCESS:
+    case types.PRODUCERS_FETCH_DATA_SUCCESS:
       return Object.assign({}, state, {
         markers: createProducerMarkers(action.payload),
         producers: action.payload,

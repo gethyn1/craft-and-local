@@ -2,28 +2,25 @@
 
 import { API_URL_CATEGORIES } from '../../config'
 
-export const CATEGORIES_IS_LOADING = 'CATEGORIES_IS_LOADING'
-export const CATEGORIES_HAS_ERRORED = 'CATEGORIES_HAS_ERRORED'
-export const CATEGORIES_FETCH_DATA_SUCCESS = 'CATEGORIES_FETCH_DATA_SUCCESS'
-export const CATEGORIES_SET_ACTIVE_CATEGORY = 'CATEGORIES_SET_ACTIVE_CATEGORY'
+import types from './constants'
 
 export const categoriesIsLoading = (payload: boolean) => ({
-  type: CATEGORIES_IS_LOADING,
+  type: types.CATEGORIES_IS_LOADING,
   payload,
 })
 
 export const categoriesHasErrored = (payload: boolean) => ({
-  type: CATEGORIES_HAS_ERRORED,
+  type: types.CATEGORIES_HAS_ERRORED,
   payload,
 })
 
 export const categoriesFetchDataSuccess = (payload: Array<Object>) => ({
-  type: CATEGORIES_FETCH_DATA_SUCCESS,
+  type: types.CATEGORIES_FETCH_DATA_SUCCESS,
   payload,
 })
 
 export const categoriesSetActiveCategory = (payload: ?string) => ({
-  type: CATEGORIES_SET_ACTIVE_CATEGORY,
+  type: types.CATEGORIES_SET_ACTIVE_CATEGORY,
   payload,
 })
 

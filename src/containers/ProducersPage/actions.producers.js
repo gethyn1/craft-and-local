@@ -2,23 +2,20 @@
 
 import { API_URL_PRODUCERS } from '../../config'
 
-export const PRODUCERS_IS_LOADING = 'PRODUCERS_IS_LOADING'
-export const PRODUCERS_HAS_ERRORED = 'PRODUCERS_HAS_ERRORED'
-export const PRODUCERS_FETCH_DATA_SUCCESS = 'PRODUCERS_FETCH_DATA_SUCCESS'
-export const PRODUCERS_FILTER_BY_CATEGORY = 'PRODUCERS_FILTER_BY_CATEGORY'
+import types from './constants'
 
 export const producersIsLoading = (payload: boolean) => ({
-  type: PRODUCERS_IS_LOADING,
+  type: types.PRODUCERS_IS_LOADING,
   payload,
 })
 
 export const producersHasErrored = (payload: boolean) => ({
-  type: PRODUCERS_HAS_ERRORED,
+  type: types.PRODUCERS_HAS_ERRORED,
   payload,
 })
 
 export const producersFetchDataSuccess = (payload: Array<Object>) => ({
-  type: PRODUCERS_FETCH_DATA_SUCCESS,
+  type: types.PRODUCERS_FETCH_DATA_SUCCESS,
   payload,
 })
 

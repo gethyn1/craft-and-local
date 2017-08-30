@@ -1,11 +1,6 @@
 // @flow
 
-import {
-  GEOCODING_ADDRESS_LOOKUP_IS_LOADING,
-  GEOCODING_ADDRESS_LOOKUP_HAS_ERRORED,
-  GEOCODING_ADDRESS_LOOKUP_SUCCESS,
-  GEOCODING_ADDRESS_LOOKUP_RESET,
-} from './actions.geocoding'
+import types from './constants'
 
 export const initialState = {
   addressLookupIsLoading: false,
@@ -15,15 +10,15 @@ export const initialState = {
 
 export const geocoding = (state: Object = initialState, action: { type: string, payload: any }) => {
   switch (action.type) {
-    case GEOCODING_ADDRESS_LOOKUP_IS_LOADING:
+    case types.GEOCODING_ADDRESS_LOOKUP_IS_LOADING:
       return Object.assign({}, state, {
         addressLookupIsLoading: action.payload,
       })
-    case GEOCODING_ADDRESS_LOOKUP_HAS_ERRORED:
+    case types.GEOCODING_ADDRESS_LOOKUP_HAS_ERRORED:
       return Object.assign({}, state, {
         addressLookupHasErrored: action.payload,
       })
-    case GEOCODING_ADDRESS_LOOKUP_SUCCESS:
+    case types.GEOCODING_ADDRESS_LOOKUP_SUCCESS:
       return Object.assign({}, state, {
         addressLookupHasErrored: false,
         addressLookupOptions: action.payload.map(result => ({
@@ -33,7 +28,7 @@ export const geocoding = (state: Object = initialState, action: { type: string, 
           lng: result.geometry.location.lng,
         })),
       })
-    case GEOCODING_ADDRESS_LOOKUP_RESET:
+    case types.GEOCODING_ADDRESS_LOOKUP_RESET:
       return Object.assign({}, state, {
         addressLookupOptions: null,
       })

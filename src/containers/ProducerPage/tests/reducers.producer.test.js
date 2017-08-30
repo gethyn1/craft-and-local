@@ -1,10 +1,6 @@
 import { initialState, producer } from '../reducer'
 
-import {
-  PRODUCER_IS_LOADING,
-  PRODUCER_HAS_ERRORED,
-  PRODUCER_FETCH_DATA_SUCCESS,
-} from '../actions'
+import types from '../constants'
 
 const loadingTestState = Object.assign({}, initialState, {
   isLoading: true,
@@ -23,30 +19,30 @@ describe('Categories reducer', () => {
     expect(producer(undefined, {})).toEqual(initialState)
   })
 
-  it(`should handle ${PRODUCER_IS_LOADING}`, () => {
+  it(`should handle ${types.PRODUCER_IS_LOADING}`, () => {
     expect(
       producer(initialState, {
-        type: PRODUCER_IS_LOADING,
+        type: types.PRODUCER_IS_LOADING,
         payload: true,
       }),
     )
     .toEqual(loadingTestState)
   })
 
-  it(`should handle ${PRODUCER_HAS_ERRORED}`, () => {
+  it(`should handle ${types.PRODUCER_HAS_ERRORED}`, () => {
     expect(
       producer(initialState, {
-        type: PRODUCER_HAS_ERRORED,
+        type: types.PRODUCER_HAS_ERRORED,
         payload: true,
       }),
     )
     .toEqual(erroredTestState)
   })
 
-  it(`should handle ${PRODUCER_FETCH_DATA_SUCCESS}`, () => {
+  it(`should handle ${types.PRODUCER_FETCH_DATA_SUCCESS}`, () => {
     expect(
       producer(initialState, {
-        type: PRODUCER_FETCH_DATA_SUCCESS,
+        type: types.PRODUCER_FETCH_DATA_SUCCESS,
         payload: { id: '123', title: 'test title', categories: ['1', '2'] },
       }),
     )

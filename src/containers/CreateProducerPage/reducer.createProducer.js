@@ -1,10 +1,6 @@
 // @flow
 
-import {
-  CREATE_PRODUCER_IS_LOADING,
-  CREATE_PRODUCER_HAS_ERRORED,
-  CREATE_PRODUCER_SUCCESS,
-} from './actions.createProducer'
+import types from './constants'
 
 export const initialState = {
   isLoading: false,
@@ -20,15 +16,15 @@ export const createProducer = (
   action: { type: string, payload: any },
 ) => {
   switch (action.type) {
-    case CREATE_PRODUCER_IS_LOADING:
+    case types.CREATE_PRODUCER_IS_LOADING:
       return Object.assign({}, state, {
         isLoading: action.payload,
       })
-    case CREATE_PRODUCER_HAS_ERRORED:
+    case types.CREATE_PRODUCER_HAS_ERRORED:
       return Object.assign({}, state, {
         hasErrored: action.payload,
       })
-    case CREATE_PRODUCER_SUCCESS:
+    case types.CREATE_PRODUCER_SUCCESS:
       return Object.assign({}, state, {
         producer: action.payload,
         geoCodingOptions: null,

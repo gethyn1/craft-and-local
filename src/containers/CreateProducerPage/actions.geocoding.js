@@ -2,28 +2,25 @@
 
 import { GOOGLE_MAPS_API_KEY } from '../../config'
 
-export const GEOCODING_ADDRESS_LOOKUP_IS_LOADING = 'GEOCODING_ADDRESS_LOOKUP_IS_LOADING'
-export const GEOCODING_ADDRESS_LOOKUP_HAS_ERRORED = 'GEOCODING_ADDRESS_LOOKUP_HAS_ERRORED'
-export const GEOCODING_ADDRESS_LOOKUP_SUCCESS = 'GEOCODING_ADDRESS_LOOKUP_SUCCESS'
-export const GEOCODING_ADDRESS_LOOKUP_RESET = 'GEOCODING_ADDRESS_LOOKUP_RESET'
+import types from './constants'
 
 export const geocodingAddressLookupIsLoading = (payload: boolean) => ({
-  type: GEOCODING_ADDRESS_LOOKUP_IS_LOADING,
+  type: types.GEOCODING_ADDRESS_LOOKUP_IS_LOADING,
   payload,
 })
 
 export const geocodingAddressLookupHasErrored = (payload: boolean) => ({
-  type: GEOCODING_ADDRESS_LOOKUP_HAS_ERRORED,
+  type: types.GEOCODING_ADDRESS_LOOKUP_HAS_ERRORED,
   payload,
 })
 
 export const geocodingAddressLookupSuccess = (payload: Object) => ({
-  type: GEOCODING_ADDRESS_LOOKUP_SUCCESS,
+  type: types.GEOCODING_ADDRESS_LOOKUP_SUCCESS,
   payload,
 })
 
 export const geocodingAddressLookupReset = () => ({
-  type: GEOCODING_ADDRESS_LOOKUP_RESET,
+  type: types.GEOCODING_ADDRESS_LOOKUP_RESET,
 })
 
 export const geocodingGetLatLngFromAddress = (address: string) => (dispatch: Function) => {

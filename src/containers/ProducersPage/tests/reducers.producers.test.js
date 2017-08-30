@@ -1,11 +1,6 @@
 import { initialState, producers, createProducerMarkers } from '../reducer.producers'
 
-import {
-  PRODUCERS_IS_LOADING,
-  PRODUCERS_HAS_ERRORED,
-  PRODUCERS_FETCH_DATA_SUCCESS,
-  PRODUCERS_FILTER_BY_CATEGORY,
-} from '../actions.producers'
+import types from '../constants'
 
 import mockProducers from '../../../data/mock-producers'
 
@@ -27,40 +22,40 @@ describe('Producers reducer', () => {
     expect(producers(undefined, {})).toEqual(initialState)
   })
 
-  it(`should handle ${PRODUCERS_IS_LOADING}`, () => {
+  it(`should handle ${types.PRODUCERS_IS_LOADING}`, () => {
     expect(
       producers(initialState, {
-        type: PRODUCERS_IS_LOADING,
+        type: types.PRODUCERS_IS_LOADING,
         payload: true,
       }),
     )
     .toEqual(loadingTestState)
   })
 
-  it(`should handle ${PRODUCERS_HAS_ERRORED}`, () => {
+  it(`should handle ${types.PRODUCERS_HAS_ERRORED}`, () => {
     expect(
       producers(initialState, {
-        type: PRODUCERS_HAS_ERRORED,
+        type: types.PRODUCERS_HAS_ERRORED,
         payload: true,
       }),
     )
     .toEqual(erroredTestState)
   })
 
-  it(`should handle ${PRODUCERS_FETCH_DATA_SUCCESS}`, () => {
+  it(`should handle ${types.PRODUCERS_FETCH_DATA_SUCCESS}`, () => {
     expect(
       producers(initialState, {
-        type: PRODUCERS_FETCH_DATA_SUCCESS,
+        type: types.PRODUCERS_FETCH_DATA_SUCCESS,
         payload: mockProducers,
       }),
     )
     .toEqual(producersTestState)
   })
 
-  it(`should handle ${PRODUCERS_FILTER_BY_CATEGORY}`, () => {
+  it(`should handle ${types.PRODUCERS_FILTER_BY_CATEGORY}`, () => {
     expect(
       producers(producersTestState, {
-        type: PRODUCERS_FILTER_BY_CATEGORY,
+        type: types.PRODUCERS_FILTER_BY_CATEGORY,
         payload: mockProducers[0].categories[0],
       }),
     )

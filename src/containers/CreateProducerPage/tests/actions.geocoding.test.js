@@ -2,16 +2,14 @@ import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
 
 import {
-  GEOCODING_ADDRESS_LOOKUP_IS_LOADING,
-  GEOCODING_ADDRESS_LOOKUP_HAS_ERRORED,
-  GEOCODING_ADDRESS_LOOKUP_SUCCESS,
-  GEOCODING_ADDRESS_LOOKUP_RESET,
   geocodingAddressLookupIsLoading,
   geocodingAddressLookupHasErrored,
   geocodingAddressLookupSuccess,
   geocodingGetLatLngFromAddress,
   geocodingAddressLookupReset,
 } from '../actions.geocoding'
+
+import types from '../constants'
 
 const mockStore = configureMockStore([thunkMiddleware])
 
@@ -26,7 +24,7 @@ describe('Geocoding actions', () => {
   it('should create an action for addressLookupIsLoading', () => {
     const isLoading = true
     const expectedAction = {
-      type: GEOCODING_ADDRESS_LOOKUP_IS_LOADING,
+      type: types.GEOCODING_ADDRESS_LOOKUP_IS_LOADING,
       payload: isLoading,
     }
 
@@ -36,7 +34,7 @@ describe('Geocoding actions', () => {
   it('should create an action for addressLookupHasErrored', () => {
     const hasErrored = true
     const expectedAction = {
-      type: GEOCODING_ADDRESS_LOOKUP_HAS_ERRORED,
+      type: types.GEOCODING_ADDRESS_LOOKUP_HAS_ERRORED,
       payload: hasErrored,
     }
 
@@ -45,7 +43,7 @@ describe('Geocoding actions', () => {
 
   it('should create an action for addressLookupSuccess', () => {
     const expectedAction = {
-      type: GEOCODING_ADDRESS_LOOKUP_SUCCESS,
+      type: types.GEOCODING_ADDRESS_LOOKUP_SUCCESS,
       payload: mockResponseSuccess,
     }
 
@@ -54,7 +52,7 @@ describe('Geocoding actions', () => {
 
   it('should create an action for addressLookupReset', () => {
     const expectedAction = {
-      type: GEOCODING_ADDRESS_LOOKUP_RESET,
+      type: types.GEOCODING_ADDRESS_LOOKUP_RESET,
     }
 
     expect(geocodingAddressLookupReset()).toEqual(expectedAction)

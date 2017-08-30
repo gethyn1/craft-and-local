@@ -1,10 +1,6 @@
 import { initialState, categories } from '../reducer.categories'
 
-import {
-  CATEGORIES_IS_LOADING,
-  CATEGORIES_HAS_ERRORED,
-  CATEGORIES_FETCH_DATA_SUCCESS,
-} from '../actions.categories'
+import types from '../constants'
 
 const loadingTestState = Object.assign({}, initialState, {
   isLoading: true,
@@ -23,30 +19,30 @@ describe('Categories reducer', () => {
     expect(categories(undefined, {})).toEqual(initialState)
   })
 
-  it(`should handle ${CATEGORIES_IS_LOADING}`, () => {
+  it(`should handle ${types.CATEGORIES_IS_LOADING}`, () => {
     expect(
       categories(initialState, {
-        type: CATEGORIES_IS_LOADING,
+        type: types.CATEGORIES_IS_LOADING,
         payload: true,
       }),
     )
     .toEqual(loadingTestState)
   })
 
-  it(`should handle ${CATEGORIES_HAS_ERRORED}`, () => {
+  it(`should handle ${types.CATEGORIES_HAS_ERRORED}`, () => {
     expect(
       categories(initialState, {
-        type: CATEGORIES_HAS_ERRORED,
+        type: types.CATEGORIES_HAS_ERRORED,
         payload: true,
       }),
     )
     .toEqual(erroredTestState)
   })
 
-  it(`should handle ${CATEGORIES_FETCH_DATA_SUCCESS}`, () => {
+  it(`should handle ${types.CATEGORIES_FETCH_DATA_SUCCESS}`, () => {
     expect(
       categories(initialState, {
-        type: CATEGORIES_FETCH_DATA_SUCCESS,
+        type: types.CATEGORIES_FETCH_DATA_SUCCESS,
         payload: [{ id: '123', title: 'test title' }],
       }),
     )

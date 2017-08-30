@@ -1,11 +1,6 @@
 import { initialState, geocoding } from '../reducer.geocoding'
 
-import {
-  GEOCODING_ADDRESS_LOOKUP_IS_LOADING,
-  GEOCODING_ADDRESS_LOOKUP_HAS_ERRORED,
-  GEOCODING_ADDRESS_LOOKUP_SUCCESS,
-  GEOCODING_ADDRESS_LOOKUP_RESET,
-} from '../actions.geocoding'
+import types from '../constants'
 
 const addressLookupLoadingTestState = Object.assign({}, initialState, {
   addressLookupIsLoading: true,
@@ -31,30 +26,30 @@ describe('Geocoding reducer', () => {
     expect(geocoding(undefined, {})).toEqual(initialState)
   })
 
-  it(`should handle ${GEOCODING_ADDRESS_LOOKUP_IS_LOADING}`, () => {
+  it(`should handle ${types.GEOCODING_ADDRESS_LOOKUP_IS_LOADING}`, () => {
     expect(
       geocoding(initialState, {
-        type: GEOCODING_ADDRESS_LOOKUP_IS_LOADING,
+        type: types.GEOCODING_ADDRESS_LOOKUP_IS_LOADING,
         payload: true,
       }),
     )
     .toEqual(addressLookupLoadingTestState)
   })
 
-  it(`should handle ${GEOCODING_ADDRESS_LOOKUP_HAS_ERRORED}`, () => {
+  it(`should handle ${types.GEOCODING_ADDRESS_LOOKUP_HAS_ERRORED}`, () => {
     expect(
       geocoding(initialState, {
-        type: GEOCODING_ADDRESS_LOOKUP_HAS_ERRORED,
+        type: types.GEOCODING_ADDRESS_LOOKUP_HAS_ERRORED,
         payload: true,
       }),
     )
     .toEqual(addressLoadingErroredTestState)
   })
 
-  it(`should handle ${GEOCODING_ADDRESS_LOOKUP_SUCCESS}`, () => {
+  it(`should handle ${types.GEOCODING_ADDRESS_LOOKUP_SUCCESS}`, () => {
     expect(
       geocoding(initialState, {
-        type: GEOCODING_ADDRESS_LOOKUP_SUCCESS,
+        type: types.GEOCODING_ADDRESS_LOOKUP_SUCCESS,
         payload: [
           {
             place_id: '123',
@@ -72,10 +67,10 @@ describe('Geocoding reducer', () => {
     .toEqual(addressLoadingSuccessTestState)
   })
 
-  it(`should handle ${GEOCODING_ADDRESS_LOOKUP_RESET}`, () => {
+  it(`should handle ${types.GEOCODING_ADDRESS_LOOKUP_RESET}`, () => {
     expect(
       geocoding(initialState, {
-        type: GEOCODING_ADDRESS_LOOKUP_RESET,
+        type: types.GEOCODING_ADDRESS_LOOKUP_RESET,
       }),
     )
     .toEqual(initialState)

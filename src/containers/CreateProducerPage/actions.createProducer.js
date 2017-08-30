@@ -5,22 +5,20 @@ import {
   STORAGE_JSON_WEB_TOKEN,
 } from '../../config'
 
-export const CREATE_PRODUCER_IS_LOADING = 'CREATE_PRODUCER_IS_LOADING'
-export const CREATE_PRODUCER_HAS_ERRORED = 'CREATE_PRODUCER_HAS_ERRORED'
-export const CREATE_PRODUCER_SUCCESS = 'CREATE_PRODUCER_SUCCESS'
+import types from './constants'
 
 export const createProducerIsLoading = (payload: boolean) => ({
-  type: CREATE_PRODUCER_IS_LOADING,
+  type: types.CREATE_PRODUCER_IS_LOADING,
   payload,
 })
 
 export const createProducerHasErrored = (payload: boolean) => ({
-  type: CREATE_PRODUCER_HAS_ERRORED,
+  type: types.CREATE_PRODUCER_HAS_ERRORED,
   payload,
 })
 
 export const createProducerSuccess = (payload: Object) => ({
-  type: CREATE_PRODUCER_SUCCESS,
+  type: types.CREATE_PRODUCER_SUCCESS,
   payload,
 })
 
