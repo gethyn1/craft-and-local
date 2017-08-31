@@ -17,9 +17,6 @@ const mapStateToProps = (state, ownProps) => ({
   hasErrored: state.producer.hasErrored,
   producerId: ownProps.match.params.userId,
   producer: state.producer.producer,
-  instagramFeedIsLoading: state.producer.instagramFeedIsLoading,
-  instagramFeedHasErrored: state.producer.instagramFeedHasErrored,
-  instagramFeed: state.producer.instagramFeed,
 })
 
 const mapDispatchToProps = (dispatch: Function) => ({
