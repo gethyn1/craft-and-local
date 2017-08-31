@@ -79,6 +79,9 @@ class Producer extends React.Component {
             <p>{categories}</p>
             <Button>Share</Button>
             <p>{producer.description}</p>
+            {producer.website ? (<p>{producer.website}</p>) : null}
+            {producer.contact_email ? (<p>{producer.contact_email}</p>) : null}
+            {producer.contact_telephone ? (<p>{producer.contact_telephone}</p>) : null}
           </div>
         </Container>
         <div className="u-margin-bottom-lg">

@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { Layout, LayoutItem } from './Layout'
+import { Layout, LayoutItem } from '../Layout'
 
 type Props = {
   items: Array<Object>,

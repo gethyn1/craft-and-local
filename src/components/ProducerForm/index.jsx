@@ -26,6 +26,8 @@ type State = {
   lat: number,
   instagram_handle: ?string,
   twitter_handle: ?string,
+  contact_email: ?string,
+  contact_telephone: ?string,
   website: ?string,
 }
 
@@ -45,6 +47,8 @@ class ProducerForm extends React.Component {
       instagram_handle: '',
       twitter_handle: '',
       website: '',
+      contact_email: '',
+      contact_telephone: '',
       geoCodingOptions: null,
     }
 
@@ -190,6 +194,14 @@ class ProducerForm extends React.Component {
         <div>
           <label htmlFor="website">Website</label><br />
           <input onChange={this.handleChange} type="text" name="website" value={this.state.website} />
+        </div>
+        <div>
+          <label htmlFor="contact_email">Contact email address</label><br />
+          <input onChange={this.handleChange} type="text" name="contact_email" value={this.state.contact_email} />
+        </div>
+        <div>
+          <label htmlFor="contact_telephone">Contact telephone</label><br />
+          <input onChange={this.handleChange} type="text" name="contact_telephone" value={this.state.contact_telephone} />
         </div>
         <button type="submit">Submit</button>
       </form>
