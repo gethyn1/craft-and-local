@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react'
 import { shallow } from 'enzyme'
 import Lightbox from '../index'
@@ -17,7 +15,7 @@ describe('<Lightbox />', () => {
       shallowComponent = shallow(
         <Lightbox {...props}>
           {children}
-        </Lightbox>
+        </Lightbox>,
       )
     }
 

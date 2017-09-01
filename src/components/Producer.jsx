@@ -79,7 +79,7 @@ class Producer extends React.Component {
             <h1 className={`${styles.title} u-h1`}>{producer.title}</h1>
             <p>{categories}</p>
             <Button>Share</Button>
-            <Lightbox isVisible={true} toggleVisibility={() => { console.log('click') }}>
+            <Lightbox isVisible toggleVisibility={() => { }}>
               <h2>test</h2>
             </Lightbox>
             <p>{producer.description}</p>
