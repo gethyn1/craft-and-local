@@ -9,6 +9,9 @@
   border: none;
   cursor: pointer;
   padding: 0;
+  position: absolute;
+  right: rem($global-spacing-unit);
+  top: rem($global-spacing-unit);
 
   &:hover {
     color: $palette-primary;
@@ -20,20 +23,40 @@
 }
 
 .overlay {
-  background: rgba(255,255,255,.8);
-  padding: rem($global-spacing-unit-lg) rem($global-spacing-unit);
+  background: rgba(0,0,0,.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 101;
+  z-index: $stacking-max;
+
+  @include mq($from: 'tablet') {
+    padding: rem($global-spacing-unit-lg) rem($global-spacing-unit);
+  }
+}
+
+.wrapper {
+  background: #fff;
+  height: 100vh;
+  margin: 0 auto;
+  padding: rem($global-spacing-unit-lg) 0 rem($global-spacing-unit);
+  position: relative;
+  width: 100%;
+
+  @include mq($from: 'tablet') {
+    height: auto;
+    max-height: 90vh;
+    max-width: rem(500);
+  }
 }
 
 .content {
-  background: #fff;
-  box-shadow: 0 0 0px 3px rgba(0, 0, 0, 0.05);
-  padding: rem($global-spacing-unit);
-  max-width: rem(500);
-  margin: auto;
+  max-height: calc(100% - #{($global-spacing-unit-lg + $global-spacing-unit)});
+  padding: 0 rem($global-spacing-unit);
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }

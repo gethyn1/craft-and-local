@@ -24,7 +24,8 @@ describe('<Lightbox />', () => {
 
   beforeEach(() => {
     props = {
-      isVisible: false,
+      className: undefined,
+      isVisible: true,
       toggleVisibility: jest.fn(),
     }
 
@@ -32,24 +33,22 @@ describe('<Lightbox />', () => {
   })
 
   it('should not be visible by default', () => {
+    props.isVisible = false
     const rendered = renderedComponent()
     expect(rendered.type()).toBeNull()
   })
 
   it('should be visible when visibility prop is set to true', () => {
-    props.isVisible = true
     const rendered = renderedComponent()
     expect(rendered.find('div').length).toBeGreaterThan(0)
   })
 
   it('should contain children', () => {
-    props.isVisible = true
     const rendered = renderedComponent()
     expect(rendered.contains(children)).toEqual(true)
   })
 
   it('should call `toggleVisibility` when close button is clicked', () => {
-    props.isVisible = true
     const rendered = renderedComponent()
     const button = rendered.find('button').first()
     button.simulate('click')
@@ -57,7 +56,6 @@ describe('<Lightbox />', () => {
   })
 
   it('should toggle call `toggleVisibility` if user clicks outside of content area', () => {
-    props.isVisible = true
     const rendered = renderedComponent()
     const overlay = rendered.find(`.${styles.overlay}`).first()
     overlay.simulate('click', { target: overlay, currentTarget: overlay })
@@ -65,11 +63,16 @@ describe('<Lightbox />', () => {
   })
 
   it('should toggle not call `toggleVisibility` if user clicks content area', () => {
-    props.isVisible = true
     const rendered = renderedComponent()
     const overlay = rendered.find(`.${styles.overlay}`).first()
     const content = rendered.find(`.${styles.content}`).first()
     overlay.simulate('click', { target: overlay, currentTarget: content })
     expect(props.toggleVisibility.mock.calls.length).toBe(0)
+  })
+
+  it('should add class names specified in props', () => {
+    props.className = 'test'
+    const rendered = renderedComponent()
+    expect(rendered.find('div').first().hasClass('test')).toBe(true)
   })
 })

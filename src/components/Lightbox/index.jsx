@@ -6,6 +6,7 @@ import styles from '../../styles/6-components/_components.lightbox.scss'
 
 type Props = {
   children: React.Element<*>,
+  className: ?string,
   isVisible: boolean,
   toggleVisibility: Function,
 }
@@ -18,13 +19,15 @@ const onOverlayClick = (event: & { currentTarget: HTMLElement }, fn: Function) =
   return null
 }
 
-const Lightbox = ({ children, isVisible, toggleVisibility }: Props) => {
+const Lightbox = ({ children, className, isVisible, toggleVisibility }: Props) => {
   if (isVisible) {
     return (
-      <div role="button" tabIndex={0} className={styles.overlay} onClick={(e) => { onOverlayClick(e, toggleVisibility) }}>
-        <div className={styles.content}>
+      <div role="button" tabIndex={0} className={`${styles.overlay} ${String(className)}`} onClick={(e) => { onOverlayClick(e, toggleVisibility) }}>
+        <div className={styles.wrapper}>
           <button className={styles.close} onClick={toggleVisibility}>X</button>
-          {children}
+          <div className={styles.content}>
+            {children}
+          </div>
         </div>
       </div>
     )
