@@ -1,0 +1,39 @@
+/* ==========================================================================
+   #LIGHTBOX
+   ========================================================================== */
+
+@import '../global-import';
+
+.close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+
+  &:hover {
+    color: $palette-primary;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.overlay {
+  background: rgba(255,255,255,.8);
+  padding: rem($global-spacing-unit-lg) rem($global-spacing-unit);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 101;
+}
+
+.content {
+  background: #fff;
+  box-shadow: 0 0 0px 3px rgba(0, 0, 0, 0.05);
+  padding: rem($global-spacing-unit);
+  max-width: rem(500);
+  margin: auto;
+}

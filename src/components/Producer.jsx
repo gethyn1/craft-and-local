@@ -5,6 +5,7 @@ import React from 'react'
 import Button from './Button'
 import Container from './Container'
 import GoogleMap from './GoogleMap'
+import Lightbox from './Lightbox'
 
 import styles from '../styles/6-components/_components.producer.scss'
 
@@ -78,6 +79,9 @@ class Producer extends React.Component {
             <h1 className={`${styles.title} u-h1`}>{producer.title}</h1>
             <p>{categories}</p>
             <Button>Share</Button>
+            <Lightbox isVisible={true} toggleVisibility={() => { console.log('click') }}>
+              <h2>test</h2>
+            </Lightbox>
             <p>{producer.description}</p>
             {producer.website ? (<p>{producer.website}</p>) : null}
             {producer.contact_email ? (<p>{producer.contact_email}</p>) : null}
