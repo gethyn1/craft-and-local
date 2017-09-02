@@ -13,6 +13,9 @@ export const GOOGLE_MAPS_URL = `https://maps.googleapis.com/maps/api/js?key=${GO
 
 // eslint-disable-next-line no-undef
 export const API_URL = ENV_ENVIRONMENT === 'production' ? 'https://craftandlocal.herokuapp.com' : 'http://localhost:5000'
+// eslint-disable-next-line no-undef
+export const APP_URL = 'https://piano-tuner-eagle-18310.netlify.com'
+
 export const API_URL_PRODUCERS = `${API_URL}/producers`
 export const API_URL_PRODUCERS_CREATE = `${API_URL_PRODUCERS}/create`
 export const API_URL_CATEGORIES = `${API_URL}/categories`
@@ -22,5 +25,8 @@ export const API_URL_USER_AUTH = `${API_URL}/user/authenticate`
 export const STORAGE_JSON_WEB_TOKEN = 'jwt'
 export const STORAGE_IS_ADMIN = 'isAdmin'
 export const STORAGE_USER_EMAIL = 'userEmail'
+
+export const SHARE_HASHTAGS = 'CraftAndLocal'
+export const TWITTER_HANDLE = 'CraftAndLocal'
 
 export const isProd = process.env.NODE_ENV === 'production'

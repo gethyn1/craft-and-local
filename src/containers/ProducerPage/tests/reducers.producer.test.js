@@ -14,6 +14,10 @@ const producerTestState = Object.assign({}, initialState, {
   producer: { id: '123', title: 'test title', categories: ['1', '2'] },
 })
 
+const isSharingTestState = Object.assign({}, initialState, {
+  isSharing: true,
+})
+
 describe('Categories reducer', () => {
   it('should return the initial state', () => {
     expect(producer(undefined, {})).toEqual(initialState)
@@ -47,5 +51,15 @@ describe('Categories reducer', () => {
       }),
     )
     .toEqual(producerTestState)
+  })
+
+  it(`should handle ${types.PRODUCER_SHARE_PROFILE}`, () => {
+    expect(
+      producer(initialState, {
+        type: types.PRODUCER_SHARE_PROFILE,
+        payload: true,
+      }),
+    )
+    .toEqual(isSharingTestState)
   })
 })

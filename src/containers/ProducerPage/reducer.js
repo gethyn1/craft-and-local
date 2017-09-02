@@ -4,6 +4,7 @@ import types from './constants'
 
 export const initialState = {
   isLoading: false,
+  isSharing: false,
   hasErrored: false,
   producer: null,
   instagramFeedIsLoading: false,
@@ -44,6 +45,10 @@ export const producer = (state: Object = initialState, action: { type: string, p
     case types.PRODUCER_FETCH_INSTAGRAM_FEED_CLEAR_STATE:
       return Object.assign({}, state, {
         instagramFeed: initialState.instagramFeed,
+      })
+    case types.PRODUCER_SHARE_PROFILE:
+      return Object.assign({}, state, {
+        isSharing: action.payload,
       })
     default:
       return state

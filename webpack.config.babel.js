@@ -15,6 +15,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 export default {
   entry: [
 		'react-hot-loader/patch',
+		'whatwg-fetch',
 		'./index.jsx'
 	],
   output: {
