@@ -9,6 +9,7 @@ import Button from './Button'
 import Container from './Container'
 import GoogleMap from './GoogleMap'
 import Lightbox from './Lightbox'
+import ListBare from './ListBare'
 
 import styles from '../styles/6-components/_components.producer.scss'
 
@@ -20,6 +21,8 @@ type Props = {
   producerId: string,
   producer: Object,
   resetProducerState: Function,
+  isSharing: boolean,
+  toggleShareProfile: Function,
 }
 
 class Producer extends React.Component {
@@ -29,6 +32,7 @@ class Producer extends React.Component {
     super(props)
 
     this.instagramFeedIsLoading = false
+    this.handleShareProfile = this.handleShareProfile.bind(this)
   }
 
   componentDidMount() {
@@ -55,6 +59,12 @@ class Producer extends React.Component {
 
   props: Props
   instagramFeedIsLoading: boolean
+  handleShareProfile: Function
+
+  handleShareProfile() {
+    this.props.toggleShareProfile(!this.props.isSharing)
+  }
+
   renderHelmetMeta: Function
 
   renderHelmetMeta() {
@@ -78,7 +88,7 @@ class Producer extends React.Component {
   }
 
   render() {
-    const { producer, isLoading, hasErrored } = this.props
+    const { producer, isLoading, hasErrored, isSharing } = this.props
 
     if (hasErrored) {
       return <p>There was an error loading the producer</p>
@@ -102,21 +112,31 @@ class Producer extends React.Component {
           <div className="u-margin-bottom-lg">
             <h1 className={`${styles.title} u-h1`}>{producer.title}</h1>
             <p>{categories}</p>
-            <Button>Share</Button>
-            <Lightbox isVisible toggleVisibility={() => { }} className="testingMcGee">
-              <h3 className="u-h3">Share {producer.title} with your friends</h3>
-              <a
-                target="_blank"
-                href={`https://facebook.com/sharer/sharer.php?u=${APP_URL}/producer/${producer.user_id}`}
-              >
-                Share on Facebook
-              </a><br />
-              <a
-                target="_blank"
-                href={`https://twitter.com/intent/tweet/?url=${APP_URL}/producer/${producer.user_id}&text=${producer.title}&hashtags=${SHARE_HASHTAGS}&via=${TWITTER_HANDLE}`}
-              >
-                Share on Twitter
-              </a>
+            <Button onClick={this.handleShareProfile}>Share</Button>
+            <Lightbox isVisible={isSharing} toggleVisibility={this.handleShareProfile}>
+              <h3 className="u-h2">Share {producer.title} with your friends</h3>
+              <ListBare className="u-margin-none">
+                <li className="u-margin-bottom-sm">
+                  <Button
+                    level="facebook"
+                    target="_blank"
+                    href={`https://facebook.com/sharer/sharer.php?u=${APP_URL}/producer/${producer.user_id}`}
+                    block
+                  >
+                    Share on Facebook
+                  </Button>
+                </li>
+                <li>
+                  <Button
+                    level="twitter"
+                    target="_blank"
+                    href={`https://twitter.com/intent/tweet/?url=${APP_URL}/producer/${producer.user_id}&text=${producer.title}&hashtags=${SHARE_HASHTAGS}&via=${TWITTER_HANDLE}`}
+                    block
+                  >
+                    Share on Twitter
+                  </Button>
+                </li>
+              </ListBare>
             </Lightbox>
             <p>{producer.description}</p>
             {producer.website ? (<p>{producer.website}</p>) : null}

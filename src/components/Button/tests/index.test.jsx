@@ -10,7 +10,7 @@ describe('generateClassList()', () => {
   })
 
   it('should exclude falsey values from the returned string', () => {
-    expect(generateClassList(['a', null, 'b', false, 'c'])).toEqual('a b c')
+    expect(generateClassList(['a', null, 'b', false, 'c', undefined])).toEqual('a b c')
   })
 })
 
@@ -36,6 +36,7 @@ describe('<Button />', () => {
     props = {
       href: undefined,
       className: undefined,
+      level: undefined,
       onClick: undefined,
       type: undefined,
     }
@@ -83,5 +84,18 @@ describe('<Button />', () => {
     const rendered = renderedComponent()
     // eslint-disable-next-line dot-notation
     expect(rendered.hasClass(styles['primary'])).toBe(true)
+  })
+
+  it('should add a target attribute if prop is specified', () => {
+    props.href = 'https://google.com'
+    props.target = '_blank'
+    const rendered = renderedComponent()
+    expect(rendered.find('a').prop('target')).toEqual('_blank')
+  })
+
+  it('should add `styles.block` if block prop is defined', () => {
+    props.block = true
+    const rendered = renderedComponent()
+    expect(rendered.find('button').hasClass(styles.block)).toBe(true)
   })
 })

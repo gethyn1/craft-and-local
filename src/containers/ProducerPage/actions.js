@@ -42,6 +42,11 @@ export const producerFetchInstagramFeedClearState = () => ({
   type: types.PRODUCER_FETCH_INSTAGRAM_FEED_CLEAR_STATE,
 })
 
+export const producerShareProfile = (payload: boolean) => ({
+  type: types.PRODUCER_SHARE_PROFILE,
+  payload,
+})
+
 export const producerFetchData = (id: string) => (dispatch: Function) => {
   const url = `${API_URL_PRODUCERS}/${id}`
   dispatch(producerHasErrored(false))

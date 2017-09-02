@@ -13,11 +13,13 @@ import React from 'react'
 import styles from '../../styles/6-components/_components.button.scss'
 
 type Props = {
+  block?: Boolean,
   children: React.Element<*>,
   className?: string,
   href?: string,
   level?: string,
   onClick?: Function,
+  target?: string,
   type?: string,
 }
 
@@ -36,18 +38,19 @@ export const generateClassList = (classes: Array<*>) =>
  * Button react component.
  */
 
-const Button = ({ children, className, href, level, onClick, type }: Props) => {
+const Button = ({ block, children, className, href, level, onClick, target, type }: Props) => {
   // Create the class list for the Button
   const classList = generateClassList([
     styles.btn,
     styles[level],
-    String(className),
+    className,
+    block ? styles.block : false,
   ])
 
   // Render an <a> tag if href prop is defined
   if (href) {
     return (
-      <a href={href} className={classList}>
+      <a href={href} target={target} className={classList}>
         {children}
       </a>
     )
@@ -62,10 +65,12 @@ const Button = ({ children, className, href, level, onClick, type }: Props) => {
 }
 
 Button.defaultProps = {
+  block: false,
   className: null,
   href: null,
   level: null,
   onClick: null,
+  target: null,
   type: null,
 }
 

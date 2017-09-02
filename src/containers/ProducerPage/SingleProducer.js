@@ -8,12 +8,14 @@ import {
   producerClearState,
   producerFetchInstagramFeed,
   producerFetchInstagramFeedClearState,
+  producerShareProfile,
 } from './actions'
 
 import Producer from '../../components/Producer'
 
 const mapStateToProps = (state, ownProps) => ({
   isLoading: state.producer.isLoading,
+  isSharing: state.producer.isSharing,
   hasErrored: state.producer.hasErrored,
   producerId: ownProps.match.params.userId,
   producer: state.producer.producer,
@@ -29,6 +31,9 @@ const mapDispatchToProps = (dispatch: Function) => ({
   resetProducerState: () => {
     dispatch(producerClearState())
     dispatch(producerFetchInstagramFeedClearState())
+  },
+  toggleShareProfile: (isSharing: boolean) => {
+    dispatch(producerShareProfile(isSharing))
   },
 })
 
