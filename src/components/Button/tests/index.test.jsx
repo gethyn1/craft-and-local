@@ -1,6 +1,18 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Button from '../index'
+import Button, { generateClassList } from '../index'
+
+import styles from '../../../styles/6-components/_components.button.scss'
+
+describe('generateClassList()', () => {
+  it('should return a string when passed an array', () => {
+    expect(generateClassList(['a', 'b', 'c'])).toEqual('a b c')
+  })
+
+  it('should exclude falsey values from the returned string', () => {
+    expect(generateClassList(['a', null, 'b', false, 'c'])).toEqual('a b c')
+  })
+})
 
 describe('<Button />', () => {
   let props
@@ -64,5 +76,12 @@ describe('<Button />', () => {
     props.className = 'test'
     const rendered = renderedComponent()
     expect(rendered.find('button').hasClass('test')).toBe(true)
+  })
+
+  it('should add a button level class if prop is specified', () => {
+    props.level = 'primary'
+    const rendered = renderedComponent()
+    // eslint-disable-next-line dot-notation
+    expect(rendered.hasClass(styles['primary'])).toBe(true)
   })
 })
