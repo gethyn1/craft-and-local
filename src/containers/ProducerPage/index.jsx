@@ -5,8 +5,11 @@ import { Helmet } from 'react-helmet'
 
 import { APP_NAME } from '../../config'
 
+import ProducerGoogleMap from './ProducerGoogleMap'
 import ProducerInstagramFeed from './ProducerInstagramFeed'
 import SingleProducer from './SingleProducer'
+
+import Container from '../../components/Container'
 
 const title = 'Producer page'
 
@@ -19,8 +22,15 @@ const ProducerPage = () => (
         { property: 'og:title', content: `${APP_NAME}: ${title}` },
       ]}
     />
-    <SingleProducer />
-    <ProducerInstagramFeed />
+    <div>
+      <SingleProducer />
+    </div>
+    <div className="u-margin-bottom-lg">
+      <ProducerGoogleMap />
+    </div>
+    <Container>
+      <ProducerInstagramFeed />
+    </Container>
   </div>
 )
 

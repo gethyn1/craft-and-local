@@ -7,7 +7,6 @@ import { APP_NAME, APP_URL, SHARE_HASHTAGS, TWITTER_HANDLE } from '../config'
 
 import Button from './Button'
 import Container from './Container'
-import GoogleMap from './GoogleMap'
 import Lightbox from './Lightbox'
 import ListBare from './ListBare'
 
@@ -144,13 +143,6 @@ class Producer extends React.Component {
             {producer.contact_telephone ? (<p>{producer.contact_telephone}</p>) : null}
           </div>
         </Container>
-        <div className="u-margin-bottom-lg">
-          <GoogleMap
-            longitude={producer.location.coordinates[0]}
-            latitude={producer.location.coordinates[1]}
-            zoom={15}
-          />
-        </div>
       </div>
     )
   }
