@@ -29,4 +29,7 @@ export const STORAGE_USER_EMAIL = 'userEmail'
 export const SHARE_HASHTAGS = 'CraftAndLocal'
 export const TWITTER_HANDLE = 'CraftAndLocal'
 
+export const GA_ID = 'UA-xxxxxx-xx'
+export const GA_DEBUG = false
+
 export const isProd = process.env.NODE_ENV === 'production'

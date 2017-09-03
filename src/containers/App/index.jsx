@@ -12,9 +12,12 @@ import CreateProducerPage from '../CreateProducerPage'
 import NotFoundPage from '../NotFoundPage'
 import ProducerPage from '../ProducerPage'
 
+import GoogleAnalytics from '../../components/GoogleAnalytics'
+
 const App = () => (
   <div>
     <UserUtils />
+    <Route path="/" component={GoogleAnalytics} />
     <Switch>
       <Route exact path={'/'} render={() => <ProducersPage />} />
       <Route exact path={'/login'} render={() => <LoginPage />} />
