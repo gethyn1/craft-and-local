@@ -19,6 +19,7 @@ const mapStateToProps = (state, ownProps) => ({
   hasErrored: state.producer.hasErrored,
   producerId: ownProps.match.params.userId,
   producer: state.producer.producer,
+  notFound: state.producer.notFound,
 })
 
 const mapDispatchToProps = (dispatch: Function) => ({

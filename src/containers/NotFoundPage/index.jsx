@@ -9,6 +9,11 @@ import Container from '../../components/Container'
 
 const title = 'Page not found'
 
+const readyToPrerender = () => {
+  window.prerenderReady = true
+  return null
+}
+
 const NotFoundPage = () => (
   <div>
     <Helmet
@@ -22,6 +27,7 @@ const NotFoundPage = () => (
     <Container>
       <p>Sorry, the page you are looking for doesn&apos;t exist.</p>
     </Container>
+    {readyToPrerender()}
   </div>
 )
 

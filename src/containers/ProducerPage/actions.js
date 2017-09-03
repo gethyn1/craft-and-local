@@ -47,6 +47,11 @@ export const producerShareProfile = (payload: boolean) => ({
   payload,
 })
 
+export const producerNotFound = (payload: boolean) => ({
+  type: types.PRODUCER_NOT_FOUND,
+  payload,
+})
+
 export const producerFetchData = (id: string) => (dispatch: Function) => {
   const url = `${API_URL_PRODUCERS}/${id}`
   dispatch(producerHasErrored(false))
@@ -55,6 +60,10 @@ export const producerFetchData = (id: string) => (dispatch: Function) => {
   return fetch(url, { method: 'GET' })
     .then((response) => {
       if (!response.ok) {
+        if (response.status === 404) {
+          dispatch(producerNotFound(true))
+        }
+
         throw Error(response.statusText)
       }
       dispatch(producerIsLoading(false))

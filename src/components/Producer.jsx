@@ -2,8 +2,9 @@
 
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import { Redirect } from 'react-router-dom'
 
-import { APP_NAME, APP_URL, SHARE_HASHTAGS, TWITTER_HANDLE } from '../config'
+import { APP_NAME, APP_URL, SHARE_HASHTAGS, TWITTER_HANDLE, NOT_FOUND_ROUTE } from '../config'
 
 import Button from './Button'
 import Container from './Container'
@@ -22,6 +23,7 @@ type Props = {
   resetProducerState: Function,
   isSharing: boolean,
   toggleShareProfile: Function,
+  notFound: boolean,
 }
 
 class Producer extends React.Component {
@@ -92,7 +94,11 @@ class Producer extends React.Component {
   }
 
   render() {
-    const { producer, isLoading, hasErrored, isSharing } = this.props
+    const { producer, isLoading, hasErrored, isSharing, notFound } = this.props
+
+    if (notFound) {
+      return <Redirect to={`/${NOT_FOUND_ROUTE}`} />
+    }
 
     if (hasErrored) {
       return <p>There was an error loading the producer</p>

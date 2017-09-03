@@ -31,3 +31,5 @@ export const TWITTER_HANDLE = 'CraftAndLocal'
 
 export const GA_ID = 'UA-xxxxxx-xx'
 export const GA_DEBUG = false
+
+export const NOT_FOUND_ROUTE = '404'
