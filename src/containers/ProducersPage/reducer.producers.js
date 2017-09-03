@@ -5,7 +5,7 @@ import types from './constants'
 export const initialState = {
   isLoading: false,
   hasErrored: false,
-  producers: [],
+  producers: null,
   markers: [],
 }
 

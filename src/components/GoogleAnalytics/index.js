@@ -14,30 +14,28 @@ type Props = {
 }
 
 class GoogleAnalytics extends React.Component {
+  static sendPageChange(pathname, search = '') {
+    const page = pathname + search
+    ReactGA.set({ page })
+    ReactGA.pageview(page)
+  }
+
   constructor(props: Props) {
     super(props)
 
     // Initial page load - only fired once
-    this.sendPageChange(props.location.pathname, props.location.search)
+    this.constructor.sendPageChange(props.location.pathname, props.location.search)
   }
 
-  props: Props
-
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     // When props change, check if the URL has changed or not
     if (this.props.location.pathname !== nextProps.location.pathname
       || this.props.location.search !== nextProps.location.search) {
-      this.sendPageChange(nextProps.location.pathname, nextProps.location.search)
+      this.constructor.sendPageChange(nextProps.location.pathname, nextProps.location.search)
     }
   }
 
-  sendPageChange: Function
-
-  sendPageChange(pathname, search='') {
-    const page = pathname + search
-    ReactGA.set({page})
-    ReactGA.pageview(page)
-  }
+  props: Props
 
   render() {
     return null
