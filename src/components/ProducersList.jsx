@@ -6,13 +6,12 @@ import { Layout, LayoutItem } from './Layout'
 import ProducerCard from './ProducerCard'
 
 type Props = {
-  producers: Array<Object>,
+  producers: ?Array<Object>,
   fetchData: Function,
   hasErrored: boolean,
   isLoading: boolean,
   lat: number,
   lng: number,
-
 }
 
 class ProducersList extends React.Component {
@@ -35,23 +34,23 @@ class ProducersList extends React.Component {
   props: Props
 
   render() {
+    if (this.props.hasErrored) {
+      return <p>There was an error getting producers</p>
+    }
+
+    if (this.props.isLoading || !this.props.producers) {
+      return <p>Loading producers ...</p>
+    }
+
+    if (!this.props.producers.length) {
+      return <p>Sorry, there are no producers for that category</p>
+    }
+
     const producers = this.props.producers.map(producer => (
       <LayoutItem key={producer._id} cols="1/3@tablet" className="u-margin-bottom">
         <ProducerCard producer={producer} {...this.props} />
       </LayoutItem>
     ))
-
-    if (this.props.hasErrored) {
-      return <p>There was an error getting producers</p>
-    }
-
-    if (this.props.isLoading) {
-      return <p>Loading producers ...</p>
-    }
-
-    if (!producers.length) {
-      return <p>Sorry, there are no producers for that category</p>
-    }
 
     return (
       <div>
