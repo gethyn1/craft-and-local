@@ -7,6 +7,7 @@ export const initialState = {
   isSharing: false,
   hasErrored: false,
   producer: null,
+  notFound: false,
   instagramFeedIsLoading: false,
   instagramFeedHasErrored: false,
   instagramFeed: null,
@@ -25,6 +26,10 @@ export const producer = (state: Object = initialState, action: { type: string, p
     case types.PRODUCER_FETCH_DATA_SUCCESS:
       return Object.assign({}, state, {
         producer: action.payload,
+      })
+    case types.PRODUCER_NOT_FOUND:
+      return Object.assign({}, state, {
+        notFound: action.payload,
       })
     case types.PRODUCER_CLEAR_STATE:
       return Object.assign({}, state, {

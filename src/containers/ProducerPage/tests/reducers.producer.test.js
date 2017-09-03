@@ -18,6 +18,10 @@ const isSharingTestState = Object.assign({}, initialState, {
   isSharing: true,
 })
 
+const notFoundTestState = Object.assign({}, initialState, {
+  notFound: true,
+})
+
 describe('Categories reducer', () => {
   it('should return the initial state', () => {
     expect(producer(undefined, {})).toEqual(initialState)
@@ -61,5 +65,15 @@ describe('Categories reducer', () => {
       }),
     )
     .toEqual(isSharingTestState)
+  })
+
+  it(`should handle ${types.PRODUCER_NOT_FOUND}`, () => {
+    expect(
+      producer(initialState, {
+        type: types.PRODUCER_NOT_FOUND,
+        payload: true,
+      }),
+    )
+    .toEqual(notFoundTestState)
   })
 })

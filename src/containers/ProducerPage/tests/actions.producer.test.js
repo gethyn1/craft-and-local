@@ -9,6 +9,7 @@ import {
   producerIsLoading,
   producerFetchData,
   producerFetchDataSuccess,
+  producerNotFound,
 } from '../actions'
 
 const mockStore = configureMockStore([thunkMiddleware])
@@ -52,6 +53,7 @@ test('Fetch producer from API: 404', () => {
       expect(store.getActions()).toEqual([
         producerHasErrored(false),
         producerIsLoading(true),
+        producerNotFound(true),
         producerIsLoading(false),
         producerHasErrored(true),
       ])
