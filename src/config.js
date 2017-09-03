@@ -4,6 +4,7 @@
 global.ENV_ENVIRONMENT = null
 /* eslint-enable */
 
+export const isProd = ENV_ENVIRONMENT === 'production'
 export const WDS_PORT = 8080
 
 export const APP_NAME = 'Craft & Local'
@@ -12,7 +13,7 @@ export const GOOGLE_MAPS_API_KEY = 'AIzaSyAI0dZaZHkO6pUC1maNGg6HALwRX4nG0w4'
 export const GOOGLE_MAPS_URL = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=geometry`
 
 // eslint-disable-next-line no-undef
-export const API_URL = ENV_ENVIRONMENT === 'production' ? 'https://craftandlocal.herokuapp.com' : 'http://localhost:5000'
+export const API_URL = isProd ? 'https://craftandlocal.herokuapp.com' : 'http://localhost:5000'
 // eslint-disable-next-line no-undef
 export const APP_URL = 'https://piano-tuner-eagle-18310.netlify.com'
 
@@ -31,5 +32,3 @@ export const TWITTER_HANDLE = 'CraftAndLocal'
 
 export const GA_ID = 'UA-xxxxxx-xx'
 export const GA_DEBUG = false
-
-export const isProd = process.env.NODE_ENV === 'production'
