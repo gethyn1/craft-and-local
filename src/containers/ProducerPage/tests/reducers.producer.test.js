@@ -11,7 +11,14 @@ const erroredTestState = Object.assign({}, initialState, {
 })
 
 const producerTestState = Object.assign({}, initialState, {
-  producer: { id: '123', title: 'test title', categories: ['1', '2'] },
+  producer: {
+    id: '123',
+    title: 'test title',
+    categories: ['1', '2'],
+    location: { coordinates: ['123', '456'] },
+  },
+  lng: '123',
+  lat: '456',
 })
 
 const isSharingTestState = Object.assign({}, initialState, {
@@ -51,7 +58,12 @@ describe('Categories reducer', () => {
     expect(
       producer(initialState, {
         type: types.PRODUCER_FETCH_DATA_SUCCESS,
-        payload: { id: '123', title: 'test title', categories: ['1', '2'] },
+        payload: {
+          id: '123',
+          title: 'test title',
+          categories: ['1', '2'],
+          location: { coordinates: ['123', '456'] },
+        },
       }),
     )
     .toEqual(producerTestState)
