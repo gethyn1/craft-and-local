@@ -31,7 +31,9 @@ class Producer extends React.Component {
 
   static readyToPrerender() {
     // Tell prerender.io that we are ready to prerender the page
-    window.prerenderReady = true
+    setTimeout(() => {
+      window.prerenderReady = true
+    }, 1000)
   }
 
   constructor(props: Props) {
