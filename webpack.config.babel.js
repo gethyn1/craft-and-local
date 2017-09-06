@@ -1,6 +1,8 @@
 import path from 'path'
 import webpack from 'webpack'
 import SpriteLoaderPlugin from 'svg-sprite-loader/plugin'
+import 'whatwg-fetch'
+import 'babel-polyfill'
 
 import { WDS_PORT, isProd } from './src/config'
 
@@ -14,8 +16,9 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 
 export default {
   entry: [
-		'react-hot-loader/patch',
+		'babel-polyfill',
 		'whatwg-fetch',
+		'react-hot-loader/patch',
 		'./index.jsx'
 	],
   output: {
