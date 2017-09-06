@@ -29,13 +29,6 @@ type Props = {
 class Producer extends React.Component {
   static defaultProps: Object
 
-  static readyToPrerender() {
-    // Tell prerender.io that we are ready to prerender the page
-    setTimeout(() => {
-      window.prerenderReady = true
-    }, 1000)
-  }
-
   constructor(props: Props) {
     super(props)
 
@@ -156,7 +149,6 @@ class Producer extends React.Component {
             {producer.contact_telephone ? (<p>{producer.contact_telephone}</p>) : null}
           </div>
         </Container>
-        {this.constructor.readyToPrerender()}
       </div>
     )
   }
