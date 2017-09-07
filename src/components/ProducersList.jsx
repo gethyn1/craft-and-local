@@ -2,6 +2,7 @@
 
 import React from 'react'
 
+import Button from './Button'
 import { Layout, LayoutItem } from './Layout'
 import ProducerCard from './ProducerCard'
 
@@ -12,9 +13,17 @@ type Props = {
   isLoading: boolean,
   lat: number,
   lng: number,
+  loadCount: number,
+  loadMore: Function,
 }
 
 class ProducersList extends React.Component {
+  constructor(props: Props) {
+    super(props)
+
+    this.handleLoadMore = this.handleLoadMore.bind(this)
+  }
+
   componentDidMount() {
     const { lat, lng } = this.props
 
@@ -32,6 +41,19 @@ class ProducersList extends React.Component {
   }
 
   props: Props
+
+  handleLoadMore() {
+    const { lat, lng, loadCount, producers } = this.props
+
+    if (producers) {
+      this.props.loadMore(
+        { lat, lng },
+        producers.slice(Math.max(producers.length - loadCount, 0)),
+      )
+    }
+  }
+
+  handleLoadMore: Function
 
   render() {
     if (this.props.hasErrored) {
@@ -57,6 +79,7 @@ class ProducersList extends React.Component {
         <Layout>
           {producers}
         </Layout>
+        <Button onClick={this.handleLoadMore}>Load more</Button>
       </div>
     )
   }

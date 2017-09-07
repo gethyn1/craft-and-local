@@ -61,4 +61,13 @@ describe('Producers reducer', () => {
     )
     .toEqual(producersTestState)
   })
+
+  it(`should handle ${types.PRODUCERS_RESET_PRODUCERS}`, () => {
+    expect(
+      producers(initialState, {
+        type: types.PRODUCERS_RESET_PRODUCERS,
+      }),
+    )
+    .toEqual(initialState)
+  })
 })

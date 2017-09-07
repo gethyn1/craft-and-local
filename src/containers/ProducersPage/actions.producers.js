@@ -19,8 +19,19 @@ export const producersFetchDataSuccess = (payload: Array<Object>) => ({
   payload,
 })
 
-export const producersFetchData = (latLng: Object) => (dispatch: Function) => {
-  const url = latLng ? `${API_URL_PRODUCERS}?latlng=${latLng.lat},${latLng.lng}` : API_URL_PRODUCERS
+export const producersResetProducers = () => ({
+  type: types.PRODUCERS_RESET_PRODUCERS,
+})
+
+export const producersFetchData = (
+  latLng: Object,
+  minDistance: number = 0,
+  exclude: Array<string> = [],
+) => (dispatch: Function) => {
+  const baseUrl = latLng ? `${API_URL_PRODUCERS}?latlng=${latLng.lat},${latLng.lng}` : API_URL_PRODUCERS
+  const minDistanceQuery = minDistance ? `&mindistance=${minDistance * 1000}` : ''
+  const excludeQuery = exclude.length ? `&exclude=${String(exclude)}` : ''
+  const url = `${baseUrl}${minDistanceQuery}${excludeQuery}`
 
   dispatch(producersIsLoading(true))
 
