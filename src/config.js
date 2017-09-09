@@ -34,4 +34,4 @@ export const GA_DEBUG = false
 
 export const NOT_FOUND_ROUTE = '404'
 
-export const LOAD_PRODUCERS_COUNT = 1
+export const LOAD_PRODUCERS_COUNT = 3

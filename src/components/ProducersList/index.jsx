@@ -2,9 +2,9 @@
 
 import React from 'react'
 
-import Button from './Button'
-import { Layout, LayoutItem } from './Layout'
-import ProducerCard from './ProducerCard'
+import Button from '../Button'
+import { Layout, LayoutItem } from '../Layout'
+import ProducerCard from '../ProducerCard'
 
 type Props = {
   category: ?string,
@@ -18,12 +18,22 @@ type Props = {
   loadMore: Function,
 }
 
+type State = {
+  noMoreProducers: boolean,
+}
+
 class ProducersList extends React.Component {
   constructor(props: Props) {
     super(props)
 
+    this.state = {
+      noMoreProducers: false,
+    }
+
     this.handleLoadMore = this.handleLoadMore.bind(this)
   }
+
+  state: State
 
   componentDidMount() {
     const { lat, lng } = this.props
@@ -34,10 +44,26 @@ class ProducersList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    const { lat, lng } = nextProps
+    const { category, lat, lng, isLoading, producers } = nextProps
 
     if (lat !== this.props.lat && lng !== this.props.lng) {
       this.props.fetchData({ lat, lng })
+    }
+
+    if (
+      isLoading === this.props.isLoading
+      && (producers && this.props.producers)
+      && category === this.props.category
+    ) {
+      this.setState({
+        noMoreProducers: producers.length === this.props.producers.length,
+      })
+    }
+
+    if (category !== this.props.category) {
+      this.setState({
+        noMoreProducers: false,
+      })
     }
   }
 
@@ -73,7 +99,6 @@ class ProducersList extends React.Component {
             {renderProducers}
           </Layout>
           {this.renderStatus()}
-          <Button onClick={this.handleLoadMore}>Load more</Button>
         </div>
       )
     }
@@ -103,14 +128,28 @@ class ProducersList extends React.Component {
     return null
   }
 
+  renderLoadMore() {
+    if (!this.props.producers) {
+      return null
+    }
+
+    if (this.state.noMoreProducers) {
+      return <p>That is all we have at the moment</p>
+    }
+
+    return <Button onClick={this.handleLoadMore}>Load more</Button>
+  }
+
   renderProducers: Function
   renderStatus: Function
+  renderLoadMore: Function
 
   render() {
     return (
       <div>
         {this.renderProducers()}
         {this.renderStatus()}
+        {this.renderLoadMore()}
       </div>
     )
   }
