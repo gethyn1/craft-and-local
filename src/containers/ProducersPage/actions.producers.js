@@ -23,15 +23,24 @@ export const producersResetProducers = () => ({
   type: types.PRODUCERS_RESET_PRODUCERS,
 })
 
-export const producersFetchData = (
-  latLng: Object,
-  minDistance: number = 0,
-  exclude: Array<string> = [],
-) => (dispatch: Function) => {
-  const baseUrl = latLng ? `${API_URL_PRODUCERS}?latlng=${latLng.lat},${latLng.lng}` : API_URL_PRODUCERS
-  const minDistanceQuery = minDistance ? `&mindistance=${minDistance * 1000}` : ''
-  const excludeQuery = exclude.length ? `&exclude=${String(exclude)}` : ''
-  const url = `${baseUrl}${minDistanceQuery}${excludeQuery}`
+export const generateUrl = (base: string, opts: Object = {}) => {
+  let query = ''
+  let first = true
+
+  Object.keys(opts).forEach((key) => {
+    if (opts && Object.prototype.hasOwnProperty.call(opts, key)) {
+      query = `${query}${first ? '?' : '&'}${key}=${opts[key]}`
+      first = false
+    }
+  })
+
+  return `${base}${query}`
+}
+
+export const producersFetchData = (params: ?Object) => (dispatch: Function) => {
+  const url = params ?
+    generateUrl(API_URL_PRODUCERS, params) :
+    generateUrl(API_URL_PRODUCERS)
 
   dispatch(producersIsLoading(true))
 
@@ -50,30 +59,4 @@ export const producersFetchData = (
       producersIsLoading(false)
       dispatch(producersHasErrored(true))
     })
-}
-
-export const producersFilterByCategory = (id: string, latLng: Object) => (dispatch: Function) => {
-  // If a category ID is not specified, return an empty array.
-  if (!id) {
-    return []
-  }
-
-  const url = latLng
-    ? `${API_URL_PRODUCERS}?categories_like=${id}&latlng=${latLng.lat},${latLng.lng}`
-    : `${API_URL_PRODUCERS}?categories_like=${id}`
-
-  dispatch(producersIsLoading(true))
-
-  return fetch(url, { method: 'GET' })
-    .then((response) => {
-      if (!response.ok) {
-        throw Error(response.statusText)
-      }
-
-      dispatch(producersIsLoading(false))
-      return response
-    })
-    .then(response => response.json())
-    .then(data => dispatch(producersFetchDataSuccess(data.data.producers)))
-    .catch(() => dispatch(producersHasErrored(true)))
 }

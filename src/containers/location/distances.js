@@ -3,7 +3,7 @@
 export const deg2rad = (deg: number) => deg * (Math.PI / 180)
 
 // Get distance between to sets of coordinates
-export const getDistanceFromLatLonInKm = (
+export const getDistanceBetweenPoints = (
   lat1: number,
   lng1: number,
   lat2: number,
@@ -21,5 +21,7 @@ export const getDistanceFromLatLonInKm = (
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
   // Distance in km
   const d = R * c
-  return d
+
+  // Distance in metres
+  return d * 1000
 }

@@ -6,7 +6,6 @@ import {
   producersIsLoading,
   producersFetchData,
   producersFetchDataSuccess,
-  producersFilterByCategory,
 } from '../actions.producers'
 
 const mockStore = configureMockStore([thunkMiddleware])
@@ -30,7 +29,6 @@ const mockResponseFailure = {
 }
 
 const latLng = { lat: 123, lng: 456 }
-const categoryId = '789'
 
 describe('Producers actions', () => {
   test('Fetch producers from API: success', () => {
@@ -60,41 +58,6 @@ describe('Producers actions', () => {
     const store = mockStore()
 
     return store.dispatch(producersFetchData(latLng))
-      .then(() => {
-        expect(store.getActions()).toEqual([
-          producersIsLoading(true),
-          producersHasErrored(true),
-        ])
-      })
-  })
-
-  test('Fetch producers by category from API: success', () => {
-    fetch.mockResponse(JSON.stringify(mockResponseSuccess), {
-      status: 200,
-      ok: true,
-    })
-
-    const store = mockStore()
-
-    return store.dispatch(producersFilterByCategory(latLng, categoryId))
-      .then(() => {
-        expect(store.getActions()).toEqual([
-          producersIsLoading(true),
-          producersIsLoading(false),
-          producersFetchDataSuccess(mockResponseSuccess.data.producers),
-        ])
-      })
-  })
-
-  test('Fetch producers by category from API: failure', () => {
-    fetch.mockResponse(JSON.stringify(mockResponseFailure), {
-      status: 404,
-      ok: true,
-    })
-
-    const store = mockStore()
-
-    return store.dispatch(producersFilterByCategory(latLng, categoryId))
       .then(() => {
         expect(store.getActions()).toEqual([
           producersIsLoading(true),

@@ -7,6 +7,7 @@ import { Layout, LayoutItem } from './Layout'
 import ProducerCard from './ProducerCard'
 
 type Props = {
+  category: ?string,
   producers: ?Array<Object>,
   fetchData: Function,
   hasErrored: boolean,
@@ -43,12 +44,13 @@ class ProducersList extends React.Component {
   props: Props
 
   handleLoadMore() {
-    const { lat, lng, loadCount, producers } = this.props
+    const { category, lat, lng, loadCount, producers } = this.props
 
     if (producers) {
       this.props.loadMore(
         { lat, lng },
         producers.slice(Math.max(producers.length - loadCount, 0)),
+        category,
       )
     }
   }
