@@ -57,31 +57,60 @@ class ProducersList extends React.Component {
 
   handleLoadMore: Function
 
-  render() {
-    if (this.props.hasErrored) {
+  renderProducers() {
+    const { producers } = this.props
+
+    if (producers && producers.length) {
+      const renderProducers = producers.map(producer => (
+        <LayoutItem key={producer._id} cols="1/3@tablet" className="u-margin-bottom">
+          <ProducerCard producer={producer} {...this.props} />
+        </LayoutItem>
+      ))
+
+      return (
+        <div>
+          <Layout>
+            {renderProducers}
+          </Layout>
+          {this.renderStatus()}
+          <Button onClick={this.handleLoadMore}>Load more</Button>
+        </div>
+      )
+    }
+
+    return null
+  }
+
+  renderStatus() {
+    const { producers, isLoading, hasErrored } = this.props
+
+    if (!producers) {
+      return <p>Please wait ...</p>
+    }
+
+    if (hasErrored) {
       return <p>There was an error getting producers</p>
     }
 
-    if (this.props.isLoading || !this.props.producers) {
+    if (isLoading) {
       return <p>Loading producers ...</p>
     }
 
-    if (!this.props.producers.length) {
+    if (producers && !producers.length) {
       return <p>Sorry, there are no producers for that category</p>
     }
 
-    const producers = this.props.producers.map(producer => (
-      <LayoutItem key={producer._id} cols="1/3@tablet" className="u-margin-bottom">
-        <ProducerCard producer={producer} {...this.props} />
-      </LayoutItem>
-    ))
+    return null
+  }
 
+  renderProducers: Function
+  renderStatus: Function
+
+  render() {
     return (
       <div>
-        <Layout>
-          {producers}
-        </Layout>
-        <Button onClick={this.handleLoadMore}>Load more</Button>
+        {this.renderProducers()}
+        {this.renderStatus()}
       </div>
     )
   }
