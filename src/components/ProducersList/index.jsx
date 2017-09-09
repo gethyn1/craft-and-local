@@ -3,7 +3,9 @@
 import React from 'react'
 
 import Button from '../Button'
+import Error from '../Error'
 import { Layout, LayoutItem } from '../Layout'
+import Loading from '../Loading'
 import ProducerCard from '../ProducerCard'
 
 type Props = {
@@ -109,16 +111,16 @@ class ProducersList extends React.Component {
   renderStatus() {
     const { producers, isLoading, hasErrored } = this.props
 
+    if (hasErrored) {
+      return <Error>There was an error getting producers</Error>
+    }
+
+    if (!producers && isLoading) {
+      return <Loading>Loading producers ...</Loading>
+    }
+
     if (!producers) {
       return <p>Please wait ...</p>
-    }
-
-    if (hasErrored) {
-      return <p>There was an error getting producers</p>
-    }
-
-    if (isLoading) {
-      return <p>Loading producers ...</p>
     }
 
     if (producers && !producers.length) {
