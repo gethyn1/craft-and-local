@@ -33,3 +33,5 @@ export const GA_ID = 'UA-xxxxxx-xx'
 export const GA_DEBUG = false
 
 export const NOT_FOUND_ROUTE = '404'
+
+export const LOAD_PRODUCERS_COUNT = 3

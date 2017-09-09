@@ -1,6 +1,6 @@
 // @flow
 
-import { API_URL_PRODUCERS } from '../../config'
+import { API_URL_PRODUCERS, LOAD_PRODUCERS_COUNT } from '../../config'
 
 import types from './constants'
 
@@ -19,12 +19,32 @@ export const producersFetchDataSuccess = (payload: Array<Object>) => ({
   payload,
 })
 
-export const producersFetchData = (latLng: Object) => (dispatch: Function) => {
-  const url = latLng ? `${API_URL_PRODUCERS}?latlng=${latLng.lat},${latLng.lng}` : API_URL_PRODUCERS
+export const producersResetProducers = () => ({
+  type: types.PRODUCERS_RESET_PRODUCERS,
+})
+
+export const generateUrl = (base: string, opts: Object = {}) => {
+  let query = ''
+  let first = true
+
+  Object.keys(opts).forEach((key) => {
+    if (opts && Object.prototype.hasOwnProperty.call(opts, key)) {
+      query = `${query}${first ? '?' : '&'}${key}=${opts[key]}`
+      first = false
+    }
+  })
+
+  return `${base}${query}`
+}
+
+export const producersFetchData = (params: ?Object) => (dispatch: Function) => {
+  const paramsWithLimit = Object.assign({}, params, {
+    limit: LOAD_PRODUCERS_COUNT,
+  })
 
   dispatch(producersIsLoading(true))
 
-  return fetch(url, { method: 'GET' })
+  return fetch(generateUrl(API_URL_PRODUCERS, paramsWithLimit), { method: 'GET' })
     .then((response) => {
       if (!response.ok) {
         throw Error(response.statusText)
@@ -39,30 +59,4 @@ export const producersFetchData = (latLng: Object) => (dispatch: Function) => {
       producersIsLoading(false)
       dispatch(producersHasErrored(true))
     })
-}
-
-export const producersFilterByCategory = (id: string, latLng: Object) => (dispatch: Function) => {
-  // If a category ID is not specified, return an empty array.
-  if (!id) {
-    return []
-  }
-
-  const url = latLng
-    ? `${API_URL_PRODUCERS}?categories_like=${id}&latlng=${latLng.lat},${latLng.lng}`
-    : `${API_URL_PRODUCERS}?categories_like=${id}`
-
-  dispatch(producersIsLoading(true))
-
-  return fetch(url, { method: 'GET' })
-    .then((response) => {
-      if (!response.ok) {
-        throw Error(response.statusText)
-      }
-
-      dispatch(producersIsLoading(false))
-      return response
-    })
-    .then(response => response.json())
-    .then(data => dispatch(producersFetchDataSuccess(data.data.producers)))
-    .catch(() => dispatch(producersHasErrored(true)))
 }

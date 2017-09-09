@@ -30,8 +30,17 @@ export const producers = (state: Object = initialState, action: { type: string, 
       })
     case types.PRODUCERS_FETCH_DATA_SUCCESS:
       return Object.assign({}, state, {
-        markers: createProducerMarkers(action.payload),
-        producers: action.payload,
+        markers: state.markers.length ?
+          state.markers.concat(createProducerMarkers(action.payload)) :
+          createProducerMarkers(action.payload),
+        producers: state.producers ?
+          state.producers.concat(action.payload) :
+          action.payload,
+      })
+    case types.PRODUCERS_RESET_PRODUCERS:
+      return Object.assign({}, state, {
+        producers: null,
+        markers: [],
       })
     default:
       return state

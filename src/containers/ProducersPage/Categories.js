@@ -8,7 +8,7 @@ import {
 } from './actions.categories'
 import {
   producersFetchData,
-  producersFilterByCategory,
+  producersResetProducers,
 } from './actions.producers'
 
 import CategoryFilters from '../../components/CategoryFilters'
@@ -27,8 +27,12 @@ const mapDispatchToProps = dispatch => ({
     dispatch(categoriesFetchData())
   },
   onClickFilter: (latLng: Object, id: ?string) => {
+    dispatch(producersResetProducers())
     if (id) {
-      dispatch(producersFilterByCategory(id, latLng))
+      dispatch(producersFetchData({
+        latlng: `${latLng.lat},${latLng.lng}`,
+        categories_like: id,
+      }))
       dispatch(categoriesSetActiveCategory(id))
     } else {
       dispatch(producersFetchData(latLng))
