@@ -35,7 +35,9 @@ const mapDispatchToProps = dispatch => ({
       }))
       dispatch(categoriesSetActiveCategory(id))
     } else {
-      dispatch(producersFetchData(latLng))
+      dispatch(producersFetchData({
+        latlng: `${latLng.lat},${latLng.lng}`,
+      }))
       dispatch(categoriesSetActiveCategory(null))
     }
   },
