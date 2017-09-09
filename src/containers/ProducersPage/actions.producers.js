@@ -1,6 +1,6 @@
 // @flow
 
-import { API_URL_PRODUCERS } from '../../config'
+import { API_URL_PRODUCERS, LOAD_PRODUCERS_COUNT } from '../../config'
 
 import types from './constants'
 
@@ -38,13 +38,13 @@ export const generateUrl = (base: string, opts: Object = {}) => {
 }
 
 export const producersFetchData = (params: ?Object) => (dispatch: Function) => {
-  const url = params ?
-    generateUrl(API_URL_PRODUCERS, params) :
-    generateUrl(API_URL_PRODUCERS)
+  const paramsWithLimit = Object.assign({}, params, {
+    limit: LOAD_PRODUCERS_COUNT,
+  })
 
   dispatch(producersIsLoading(true))
 
-  return fetch(url, { method: 'GET' })
+  return fetch(generateUrl(API_URL_PRODUCERS, paramsWithLimit), { method: 'GET' })
     .then((response) => {
       if (!response.ok) {
         throw Error(response.statusText)
