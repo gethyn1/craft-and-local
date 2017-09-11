@@ -3,8 +3,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 
-import { APP_NAME } from '../../config'
-
 import Container from '../../components/Container'
 
 const title = 'Page not found'
@@ -12,10 +10,9 @@ const title = 'Page not found'
 const NotFoundPage = () => (
   <div>
     <Helmet
-      title={`${APP_NAME}: ${title}`}
+      title={title}
       meta={[
-        { name: 'description', content: 'Local producers and market traders' },
-        { property: 'og:title', content: `${APP_NAME}: ${title}` },
+        { property: 'title', content: title },
         { name: 'robots', content: 'noindex' },
       ]}
     />

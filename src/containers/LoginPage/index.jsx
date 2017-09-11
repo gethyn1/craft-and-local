@@ -16,8 +16,8 @@ const LoginPage = () => (
     <Helmet
       title={`${APP_NAME}: ${title}`}
       meta={[
-        { name: 'description', content: 'Local producers and market traders' },
-        { property: 'og:title', content: `${APP_NAME}: ${title}` },
+        { property: 'title', content: `${APP_NAME}: ${title}` },
+        { name: 'robots', content: 'noindex' },
       ]}
     />
     <Container>
