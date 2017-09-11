@@ -1,24 +1,49 @@
 // @flow
 
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+
 import { getDistanceBetweenPoints } from '../location/distances'
-import { producersFetchData } from './actions.producers'
+import {
+  producersFetchData,
+  producersResetProducers,
+} from './actions.producers'
+import { categoriesSetActiveCategory } from './actions.categories'
 import ProducersList from '../../components/ProducersList'
 
-const mapStateToProps = state => ({
-  category: state.categories.active,
-  producers: state.producers.producers,
-  hasErrored: state.producers.hasErrored,
-  isLoading: state.producers.isLoading,
-  lat: state.location.latitude,
-  lng: state.location.longitude,
-  loadCount: 2,
-})
+const getCategoryFromSlug = (categories: Array<Object>, slug: string) =>
+  categories.find(category => category.slug === slug)
 
-const mapDispatchToProps = dispatch => ({
-  fetchData: (latLng: Object) => {
+const mapStateToProps = (state: Object, ownProps: Object) => {
+  const { params } = ownProps.match
+  let category = null
+  let categoryFromSlug = null
+
+  if (state.categories.categories && params.category) {
+    categoryFromSlug = getCategoryFromSlug(state.categories.categories, params.category)
+  }
+
+  if (categoryFromSlug) {
+    category = categoryFromSlug._id
+  }
+
+  return {
+    category,
+    categories: state.categories.categories,
+    hasErrored: state.producers.hasErrored,
+    isLoading: state.producers.isLoading,
+    lat: state.location.latitude,
+    lng: state.location.longitude,
+    loadCount: 2,
+    producers: state.producers.producers,
+  }
+}
+
+const mapDispatchToProps = (dispatch: Function) => ({
+  fetchData: (params: Object) => {
     dispatch(producersFetchData({
-      latlng: `${latLng.lat},${latLng.lng}`,
+      categories_like: params.category,
+      latlng: `${params.lat},${params.lng}`,
     }))
   },
   loadMore: (latLng: Object, producers: Array<Object>, category: string) => {
@@ -50,11 +75,17 @@ const mapDispatchToProps = dispatch => ({
 
     dispatch(producersFetchData(queryParams))
   },
+  setActiveCategory: (category: string) => {
+    dispatch(categoriesSetActiveCategory(category))
+  },
+  resetProducers: () => {
+    dispatch(producersResetProducers())
+  },
 })
 
-const AllProducers = connect(
+const AllProducers = withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ProducersList)
+)(ProducersList))
 
 export default AllProducers

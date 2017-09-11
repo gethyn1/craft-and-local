@@ -4,19 +4,57 @@
 
 @import '../global-import';
 
+// .wrapper {
+//   position: relative;
+//
+//   &::before,
+//   &::after {
+//     content: '';
+//     display: block;
+//     position: absolute;
+//     top: 0;
+//     bottom: 0;
+//     width: rem(100);
+//   }
+//
+//   &::before {
+//     background-image: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+//     left: 0;
+//   }
+//
+//   &::after {
+//     background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+//     right: 0;
+//   }
+// }
+
 .filter-list {
   display: flex;
   justify-content: space-between;
+  margin-left: 0;
+  overflow-x: scroll;
+}
+
+.filter-item {
+  list-style: none;
+
+  + * {
+    margin-left: rem($global-spacing-unit-sm);
+  }
 }
 
 .filter {
   background: rgba(0,0,0,0.05);
   border: none;
+  color: inherit;
   cursor: pointer;
   border-radius: $global-radius;
+  display: block;
   height: rem(40);
+  line-height: rem(40);
   font-size: rem($small-font-size);
   padding: 0 rem($global-spacing-unit);
+  text-decoration: none;
   white-space: nowrap;
 
   &:hover,

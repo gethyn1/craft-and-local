@@ -28,7 +28,7 @@ export const generateUrl = (base: string, opts: Object = {}) => {
   let first = true
 
   Object.keys(opts).forEach((key) => {
-    if (opts && Object.prototype.hasOwnProperty.call(opts, key)) {
+    if (opts && Object.prototype.hasOwnProperty.call(opts, key) && opts[key]) {
       query = `${query}${first ? '?' : '&'}${key}=${opts[key]}`
       first = false
     }
