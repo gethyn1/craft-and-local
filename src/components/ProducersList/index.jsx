@@ -18,6 +18,8 @@ type Props = {
   lng: number,
   loadCount: number,
   loadMore: Function,
+  setActiveCategory: Function,
+  resetProducers: Function,
 }
 
 type State = {
@@ -38,18 +40,32 @@ class ProducersList extends React.Component {
   state: State
 
   componentDidMount() {
-    const { lat, lng } = this.props
+    const { category, lat, lng } = this.props
 
     if (lat && lng) {
-      this.props.fetchData({ lat, lng })
+      this.props.fetchData({ category, lat, lng })
     }
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    const { category, lat, lng, isLoading, producers } = nextProps
+    const { category, lat, lng, isLoading, producers, setActiveCategory } = nextProps
 
-    if (lat !== this.props.lat && lng !== this.props.lng) {
-      this.props.fetchData({ lat, lng })
+    if (category !== this.props.category) {
+      setActiveCategory(category)
+    }
+
+    if (
+      ((lat && lng)
+      && (lat !== this.props.lat && lng !== this.props.lng))
+      ||
+      ((lat && lng)
+      && (category !== this.props.category))
+    ) {
+      this.props.resetProducers()
+      this.setState({
+        noMoreProducers: false,
+      })
+      this.props.fetchData({ category, lat, lng })
     }
 
     if (
@@ -59,12 +75,6 @@ class ProducersList extends React.Component {
     ) {
       this.setState({
         noMoreProducers: producers.length === this.props.producers.length,
-      })
-    }
-
-    if (category !== this.props.category) {
-      this.setState({
-        noMoreProducers: false,
       })
     }
   }
@@ -131,7 +141,7 @@ class ProducersList extends React.Component {
   }
 
   renderLoadMore() {
-    if (!this.props.producers) {
+    if (!this.props.producers || !this.props.producers.length) {
       return null
     }
 

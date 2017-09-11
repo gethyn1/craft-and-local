@@ -39,6 +39,8 @@ describe('<ProducersList />', () => {
       lng: undefined,
       loadCount: undefined,
       loadMore: jest.fn(),
+      resetProducers: jest.fn(),
+      setActiveCategory: jest.fn(),
     }
 
     shallowComponent = undefined

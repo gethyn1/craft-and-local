@@ -22,9 +22,10 @@ const App = () => (
     {isProd && <Route path="/" component={GoogleAnalytics} />}
     <Switch>
       <Route exact path={'/'} render={() => <ProducersPage />} />
-      <Route exact path={'/login'} render={() => <LoginPage />} />
+      <Route exact path={'/producers/:category'} render={() => <ProducersPage />} />
       <Authenticated path={'/producer/create'} component={CreateProducerPage} adminComponent />
       <Route path={'/producer/:userId'} render={() => <ProducerPage />} />
+      <Route exact path={'/login'} render={() => <LoginPage />} />
       <Route render={() => <NotFoundPage />} />
     </Switch>
   </div>

@@ -1,8 +1,7 @@
 // @flow
 
 import React from 'react'
-
-import ListBare from './ListBare'
+import { Link } from 'react-router-dom'
 
 import styles from '../styles/6-components/_components.filters.scss'
 
@@ -10,9 +9,6 @@ type Props = {
   categories: Array<Object>,
   active: ?string,
   fetchData: Function,
-  onClickFilter: Function,
-  lat: number,
-  lng: number,
 }
 
 class CategoryFilters extends React.Component {
@@ -23,31 +19,33 @@ class CategoryFilters extends React.Component {
   props: Props
 
   render() {
-    const { categories, active, onClickFilter, lat, lng } = this.props
+    const { categories, active } = this.props
 
     const filters = categories ? categories.map(category => (
-      <li key={category._id}>
-        <button
+      <li key={category._id} className={styles['filter-item']}>
+        <Link
+          to={`/producers/${category.slug}`}
           className={`${styles.filter} ${active === category._id ? styles.active : ''}`}
-          onClick={() => { onClickFilter({ lat, lng }, category._id) }}
         >
           {category.title}
-        </button>
+        </Link>
       </li>
     )) : null
 
     return (
-      <ListBare className={styles['filter-list']}>
-        <li className={styles['filter-item']}>
-          <button
-            className={`${styles.filter} ${!active ? styles.active : ''}`}
-            onClick={() => { onClickFilter({ lat, lng }) }}
-          >
-            All
-          </button>
-        </li>
-        {filters}
-      </ListBare>
+      <div className={styles.wrapper}>
+        <ul className={styles['filter-list']}>
+          <li className={styles['filter-item']}>
+            <Link
+              to="/"
+              className={`${styles.filter} ${!active ? styles.active : ''}`}
+            >
+              All
+            </Link>
+          </li>
+          {filters}
+        </ul>
+      </div>
     )
   }
 }
