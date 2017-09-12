@@ -16,10 +16,13 @@ const getCategoryFromSlug = (categories: Array<Object>, slug: string) =>
 
 const mapStateToProps = (state: Object, ownProps: Object) => {
   const { params } = ownProps.match
+  const { categories } = state.categories
+
   let category = null
   let categoryFromSlug = null
+  let categoryDoesNotExist = false
 
-  if (state.categories.categories && params.category) {
+  if (categories && params.category) {
     categoryFromSlug = getCategoryFromSlug(state.categories.categories, params.category)
   }
 
@@ -27,9 +30,14 @@ const mapStateToProps = (state: Object, ownProps: Object) => {
     category = categoryFromSlug._id
   }
 
+  if (params.category && categories && !category) {
+    categoryDoesNotExist = true
+  }
+
   return {
     category,
-    categories: state.categories.categories,
+    categoryDoesNotExist,
+    categories,
     hasErrored: state.producers.hasErrored,
     isLoading: state.producers.isLoading,
     lat: state.location.latitude,

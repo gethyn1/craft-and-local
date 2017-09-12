@@ -1,6 +1,9 @@
 // @flow
 
 import React from 'react'
+import { Redirect } from 'react-router-dom'
+
+import { NOT_FOUND_ROUTE } from '../../config'
 
 import Button from '../Button'
 import Error from '../Error'
@@ -10,6 +13,7 @@ import ProducerCard from '../ProducerCard'
 
 type Props = {
   category: ?string,
+  categoryDoesNotExist: boolean,
   producers: ?Array<Object>,
   fetchData: Function,
   hasErrored: boolean,
@@ -161,6 +165,10 @@ class ProducersList extends React.Component {
   renderLoadMore: Function
 
   render() {
+    if (this.props.categoryDoesNotExist) {
+      return <Redirect to={`/${NOT_FOUND_ROUTE}`} />
+    }
+
     return (
       <div>
         {this.renderProducers()}
