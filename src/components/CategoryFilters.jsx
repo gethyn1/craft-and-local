@@ -16,6 +16,10 @@ class CategoryFilters extends React.Component {
     this.props.fetchData()
   }
 
+  componentWillUnmount() {
+    this.props.resetCategories()
+  }
+
   props: Props
 
   render() {
