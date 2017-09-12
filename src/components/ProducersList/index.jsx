@@ -79,6 +79,10 @@ class ProducersList extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.resetProducers()
+  }
+
   props: Props
 
   handleLoadMore() {
