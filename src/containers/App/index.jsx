@@ -20,6 +20,13 @@ const App = () => (
   <div>
     <UserUtils />
     {isProd && <Route path="/" component={GoogleAnalytics} />}
+    <Route
+      path="/"
+      render={() => {
+        window.scrollTo(0, 0)
+        return null
+      }}
+    />
     <Switch>
       <Route exact path={'/'} render={() => <ProducersPage />} />
       <Route exact path={'/producers/:category'} render={() => <ProducersPage />} />
