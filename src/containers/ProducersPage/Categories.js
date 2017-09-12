@@ -2,7 +2,10 @@
 
 import { connect } from 'react-redux'
 
-import { categoriesFetchData } from './actions.categories'
+import {
+  categoriesFetchData,
+  categoriesSetActiveCategory,
+} from './actions.categories'
 
 import CategoryFilters from '../../components/CategoryFilters'
 
@@ -16,6 +19,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchData: () => {
     dispatch(categoriesFetchData())
+  },
+  resetCategories: () => {
+    dispatch(categoriesSetActiveCategory(null))
   },
 })
 
