@@ -30,6 +30,7 @@ describe('<ProducersList />', () => {
 
   beforeEach(() => {
     props = {
+      categoryDoesNotExist: false,
       category: undefined,
       producers: undefined,
       fetchData: jest.fn(),
@@ -136,5 +137,11 @@ describe('<ProducersList />', () => {
     expect(props.loadMore.mock.calls).toEqual([
       [{ lat: 123, lng: 456 }, [{ _id: '123' }], '1'],
     ])
+  })
+
+  it('should redirect to 404 if categoryDoesNotExist is true', () => {
+    props.categoryDoesNotExist = true
+    const rendered = renderedShallow()
+    expect(rendered.find('Redirect').length).toBe(1)
   })
 })
