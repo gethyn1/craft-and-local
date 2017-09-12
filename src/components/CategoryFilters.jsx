@@ -9,6 +9,7 @@ type Props = {
   categories: Array<Object>,
   active: ?string,
   fetchData: Function,
+  resetCategories: Function,
 }
 
 class CategoryFilters extends React.Component {
