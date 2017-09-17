@@ -65,7 +65,7 @@ class GoogleMap extends React.Component {
 
       // Add central marker for current position
       if (addCenterMarker) {
-        this.addMarker(pos, this.map, '')
+        this.addMarker(pos, this.map, null, false)
       }
     }
   }
@@ -77,19 +77,26 @@ class GoogleMap extends React.Component {
   mapContainer: any
   addMarkers: Function
 
-  addMarker(pos: Object, map: HTMLElement, title: string) {
-    // flow-disable-next-line
-    const infowindow = new google.maps.InfoWindow({
-      content: `<p>${title}</p>`,
-    })
+  addMarker(pos: Object, map: HTMLElement, title: ?string, push: boolean = true) {
+    let infowindow
 
+    // flow-disable-next-line
     const marker = new google.maps.Marker({
       position: new google.maps.LatLng(pos),
-      title,
     })
 
-    marker.addListener('click', () => infowindow.open(map, marker))
-    this.markersArr.push(marker)
+    if (title) {
+      infowindow = new google.maps.InfoWindow({
+        content: `<p>${title}</p>`,
+      })
+
+      marker.title = title
+      marker.addListener('click', () => infowindow.open(map, marker))
+    }
+
+    if (push) {
+      this.markersArr.push(marker)
+    }
 
     return marker.setMap(map)
   }
