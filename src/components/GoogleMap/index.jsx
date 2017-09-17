@@ -4,7 +4,7 @@
 import React from 'react'
 import scriptLoader from 'react-async-script-loader'
 
-import { GOOGLE_MAPS_URL } from '../config'
+import { GOOGLE_MAPS_URL } from '../../config'
 
 type Props = {
   latitude?: number,
@@ -21,7 +21,63 @@ type Props = {
 class GoogleMap extends React.Component {
   static defaultProps: Object
 
-  static addMarker(pos: Object, map: HTMLElement, title: string) {
+  constructor(props: Props) {
+    super(props)
+
+    this.map = null
+    this.marker = null
+    this.markersArr = []
+    this.mapContainer = null
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    const {
+      addCenterMarker,
+      latitude,
+      longitude,
+      markers,
+      zoom,
+      isScriptLoaded,
+      isScriptLoadSucceed,
+    } = nextProps
+
+    if (isScriptLoaded && isScriptLoadSucceed) {
+      if (!this.map) {
+        // flow-disable-next-line
+        this.map = new google.maps.Map(this.mapContainer, {
+          zoom,
+          scrollwheel: false,
+        })
+      }
+
+      this.setMapCenter(latitude, longitude, addCenterMarker)
+      this.addMarkers(markers)
+    }
+  }
+
+  setMapCenter: Function
+
+  setMapCenter(lat: number, lng: number, addCenterMarker: boolean) {
+    if (lat && lng) {
+      const pos = { lat, lng }
+
+      this.map.setCenter(pos)
+
+      // Add central marker for current position
+      if (addCenterMarker) {
+        this.addMarker(pos, this.map, '')
+      }
+    }
+  }
+
+  props: Props
+  map: any
+  marker: any
+  markersArr: Array<Object>
+  mapContainer: any
+  addMarkers: Function
+
+  addMarker(pos: Object, map: HTMLElement, title: string) {
     // flow-disable-next-line
     const infowindow = new google.maps.InfoWindow({
       content: `<p>${title}</p>`,
@@ -33,64 +89,22 @@ class GoogleMap extends React.Component {
     })
 
     marker.addListener('click', () => infowindow.open(map, marker))
+    this.markersArr.push(marker)
 
     return marker.setMap(map)
   }
 
-  constructor(props: Props) {
-    super(props)
-
-    this.map = null
-    this.marker = null
-    this.mapContainer = null
-  }
-
-  componentWillReceiveProps(nextProps: Props) {
-    const {
-      latitude,
-      longitude,
-      zoom,
-      markers,
-      addCenterMarker,
-      isScriptLoaded,
-      isScriptLoadSucceed,
-    } = nextProps
-
-    if (isScriptLoaded && isScriptLoadSucceed) {
-      // flow-disable-next-line
-      this.map = new google.maps.Map(this.mapContainer, {
-        zoom,
-        scrollwheel: false,
-      })
-
-      if (this.map && latitude && longitude) {
-        const pos = {
-          lat: latitude,
-          lng: longitude,
-        }
-
-        this.map.setCenter(pos)
-
-        // Add central marker for current position
-        if (addCenterMarker) {
-          this.constructor.addMarker(pos, this.map, '')
-        }
-
-        // Add producer state markers
-        this.addMarkers(markers)
-      }
-    }
-  }
-
-  props: Props
-  map: any
-  marker: any
-  mapContainer: any
-  addMarkers: Function
-
   addMarkers(markers: Array<Object>) {
+    // Clear previous markers
+    this.markersArr.forEach((marker) => {
+      marker.setMap(null)
+    })
+
+    this.markersArr = []
+
+    // Add new markers
     markers.forEach((item) => {
-      this.constructor.addMarker({
+      this.addMarker({
         lat: item.lat,
         lng: item.lng,
       }, this.map, item.title)
