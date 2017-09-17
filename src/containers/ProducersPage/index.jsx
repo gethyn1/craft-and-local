@@ -8,6 +8,7 @@ import { APP_NAME } from '../../config'
 import AllProducers from './AllProducers'
 import Categories from './Categories'
 import CurrentLocation from '../location/CurrentLocation'
+import ProducersGoogleMap from './ProducersGoogleMap'
 
 import Container from '../../components/Container'
 
@@ -24,6 +25,9 @@ const HomePage = () => (
     />
     <div className="u-margin-bottom">
       <CurrentLocation />
+      <div style={{ height: '400px' }}>
+        <ProducersGoogleMap />
+      </div>
     </div>
     <Container>
       <Categories />
