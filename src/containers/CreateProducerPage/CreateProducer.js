@@ -2,6 +2,7 @@
 
 import { connect } from 'react-redux'
 
+import { uploadFile } from '../uploads/actions'
 import { categoriesFetchData } from '../ProducersPage/actions.categories'
 import { createProducerPostData } from './actions.createProducer'
 import {
@@ -21,6 +22,9 @@ const mapStateToProps = state => ({
       option: option.address,
       value: `${option.lng},${option.lat}`,
     })) : null,
+  uploadsIsLoading: state.uploads.isLoading,
+  uploadsHasErrored: state.uploads.hasErrored,
+  uploadedImages: state.uploads.uploaded,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -35,6 +39,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onGeoCodingSelect: () => {
     dispatch(geocodingAddressLookupReset())
+  },
+  onFileUpload: (id: string, file: Object) => {
+    dispatch(uploadFile(id, file))
   },
 })
 

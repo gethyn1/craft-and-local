@@ -21,6 +21,7 @@ import * as location from './containers/location/reducer'
 import * as producer from './containers/ProducerPage/reducer'
 import * as producers from './containers/ProducersPage/reducer.producers'
 import * as session from './containers/session/reducer'
+import * as uploads from './containers/uploads/reducer'
 import rootReducer from './rootReducer'
 
 /* eslint-disable no-underscore-dangle */
@@ -35,6 +36,7 @@ const defaultState = {
   producer: producer.initialState,
   producers: producers.initialState,
   session: session.initialState,
+  uploads: uploads.initialState,
 }
 
 const store = createStore(

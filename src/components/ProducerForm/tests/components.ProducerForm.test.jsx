@@ -32,6 +32,9 @@ describe('<ProducerForm />', () => {
       geoCodingLookup: jest.fn(),
       geoCodingOptions: undefined,
       onGeoCodingSelect: jest.fn(),
+      uploadsHasErrored: [],
+      uploadsIsLoading: [],
+      uploadedImages: [],
     }
 
     mountedProducerForm = undefined

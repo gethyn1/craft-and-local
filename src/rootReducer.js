@@ -9,6 +9,7 @@ import { location } from './containers/location/reducer'
 import { producer } from './containers/ProducerPage/reducer'
 import { producers } from './containers/ProducersPage/reducer.producers'
 import { session } from './containers/session/reducer'
+import { uploads } from './containers/uploads/reducer'
 
 const rootReducer = combineReducers({
   categories,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   producer,
   producers,
   session,
+  uploads,
 })
 
 export default rootReducer
