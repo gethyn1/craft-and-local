@@ -35,6 +35,7 @@ type State = {
   contact_email: ?string,
   contact_telephone: ?string,
   website: ?string,
+  uploads: Object,
 }
 
 class ProducerForm extends React.Component {
@@ -42,6 +43,7 @@ class ProducerForm extends React.Component {
     super(props)
 
     this.state = {
+      uploads: {},
       avatar: undefined,
       title: '',
       user_id: '',
@@ -66,7 +68,6 @@ class ProducerForm extends React.Component {
     this.handleAddressSelect = this.handleAddressSelect.bind(this)
     this.handleFileChange = this.handleFileChange.bind(this)
     this.handleFileUpload = this.handleFileUpload.bind(this)
-    this.handleImageUploaded = this.handleImageUploaded.bind(this)
   }
 
   state: State
@@ -75,9 +76,24 @@ class ProducerForm extends React.Component {
     if (!this.props.categories) {
       this.props.getCategories()
     }
+
+    this.mapUploadsToState(this.props.uploadedImages)
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    this.mapUploadsToState(nextProps.uploadedImages)
+  }
+
+  mapUploadsToState(uploads: Array<Object>) {
+    uploads.forEach((upload) => {
+      this.setState({
+        [upload.id]: upload.url,
+      })
+    })
   }
 
   props: Props
+  mapUploadsToState: Function
   handleChange: Function
   handleCategoryChange: Function
   handleGeoCoding: Function
@@ -85,7 +101,6 @@ class ProducerForm extends React.Component {
   handleAddressSelect: Function
   handleFileChange: Function
   handleFileUpload: Function
-  handleImageUploaded: Function
 
   handleChange(event: Event & { target: HTMLInputElement }) {
     const name = event.target.name
@@ -94,30 +109,22 @@ class ProducerForm extends React.Component {
     })
   }
 
+  // !!!!! DO I NEED THIS ?????
   handleFileChange(event: Event & { target: HTMLInputElement }) {
     event.preventDefault()
 
-    const name = event.target.name
-    const file = event.target.files[0]
-
     this.setState({
-      [name]: { file },
+      uploads: {
+        [event.target.name]: { file: event.target.files[0] },
+      },
     })
   }
 
   handleFileUpload(event: Event & { target: HTMLButtonElement }) {
     const name = event.target.getAttribute('data-name')
-    if (name && this.state[name]) {
-      this.props.onFileUpload(name, this.state[name].file)
+    if (name && this.state.uploads[name]) {
+      this.props.onFileUpload(name, this.state.uploads[name].file)
     }
-  }
-
-  handleImageUploaded(name: string) {
-    // eslint-disable-next-line no-console
-    console.log(name, this.state[name])
-    const imageObj = this.props.uploadedImages.find(image => image.id === name)
-    // eslint-disable-next-line no-console
-    console.log('image', imageObj)
   }
 
   handleCategoryChange(event: Event & { target: HTMLInputElement }) {
@@ -188,6 +195,9 @@ class ProducerForm extends React.Component {
   render() {
     return (
       <div>
+        {this.props.uploadedImages.map(image => (
+          <input key={image.id} type="text" name={image.id} value={image.url} readOnly />
+        ))}
         <ImageUpload
           hasErrored={this.props.uploadsHasErrored.includes('avatar')}
           isLoading={this.props.uploadsIsLoading.includes('avatar')}
@@ -196,7 +206,6 @@ class ProducerForm extends React.Component {
           label="Avatar"
           onImageSelected={this.handleFileChange}
           onUploadImage={this.handleFileUpload}
-          onImageUploaded={this.handleImageUploaded}
         />
         <form onSubmit={this.handleSubmit}>
           {this.renderStatus()}

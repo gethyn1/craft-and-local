@@ -13,7 +13,6 @@ type Props = {
   name: string,
   onImageSelected: Function,
   onUploadImage: Function,
-  onImageUploaded: Function,
 }
 
 const ImageUpload = ({
@@ -24,7 +23,6 @@ const ImageUpload = ({
   name,
   onImageSelected,
   onUploadImage,
-  onImageUploaded,
 }: Props) => {
   let status
 
@@ -34,7 +32,6 @@ const ImageUpload = ({
     status = <Error><p>There was an error uploading the image</p></Error>
   } else if (hasUploaded) {
     status = <p>Image succesfully uploaded</p>
-    onImageUploaded(name)
   }
 
   return (

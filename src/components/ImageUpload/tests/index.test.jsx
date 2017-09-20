@@ -26,7 +26,6 @@ describe('<ImageUpload />', () => {
       name: undefined,
       onImageSelected: jest.fn(),
       onUploadImage: jest.fn(),
-      onImageUploaded: jest.fn(),
     }
 
     mountedComponent = undefined
@@ -87,12 +86,5 @@ describe('<ImageUpload />', () => {
     props.isLoading = true
     const loading = renderedComponent().find('Loading')
     expect(loading.length).toEqual(1)
-  })
-
-  it('should trigger props.onImageUploaded when props.hasUploaded is set to true', () => {
-    props.hasUploaded = true
-    // eslint-disable-next-line no-unused-vars
-    const rendered = renderedComponent()
-    expect(props.onImageUploaded.mock.calls.length).toBe(1)
   })
 })
