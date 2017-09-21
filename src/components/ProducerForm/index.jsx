@@ -66,7 +66,6 @@ class ProducerForm extends React.Component {
     this.handleGeoCoding = this.handleGeoCoding.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleAddressSelect = this.handleAddressSelect.bind(this)
-    this.handleFileChange = this.handleFileChange.bind(this)
     this.handleFileUpload = this.handleFileUpload.bind(this)
   }
 
@@ -109,22 +108,8 @@ class ProducerForm extends React.Component {
     })
   }
 
-  // !!!!! DO I NEED THIS ?????
-  handleFileChange(event: Event & { target: HTMLInputElement }) {
-    event.preventDefault()
-
-    this.setState({
-      uploads: {
-        [event.target.name]: { file: event.target.files[0] },
-      },
-    })
-  }
-
-  handleFileUpload(event: Event & { target: HTMLButtonElement }) {
-    const name = event.target.getAttribute('data-name')
-    if (name && this.state.uploads[name]) {
-      this.props.onFileUpload(name, this.state.uploads[name].file)
-    }
+  handleFileUpload(name: String, file: Object) {
+    this.props.onFileUpload(name, file)
   }
 
   handleCategoryChange(event: Event & { target: HTMLInputElement }) {
@@ -204,7 +189,6 @@ class ProducerForm extends React.Component {
           hasUploaded={!!this.props.uploadedImages.find(item => item.id === 'avatar')}
           name="avatar"
           label="Avatar"
-          onImageSelected={this.handleFileChange}
           onUploadImage={this.handleFileUpload}
         />
         <form onSubmit={this.handleSubmit}>

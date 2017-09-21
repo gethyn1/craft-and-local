@@ -6,7 +6,6 @@ describe('<ImageUpload />', () => {
   let props
   let mountedComponent
 
-
   const renderedComponent = () => {
     if (!mountedComponent) {
       mountedComponent = mount(
@@ -58,13 +57,6 @@ describe('<ImageUpload />', () => {
     expect(rendered.find('input[type="file"]').prop('name')).toBe('test')
   })
 
-  it('should trigger props.onImageSelected when image is selected', () => {
-    const rendered = renderedComponent()
-    const input = rendered.find('input[type="file"]')
-    input.simulate('change')
-    expect(props.onImageSelected.mock.calls.length).toBe(1)
-  })
-
   it('should have an upload button', () => {
     const button = renderedComponent().find('button')
     expect(button.length).toEqual(1)
@@ -86,5 +78,12 @@ describe('<ImageUpload />', () => {
     props.isLoading = true
     const loading = renderedComponent().find('Loading')
     expect(loading.length).toEqual(1)
+  })
+
+  it('should update state.file with input value when file is selected', () => {
+    const rendered = renderedComponent()
+    const input = rendered.find('input[type="file"]')
+    input.simulate('change', { target: { files: ['test'] } })
+    expect(rendered.state().file).toBe('test')
   })
 })
