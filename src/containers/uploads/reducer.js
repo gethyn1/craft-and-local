@@ -29,9 +29,13 @@ export const uploads = (
       return Object.assign({}, state, {
         hasErrored: state.hasErrored.filter(item => item !== action.payload),
       })
-    case types.FILE_UPLOAD_SUCCESS:
+    case types.FILE_UPLOAD_SUCCESS_ADD:
       return Object.assign({}, state, {
         uploaded: [...state.uploaded, action.payload],
+      })
+    case types.FILE_UPLOAD_SUCCESS_REMOVE:
+      return Object.assign({}, state, {
+        uploaded: state.uploaded.filter(upload => upload.id !== action.payload),
       })
     default:
       return state

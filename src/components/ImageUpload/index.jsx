@@ -78,7 +78,7 @@ class ImageUpload extends React.Component {
     return (
       <div>
         {status}
-        {label && <label htmlFor={name}>{label}</label>}
+        {label && <label htmlFor={name}>{label}</label>}<br />
         <input type="file" name={name} onChange={this.handleChange} />
         <button data-name={name} onClick={this.handleUpload}>Upload</button>
       </div>

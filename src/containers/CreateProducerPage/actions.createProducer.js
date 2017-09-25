@@ -5,6 +5,8 @@ import {
   STORAGE_JSON_WEB_TOKEN,
 } from '../../config'
 
+import createPostHeaders from '../session/headers'
+
 import types from './constants'
 
 export const createProducerIsLoading = (payload: boolean) => ({
@@ -27,21 +29,10 @@ export const createProducerPostData = (producer: Object) => (dispatch: Function)
   dispatch(createProducerHasErrored(false))
   dispatch(createProducerIsLoading(true))
 
-  const headers = new Headers({
-    'Content-Type': 'application/json',
-  })
-
-  const jwtToken = sessionStorage.getItem(STORAGE_JSON_WEB_TOKEN)
-
-  if (jwtToken !== null) {
-    // flow-disable-next-line
-    headers.set('Authorization', jwtToken)
-  }
-
   return fetch(url, {
     method: 'POST',
     body: JSON.stringify(producer),
-    headers,
+    headers: createPostHeaders(STORAGE_JSON_WEB_TOKEN, true),
   })
     .then((response) => {
       if (!response.ok) {
