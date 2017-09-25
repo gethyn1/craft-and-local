@@ -110,15 +110,13 @@ class ProducerForm extends React.Component {
 
   handleFileUpload(name: String, file: Object) {
     // Run a check to see if name exists in props.uploadedImages
+    const fieldHasUpload = this.props.uploadedImages.find(item => item.id === name)
 
-    // If yes:
-    const fieldHasUpload = !!this.props.uploadedImages.find(item => item.id === name)
-
-
-    // Handle cancelling original upload before uploading file
-
-    // If no:
-    this.props.onFileUpload(name, file, fieldHasUpload)
+    if (fieldHasUpload) {
+      this.props.onFileUpload(name, file, fieldHasUpload.url)
+    } else {
+      this.props.onFileUpload(name, file)
+    }
   }
 
   handleCategoryChange(event: Event & { target: HTMLInputElement }) {

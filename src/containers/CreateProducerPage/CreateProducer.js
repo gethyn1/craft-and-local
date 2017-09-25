@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import {
   fileUploadAvatar,
-  fileUploadSuccessRemove,
+  fileDeleteFile,
 } from '../uploads/actions'
 import { categoriesFetchData } from '../ProducersPage/actions.categories'
 import { createProducerPostData } from './actions.createProducer'
@@ -43,9 +43,9 @@ const mapDispatchToProps = dispatch => ({
   onGeoCodingSelect: () => {
     dispatch(geocodingAddressLookupReset())
   },
-  onFileUpload: (id: string, file: Object, reset: boolean = false) => {
-    if (reset) {
-      dispatch(fileUploadSuccessRemove(id))
+  onFileUpload: (id: string, file: Object, replace: ?string = null) => {
+    if (replace) {
+      dispatch(fileDeleteFile(id, replace))
     }
 
     dispatch(fileUploadAvatar(id, file))
