@@ -24,6 +24,7 @@ describe('<ProducerForm />', () => {
 
   beforeEach(() => {
     props = {
+      getProducer: jest.fn(),
       getCategories: jest.fn(),
       categories: undefined,
       isLoading: undefined,

@@ -6,6 +6,9 @@ import ImageUpload from '../ImageUpload'
 import TextListInput from '../TextListInput'
 
 type Props = {
+  getProducer: Function,
+  producerId: string,
+  producer: Object,
   getCategories: Function,
   categories: Array<Object>,
   isLoading: boolean,
@@ -67,11 +70,14 @@ class ProducerForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleAddressSelect = this.handleAddressSelect.bind(this)
     this.handleFileUpload = this.handleFileUpload.bind(this)
+    this.categoryInState = this.categoryInState.bind(this)
   }
 
   state: State
 
   componentDidMount() {
+    this.props.getProducer(this.props.producerId)
+
     if (!this.props.categories) {
       this.props.getCategories()
     }
@@ -81,6 +87,10 @@ class ProducerForm extends React.Component {
 
   componentWillReceiveProps(nextProps: Props) {
     this.mapUploadsToState(nextProps.uploadedImages)
+
+    if (this.props.producer !== nextProps.producer) {
+      this.mapProducerToState(nextProps.producer)
+    }
   }
 
   mapUploadsToState(uploads: Array<Object>) {
@@ -91,8 +101,25 @@ class ProducerForm extends React.Component {
     })
   }
 
+  mapProducerToState(producer: Object) {
+    this.setState({
+      title: producer.title,
+      user_id: producer.user_id,
+      description: producer.description || '',
+      categories: producer.categories.map(category => category._id),
+      lng: producer.location.coordinates[0] || 0,
+      lat: producer.location.coordinates[1] || 0,
+      instagram_handle: producer.social_handles.instagram || '',
+      twitter_handle: producer.social_handles.twitter || '',
+      website: producer.website || '',
+      contact_email: producer.contact_email || '',
+      contact_telephone: producer.contact_telephone || '',
+    })
+  }
+
   props: Props
   mapUploadsToState: Function
+  mapProducerToState: Function
   handleChange: Function
   handleCategoryChange: Function
   handleGeoCoding: Function
@@ -100,6 +127,7 @@ class ProducerForm extends React.Component {
   handleAddressSelect: Function
   handleFileChange: Function
   handleFileUpload: Function
+  categoryInState: Function
 
   handleChange(event: Event & { target: HTMLInputElement }) {
     const name = event.target.name
@@ -152,7 +180,15 @@ class ProducerForm extends React.Component {
   handleSubmit(event: Event) {
     event.preventDefault()
 
-    this.props.onSubmit(this.state)
+    this.props.onSubmit(this.state, this.props.producerId)
+  }
+
+  categoryInState(id: string) {
+    if (this.state.categories) {
+      return this.state.categories.includes(id)
+    }
+
+    return false
   }
 
   renderStatus: Function
@@ -163,7 +199,7 @@ class ProducerForm extends React.Component {
     if (categories) {
       return categories.map((category: Object) => (
         <div key={category._id}>
-          <input type="checkbox" onChange={this.handleCategoryChange} id={category._id} value={category._id} name="categories" />&nbsp;
+          <input type="checkbox" checked={this.categoryInState(category._id)} onChange={this.handleCategoryChange} id={category._id} value={category._id} name="categories" />&nbsp;
           <label htmlFor={category._id}>{category.title}</label>
         </div>
       ))
