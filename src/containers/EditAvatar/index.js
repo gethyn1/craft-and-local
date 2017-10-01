@@ -3,7 +3,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
-import { fileUploadAvatar } from '../uploads/actions'
+import { fileUploadAvatar, fileUploadSuccessRemove } from '../uploads/actions'
 import UploadAvatar from '../../components/UploadAvatar'
 
 const mapStateToProps = (state: Object, ownProps: Object) => ({
@@ -17,6 +17,9 @@ const mapStateToProps = (state: Object, ownProps: Object) => ({
 const mapDispatchToProps = (dispatch: Function) => ({
   onUploadFile: (id: string, file: Object, keys: Object) => {
     dispatch(fileUploadAvatar(id, file, keys.userId))
+  },
+  resetUploads: () => {
+    dispatch(fileUploadSuccessRemove('avatar'))
   },
 })
 

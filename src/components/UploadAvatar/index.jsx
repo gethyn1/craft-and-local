@@ -12,6 +12,7 @@ type Props = {
   userId: string,
   onUploadFile: Function,
   previewPath: ?string,
+  resetUploads: Function,
 }
 
 type State = {
@@ -56,6 +57,10 @@ class UploadAvatar extends React.Component {
     }
 
     return null
+  }
+
+  componentWillUnmount() {
+    this.props.resetUploads()
   }
 
   render() {
