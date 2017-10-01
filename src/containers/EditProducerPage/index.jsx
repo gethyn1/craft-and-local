@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet'
 
 import { APP_NAME } from '../../config'
 
+import EditAvatar from '../EditAvatar'
 import EditProducer from './EditProducer'
 import Container from '../../components/Container'
 
@@ -21,6 +22,7 @@ const EditProducerPage = () => (
     />
     <Container>
       <p>Edit producer page</p>
+      <EditAvatar />
       <EditProducer />
     </Container>
   </div>

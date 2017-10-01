@@ -1,15 +1,15 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import ImageUpload from '../index'
+import FileUpload from '../index'
 
-describe('<ImageUpload />', () => {
+describe('<FileUpload />', () => {
   let props
   let mountedComponent
 
   const renderedComponent = () => {
     if (!mountedComponent) {
       mountedComponent = mount(
-        <ImageUpload {...props} />,
+        <FileUpload {...props} />,
       )
     }
 
@@ -23,8 +23,8 @@ describe('<ImageUpload />', () => {
       isLoading: false,
       label: undefined,
       name: undefined,
-      onImageSelected: jest.fn(),
-      onUploadImage: jest.fn(),
+      onUploadFile: jest.fn(),
+      uploadKeys: undefined,
     }
 
     mountedComponent = undefined
@@ -62,10 +62,10 @@ describe('<ImageUpload />', () => {
     expect(button.length).toEqual(1)
   })
 
-  it('should trigger props.onUploadImage when button is clicked', () => {
+  it('should trigger props.onUploadFile when button is clicked', () => {
     const button = renderedComponent().find('button')
     button.simulate('click')
-    expect(props.onUploadImage.mock.calls.length).toBe(1)
+    expect(props.onUploadFile.mock.calls.length).toBe(1)
   })
 
   it('should display error when props.hasErrored is true', () => {
@@ -85,5 +85,12 @@ describe('<ImageUpload />', () => {
     const input = rendered.find('input[type="file"]')
     input.simulate('change', { target: { files: ['test'] } })
     expect(rendered.state().file).toBe('test')
+  })
+
+  it('should pass props.uploadKeys as the final argument for props.onUploadFile', () => {
+    props.uploadKeys = { test: 'test' }
+    const button = renderedComponent().find('button')
+    button.simulate('click')
+    expect(props.onUploadFile.mock.calls[0][2]).toEqual({ test: 'test' })
   })
 })

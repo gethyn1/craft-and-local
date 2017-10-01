@@ -2,7 +2,6 @@
 
 import React from 'react'
 
-import ImageUpload from '../ImageUpload'
 import TextListInput from '../TextListInput'
 
 type Props = {
@@ -17,14 +16,9 @@ type Props = {
   geoCodingLookup: Function,
   geoCodingOptions: ?Array<Object>,
   onGeoCodingSelect: Function,
-  uploadsIsLoading: Array<string>,
-  uploadsHasErrored: Array<string>,
-  uploadedImages: Array<Object>,
-  onFileUpload: Function,
 }
 
 type State = {
-  avatar: ?string,
   title: ?string,
   user_id: ?string,
   description: ?string,
@@ -38,7 +32,6 @@ type State = {
   contact_email: ?string,
   contact_telephone: ?string,
   website: ?string,
-  uploads: Object,
 }
 
 class ProducerForm extends React.Component {
@@ -46,8 +39,6 @@ class ProducerForm extends React.Component {
     super(props)
 
     this.state = {
-      uploads: {},
-      avatar: undefined,
       title: '',
       user_id: '',
       description: '',
@@ -69,7 +60,6 @@ class ProducerForm extends React.Component {
     this.handleGeoCoding = this.handleGeoCoding.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleAddressSelect = this.handleAddressSelect.bind(this)
-    this.handleFileUpload = this.handleFileUpload.bind(this)
     this.categoryInState = this.categoryInState.bind(this)
   }
 
@@ -81,24 +71,12 @@ class ProducerForm extends React.Component {
     if (!this.props.categories) {
       this.props.getCategories()
     }
-
-    this.mapUploadsToState(this.props.uploadedImages)
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    this.mapUploadsToState(nextProps.uploadedImages)
-
     if (this.props.producer !== nextProps.producer) {
       this.mapProducerToState(nextProps.producer)
     }
-  }
-
-  mapUploadsToState(uploads: Array<Object>) {
-    uploads.forEach((upload) => {
-      this.setState({
-        [upload.id]: upload.url,
-      })
-    })
   }
 
   mapProducerToState(producer: Object) {
@@ -118,15 +96,12 @@ class ProducerForm extends React.Component {
   }
 
   props: Props
-  mapUploadsToState: Function
   mapProducerToState: Function
   handleChange: Function
   handleCategoryChange: Function
   handleGeoCoding: Function
   handleSubmit: Function
   handleAddressSelect: Function
-  handleFileChange: Function
-  handleFileUpload: Function
   categoryInState: Function
 
   handleChange(event: Event & { target: HTMLInputElement }) {
@@ -134,17 +109,6 @@ class ProducerForm extends React.Component {
     this.setState({
       [name]: event.target.value,
     })
-  }
-
-  handleFileUpload(name: String, file: Object) {
-    // Run a check to see if name exists in props.uploadedImages
-    const fieldHasUpload = this.props.uploadedImages.find(item => item.id === name)
-
-    if (fieldHasUpload) {
-      this.props.onFileUpload(name, file, fieldHasUpload.url)
-    } else {
-      this.props.onFileUpload(name, file)
-    }
   }
 
   handleCategoryChange(event: Event & { target: HTMLInputElement }) {
@@ -223,17 +187,6 @@ class ProducerForm extends React.Component {
   render() {
     return (
       <div>
-        {this.props.uploadedImages.map(image => (
-          <input key={image.id} type="text" name={image.id} value={image.url} readOnly />
-        ))}
-        <ImageUpload
-          hasErrored={this.props.uploadsHasErrored.includes('avatar')}
-          isLoading={this.props.uploadsIsLoading.includes('avatar')}
-          hasUploaded={!!this.props.uploadedImages.find(item => item.id === 'avatar')}
-          name="avatar"
-          label="Avatar"
-          onUploadImage={this.handleFileUpload}
-        />
         <form onSubmit={this.handleSubmit}>
           {this.renderStatus()}
           <div>

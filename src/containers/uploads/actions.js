@@ -2,7 +2,6 @@
 
 import {
   API_URL_UPLOADS_AVATAR,
-  API_URL_UPLOADS_DELETE,
   STORAGE_JSON_WEB_TOKEN,
 } from '../../config'
 
@@ -39,29 +38,21 @@ export const fileUploadSuccessRemove = (payload: string) => ({
   payload,
 })
 
-export const fileDeleteFile = (id: string, key: string) => (dispatch: Function) => {
-  const url = API_URL_UPLOADS_DELETE
-
-  // Delete from state
+export const fileUploadFile = (
+  id: string,
+  file: Object,
+  url: string,
+  userId: ?string = null,
+) => (dispatch: Function) => {
+  // Delete current upload from state
   dispatch(fileUploadSuccessRemove(id))
 
-  // Delete from S3
-  return fetch(url, {
-    method: 'POST',
-    body: JSON.stringify({ key }),
-    headers: createPostHeaders(STORAGE_JSON_WEB_TOKEN, true),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw Error(response.statusText)
-      }
-      return response
-    })
-}
-
-export const fileUploadFile = (id: string, file: Object, url: string) => (dispatch: Function) => {
   const formData = new FormData()
   formData.append(id, file)
+
+  if (userId) {
+    formData.append('user_id', userId)
+  }
 
   dispatch(fileIsUploadingAdd(id))
 
@@ -91,5 +82,5 @@ export const fileUploadFile = (id: string, file: Object, url: string) => (dispat
     })
 }
 
-export const fileUploadAvatar = (id: string, file: Object) =>
-  fileUploadFile(id, file, API_URL_UPLOADS_AVATAR)
+export const fileUploadAvatar = (id: string, file: Object, userId: string) =>
+  fileUploadFile(id, file, API_URL_UPLOADS_AVATAR, userId)

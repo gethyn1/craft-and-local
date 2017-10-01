@@ -11,19 +11,19 @@ type Props = {
   hasUploaded: boolean,
   label: ?string,
   name: string,
-  onUploadImage: Function,
+  onUploadFile: Function,
+  uploadKeys: Object,
 }
 
 type State = {
   file: ?Object,
 }
 
-// TO DO:
-// 1. Clear file
-// 2. Multiple files
-// 3. Possibly update name to FileUpload
+// TO DO: Upload multiple files
 
-class ImageUpload extends React.Component {
+class FileUpload extends React.Component {
+  static defaultProps: Object
+
   constructor(props: Props) {
     super(props)
 
@@ -50,7 +50,7 @@ class ImageUpload extends React.Component {
   }
 
   handleUpload() {
-    this.props.onUploadImage(this.props.name, this.state.file)
+    this.props.onUploadFile(this.props.name, this.state.file, this.props.uploadKeys)
   }
 
   handleChange: Function
@@ -86,4 +86,8 @@ class ImageUpload extends React.Component {
   }
 }
 
-export default ImageUpload
+FileUpload.defaultProps = {
+  uploadKeys: {},
+}
+
+export default FileUpload
