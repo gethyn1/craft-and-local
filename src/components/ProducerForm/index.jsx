@@ -1,7 +1,9 @@
 // @flow
 
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 
+import { NOT_FOUND_ROUTE } from '../../config'
 import TextListInput from '../TextListInput'
 
 type Props = {
@@ -16,6 +18,7 @@ type Props = {
   geoCodingLookup: Function,
   geoCodingOptions: ?Array<Object>,
   onGeoCodingSelect: Function,
+  notFound: boolean,
 }
 
 type State = {
@@ -185,6 +188,10 @@ class ProducerForm extends React.Component {
   }
 
   render() {
+    if (this.props.notFound) {
+      return <Redirect to={`/${NOT_FOUND_ROUTE}`} />
+    }
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>

@@ -22,6 +22,7 @@ const mapStateToProps = (state: Object, ownProps: Object) => ({
       option: option.address,
       value: `${option.lng},${option.lat}`,
     })) : null,
+  notFound: state.producer.notFound,
 })
 
 const mapDispatchToProps = (dispatch: Function) => ({
