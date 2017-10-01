@@ -46,6 +46,10 @@ class UploadAvatar extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.resetUploads()
+  }
+
   props: Props
   renderPreview: Function
 
@@ -57,10 +61,6 @@ class UploadAvatar extends React.Component {
     }
 
     return null
-  }
-
-  componentWillUnmount() {
-    this.props.resetUploads()
   }
 
   render() {
