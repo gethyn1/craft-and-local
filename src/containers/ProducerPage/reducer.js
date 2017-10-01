@@ -38,6 +38,8 @@ export const producer = (state: Object = initialState, action: { type: string, p
     case types.PRODUCER_CLEAR_STATE:
       return Object.assign({}, state, {
         producer: initialState.producer,
+        lng: initialState.lng,
+        lat: initialState.lat,
       })
     case types.PRODUCER_INSTAGRAM_FEED_IS_LOADING:
       return Object.assign({}, state, {
