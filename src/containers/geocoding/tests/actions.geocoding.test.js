@@ -7,7 +7,7 @@ import {
   geocodingAddressLookupSuccess,
   geocodingGetLatLngFromAddress,
   geocodingAddressLookupReset,
-} from '../actions.geocoding'
+} from '../actions'
 
 import types from '../constants'
 

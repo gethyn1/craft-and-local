@@ -15,12 +15,14 @@ import sass from './styles/style.scss'
 
 // Redux
 import * as categories from './containers/ProducersPage/reducer.categories'
-import * as createProducer from './containers/CreateProducerPage/reducer.createProducer'
-import * as geocoding from './containers/CreateProducerPage/reducer.geocoding'
+import * as createProducer from './containers/CreateProducerPage/reducer'
+import * as editProducer from './containers/EditProducerPage/reducer'
+import * as geocoding from './containers/geocoding/reducer'
 import * as location from './containers/location/reducer'
 import * as producer from './containers/ProducerPage/reducer'
 import * as producers from './containers/ProducersPage/reducer.producers'
 import * as session from './containers/session/reducer'
+import * as uploads from './containers/uploads/reducer'
 import rootReducer from './rootReducer'
 
 /* eslint-disable no-underscore-dangle */
@@ -30,11 +32,13 @@ const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMP
 const defaultState = {
   categories: categories.initialState,
   createProducer: createProducer.initialState,
+  editProducer: editProducer.initialState,
   geocoding: geocoding.initialState,
   location: location.initialState,
   producer: producer.initialState,
   producers: producers.initialState,
   session: session.initialState,
+  uploads: uploads.initialState,
 }
 
 const store = createStore(

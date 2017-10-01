@@ -11,6 +11,7 @@ import UserUtils from '../UserUtils'
 import ProducersPage from '../ProducersPage'
 import LoginPage from '../LoginPage'
 import CreateProducerPage from '../CreateProducerPage'
+import EditProducerPage from '../EditProducerPage'
 import NotFoundPage from '../NotFoundPage'
 import ProducerPage from '../ProducerPage'
 
@@ -31,6 +32,7 @@ const App = () => (
       <Route exact path={'/'} render={() => <ProducersPage />} />
       <Route exact path={'/producers/:category'} render={() => <ProducersPage />} />
       <Authenticated path={'/producer/create'} component={CreateProducerPage} adminComponent />
+      <Authenticated path={'/producer/edit/:userId'} component={EditProducerPage} adminComponent />
       <Route path={'/producer/:userId'} render={() => <ProducerPage />} />
       <Route exact path={'/login'} render={() => <LoginPage />} />
       <Route render={() => <NotFoundPage />} />

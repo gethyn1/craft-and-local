@@ -3,11 +3,11 @@
 import { connect } from 'react-redux'
 
 import { categoriesFetchData } from '../ProducersPage/actions.categories'
-import { createProducerPostData } from './actions.createProducer'
+import { createProducerPostData } from './actions'
 import {
   geocodingGetLatLngFromAddress,
   geocodingAddressLookupReset,
-} from './actions.geocoding'
+} from '../geocoding/actions'
 
 import ProducerForm from '../../components/ProducerForm'
 

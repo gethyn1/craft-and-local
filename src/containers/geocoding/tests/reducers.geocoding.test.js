@@ -1,4 +1,4 @@
-import { initialState, geocoding } from '../reducer.geocoding'
+import { initialState, geocoding } from '../reducer'
 
 import types from '../constants'
 

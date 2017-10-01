@@ -1,10 +1,15 @@
 // @flow
 
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 
+import { NOT_FOUND_ROUTE } from '../../config'
 import TextListInput from '../TextListInput'
 
 type Props = {
+  getProducer: Function,
+  producerId: string,
+  producer: Object,
   getCategories: Function,
   categories: Array<Object>,
   isLoading: boolean,
@@ -13,6 +18,7 @@ type Props = {
   geoCodingLookup: Function,
   geoCodingOptions: ?Array<Object>,
   onGeoCodingSelect: Function,
+  notFound: boolean,
 }
 
 type State = {
@@ -57,22 +63,49 @@ class ProducerForm extends React.Component {
     this.handleGeoCoding = this.handleGeoCoding.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleAddressSelect = this.handleAddressSelect.bind(this)
+    this.categoryInState = this.categoryInState.bind(this)
   }
 
   state: State
 
   componentDidMount() {
+    this.props.getProducer(this.props.producerId)
+
     if (!this.props.categories) {
       this.props.getCategories()
     }
   }
 
+  componentWillReceiveProps(nextProps: Props) {
+    if (this.props.producer !== nextProps.producer) {
+      this.mapProducerToState(nextProps.producer)
+    }
+  }
+
+  mapProducerToState(producer: Object) {
+    this.setState({
+      title: producer.title,
+      user_id: producer.user_id,
+      description: producer.description || '',
+      categories: producer.categories.map(category => category._id),
+      lng: producer.location.coordinates[0] || 0,
+      lat: producer.location.coordinates[1] || 0,
+      instagram_handle: producer.social_handles.instagram || '',
+      twitter_handle: producer.social_handles.twitter || '',
+      website: producer.website || '',
+      contact_email: producer.contact_email || '',
+      contact_telephone: producer.contact_telephone || '',
+    })
+  }
+
   props: Props
+  mapProducerToState: Function
   handleChange: Function
   handleCategoryChange: Function
   handleGeoCoding: Function
   handleSubmit: Function
   handleAddressSelect: Function
+  categoryInState: Function
 
   handleChange(event: Event & { target: HTMLInputElement }) {
     const name = event.target.name
@@ -114,7 +147,15 @@ class ProducerForm extends React.Component {
   handleSubmit(event: Event) {
     event.preventDefault()
 
-    this.props.onSubmit(this.state)
+    this.props.onSubmit(this.state, this.props.producerId)
+  }
+
+  categoryInState(id: string) {
+    if (this.state.categories) {
+      return this.state.categories.includes(id)
+    }
+
+    return false
   }
 
   renderStatus: Function
@@ -125,7 +166,7 @@ class ProducerForm extends React.Component {
     if (categories) {
       return categories.map((category: Object) => (
         <div key={category._id}>
-          <input type="checkbox" onChange={this.handleCategoryChange} id={category._id} value={category._id} name="categories" />&nbsp;
+          <input type="checkbox" checked={this.categoryInState(category._id)} onChange={this.handleCategoryChange} id={category._id} value={category._id} name="categories" />&nbsp;
           <label htmlFor={category._id}>{category.title}</label>
         </div>
       ))
@@ -147,64 +188,70 @@ class ProducerForm extends React.Component {
   }
 
   render() {
+    if (this.props.notFound) {
+      return <Redirect to={`/${NOT_FOUND_ROUTE}`} />
+    }
+
     return (
-      <form onSubmit={this.handleSubmit}>
-        {this.renderStatus()}
-        <div>
-          <label htmlFor="title">Title</label><br />
-          <input onChange={this.handleChange} type="text" name="title" value={this.state.title} />
-        </div>
-        <div>
-          <label htmlFor="user_id">User ID</label><br />
-          <input onChange={this.handleChange} type="text" name="user_id" value={this.state.user_id} />
-        </div>
-        <div>
-          <label htmlFor="description">Description</label><br />
-          <textarea onChange={this.handleChange} name="description" value={this.state.description} />
-        </div>
-        <div>
-          <label htmlFor="address_lookup">Postcode</label><br />
-          <TextListInput
-            options={this.props.geoCodingOptions}
-            onChange={this.handleGeoCoding}
-            onOptionSelect={this.handleAddressSelect}
-            name="address_lookup"
-          />
-        </div>
-        <div>
-          <label htmlFor="lng">Longitude</label><br />
-          <input onChange={this.handleChange} type="text" name="lng" value={this.state.lng} />
-        </div>
-        <div>
-          <label htmlFor="lat">Latitude</label><br />
-          <input onChange={this.handleChange} type="text" name="lat" value={this.state.lat} />
-        </div>
-        <div className="u-margin-bottom">
-          <p>Categories:</p>
-          {this.renderCategories()}
-        </div>
-        <div>
-          <label htmlFor="instagram_handle">Instagram</label><br />
-          <input onChange={this.handleChange} type="text" name="instagram_handle" value={this.state.instagram_handle} />
-        </div>
-        <div>
-          <label htmlFor="twitter_handle">Twitter</label><br />
-          <input onChange={this.handleChange} type="text" name="twitter_handle" value={this.state.twitter_handle} />
-        </div>
-        <div>
-          <label htmlFor="website">Website</label><br />
-          <input onChange={this.handleChange} type="text" name="website" value={this.state.website} />
-        </div>
-        <div>
-          <label htmlFor="contact_email">Contact email address</label><br />
-          <input onChange={this.handleChange} type="text" name="contact_email" value={this.state.contact_email} />
-        </div>
-        <div>
-          <label htmlFor="contact_telephone">Contact telephone</label><br />
-          <input onChange={this.handleChange} type="text" name="contact_telephone" value={this.state.contact_telephone} />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          {this.renderStatus()}
+          <div>
+            <label htmlFor="title">Title</label><br />
+            <input onChange={this.handleChange} type="text" name="title" value={this.state.title} />
+          </div>
+          <div>
+            <label htmlFor="user_id">User ID</label><br />
+            <input onChange={this.handleChange} type="text" name="user_id" value={this.state.user_id} />
+          </div>
+          <div>
+            <label htmlFor="description">Description</label><br />
+            <textarea onChange={this.handleChange} name="description" value={this.state.description} />
+          </div>
+          <div>
+            <label htmlFor="address_lookup">Postcode</label><br />
+            <TextListInput
+              options={this.props.geoCodingOptions}
+              onChange={this.handleGeoCoding}
+              onOptionSelect={this.handleAddressSelect}
+              name="address_lookup"
+            />
+          </div>
+          <div>
+            <label htmlFor="lng">Longitude</label><br />
+            <input onChange={this.handleChange} type="text" name="lng" value={this.state.lng} />
+          </div>
+          <div>
+            <label htmlFor="lat">Latitude</label><br />
+            <input onChange={this.handleChange} type="text" name="lat" value={this.state.lat} />
+          </div>
+          <div className="u-margin-bottom">
+            <p>Categories:</p>
+            {this.renderCategories()}
+          </div>
+          <div>
+            <label htmlFor="instagram_handle">Instagram</label><br />
+            <input onChange={this.handleChange} type="text" name="instagram_handle" value={this.state.instagram_handle} />
+          </div>
+          <div>
+            <label htmlFor="twitter_handle">Twitter</label><br />
+            <input onChange={this.handleChange} type="text" name="twitter_handle" value={this.state.twitter_handle} />
+          </div>
+          <div>
+            <label htmlFor="website">Website</label><br />
+            <input onChange={this.handleChange} type="text" name="website" value={this.state.website} />
+          </div>
+          <div>
+            <label htmlFor="contact_email">Contact email address</label><br />
+            <input onChange={this.handleChange} type="text" name="contact_email" value={this.state.contact_email} />
+          </div>
+          <div>
+            <label htmlFor="contact_telephone">Contact telephone</label><br />
+            <input onChange={this.handleChange} type="text" name="contact_telephone" value={this.state.contact_telephone} />
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     )
   }
 }
