@@ -21,13 +21,19 @@ $coral: #ff847c;
 $silver-satin: #c9d1d3;
 
 /// @group color
+$alabaster: #fafafa;
+
+/// @group color
 $twitter: #1da1f2;
 
 /// @group color
 $facebook: #3b5998;
 
 /// @group color
-$palette-body: inherit;
+$palette-body: #000;
+
+/// @group color
+$palette-body-lighten: rgba(0, 0, 0, .6);
 
 /// @group color
 $palette-primary: $caribbean-green;

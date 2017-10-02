@@ -15,6 +15,7 @@ import EditProducerPage from '../EditProducerPage'
 import NotFoundPage from '../NotFoundPage'
 import ProducerPage from '../ProducerPage'
 
+import Footer from '../../components/Footer'
 import GoogleAnalytics from '../../components/GoogleAnalytics'
 
 const App = () => (
@@ -37,6 +38,7 @@ const App = () => (
       <Route exact path={'/login'} render={() => <LoginPage />} />
       <Route render={() => <NotFoundPage />} />
     </Switch>
+    <Footer />
   </div>
 )
 
