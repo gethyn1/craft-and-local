@@ -23,14 +23,14 @@ class UserLocation extends React.Component {
     const { address, isLoading, hasErrored } = this.props
 
     if (isLoading) {
-      return <p>Finding your location ...</p>
+      return <p className="u-margin-bottom-none">Finding your location ...</p>
     }
 
     if (hasErrored) {
-      return <p>Sorry, there was an error getting your location ...</p>
+      return <p className="u-margin-bottom-none">Sorry, there was an error getting your location ...</p>
     }
 
-    return <p>{address}</p>
+    return <p className="u-margin-bottom-none">Here are producers near {address}</p>
   }
 }
 
