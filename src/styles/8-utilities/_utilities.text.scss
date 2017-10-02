@@ -14,6 +14,10 @@
 	text-align: right;
 }
 
+:global(.u-text-small) {
+	font-size: rem($small-font-size);
+}
+
 :global(.u-link-default) {
 	color: $palette-primary;
 }

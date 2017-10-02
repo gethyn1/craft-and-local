@@ -23,8 +23,12 @@ const HomePage = () => (
         { property: 'og:title', content: `${APP_NAME}: ${title}` },
       ]}
     />
+    <div className="u-padding-vertical-sm u-color-invert u-background-brand u-text-small u-text-center">
+      <Container>
+        <CurrentLocation />
+      </Container>
+    </div>
     <div className="u-margin-bottom">
-      <CurrentLocation />
       <div style={{ height: '400px' }}>
         <ProducersGoogleMap />
       </div>

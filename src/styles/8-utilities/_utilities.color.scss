@@ -5,3 +5,11 @@
 :global(.u-color-brand) {
 	color: $palette-primary;
 }
+
+:global(.u-color-invert) {
+	color: #fff;
+}
+
+:global(.u-background-brand) {
+	background: $palette-primary;
+}
