@@ -4,63 +4,44 @@
 
 @import '../global-import';
 
-// .wrapper {
-//   position: relative;
-//
-//   &::before,
-//   &::after {
-//     content: '';
-//     display: block;
-//     position: absolute;
-//     top: 0;
-//     bottom: 0;
-//     width: rem(100);
-//   }
-//
-//   &::before {
-//     background-image: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-//     left: 0;
-//   }
-//
-//   &::after {
-//     background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-//     right: 0;
-//   }
-// }
+/**
+ * 1. Half spacing below component to allow as it compounds with filter bottom
+ *    spacing to create default spacing.
+ */
 
 .filter-list {
-  display: flex;
-  justify-content: space-between;
   margin-left: 0;
-  overflow-x: scroll;
+  margin-bottom: rem($global-spacing-unit-sm); /* 1 */
 }
 
 .filter-item {
+  display: inline-block;
   list-style: none;
+  margin-bottom: rem($global-spacing-unit-sm);
+  margin-right: rem($global-spacing-unit-sm);
 
-  + * {
-    margin-left: rem($global-spacing-unit-sm);
+  &:last-child {
+    margin-right: 0;
   }
 }
 
 .filter {
-  background: rgba(0,0,0,0.05);
-  border: none;
+  border: 1px solid rgba(0,0,0,0.05);
   color: inherit;
   cursor: pointer;
   border-radius: $global-radius;
   display: block;
-  height: rem(40);
-  line-height: rem(40);
+  height: rem(38);
+  line-height: rem(38);
   font-size: rem($small-font-size);
-  padding: 0 rem($global-spacing-unit);
+  padding: 0 rem(22);
   text-decoration: none;
   white-space: nowrap;
 
   &:hover,
   &.active {
-    background: $palette-primary;
-    color: #fff;
+    border-color: $palette-primary;
+    color: $palette-primary;
   }
 
   &:focus {
