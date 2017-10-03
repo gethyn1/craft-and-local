@@ -6,6 +6,7 @@ import styles from '../styles/5-objects/_objects.layout.scss'
 
 type Props = {
   children: React.Element<*>,
+  direction?: ?string,
   size?: string,
 }
 
@@ -15,11 +16,12 @@ type ItemProps = {
   className?: string,
 }
 
-export const Layout = ({ children, size }: Props) => {
+export const Layout = ({ children, size, direction }: Props) => {
   const sizeClass = size ? `o-layout--${size}` : ''
+  const directionClass = direction ? `o-layout--${direction}` : ''
 
   return (
-    <div className={`${styles['o-layout']} ${styles[String(sizeClass)]}`}>
+    <div className={`${styles['o-layout']} ${styles[String(sizeClass)]} ${styles[String(directionClass)]}`}>
       {children}
     </div>
   )
@@ -39,6 +41,12 @@ export const LayoutItem = ({ children, cols, className }: ItemProps) => {
   )
 }
 
+Layout.defaultProps = {
+  direction: null,
+  className: '',
+}
+
 LayoutItem.defaultProps = {
+  direction: null,
   className: '',
 }

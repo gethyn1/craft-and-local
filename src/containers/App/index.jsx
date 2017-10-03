@@ -18,8 +18,10 @@ import ProducerPage from '../ProducerPage'
 import Footer from '../../components/Footer'
 import GoogleAnalytics from '../../components/GoogleAnalytics'
 
+import styles from '../../styles/6-components/_components.app.scss'
+
 const App = () => (
-  <div>
+  <div className={styles.wrapper}>
     <UserUtils />
     {isProd && <Route path="/" component={GoogleAnalytics} />}
     <Route
@@ -38,7 +40,9 @@ const App = () => (
       <Route exact path={'/login'} render={() => <LoginPage />} />
       <Route render={() => <NotFoundPage />} />
     </Switch>
-    <Footer />
+    <div className={styles.footer}>
+      <Footer />
+    </div>
   </div>
 )
 
