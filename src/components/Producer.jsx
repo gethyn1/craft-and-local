@@ -5,13 +5,20 @@ import { Helmet } from 'react-helmet'
 import { Redirect } from 'react-router-dom'
 
 import { ASSET_BASE, APP_NAME, APP_URL, SHARE_HASHTAGS, TWITTER_HANDLE, NOT_FOUND_ROUTE } from '../config'
+import { removeUrlPrefix } from '../lib/utils'
 
 import Avatar from './Avatar'
 import Button from './Button'
 import Container from './Container'
 import Lightbox from './Lightbox'
 import ListBare from './ListBare'
-import ListInline from './ListInline'
+import Icon from './Icon'
+
+/* eslint-disable no-unused-vars */
+import twitterIcon from '../images/icons/twitter.svg'
+import instagramIcon from '../images/icons/instagram.svg'
+import linkIcon from '../images/icons/link.svg'
+/* eslint-enable no-unused-vars */
 
 import styles from '../styles/6-components/_components.producer.scss'
 
@@ -122,11 +129,11 @@ class Producer extends React.Component {
               <h1 className={`${styles.title} u-h1`}>{producer.title}</h1>
               <p className={styles.categories}>{categories}</p>
             </header>
-
-            <p>{producer.description}</p>
-
+            <div className="u-margin-bottom-lg u-3/4@tablet u-center u-text-center">
+              <p>{producer.description}</p>
+            </div>
             <div className="u-margin-bottom-lg u-text-center">
-              <Button onClick={this.handleShareProfile}>Share with friends</Button>
+              <Button onClick={this.handleShareProfile}>Share this profile</Button>
             </div>
 
             <Lightbox isVisible={isSharing} toggleVisibility={this.handleShareProfile}>
@@ -156,13 +163,31 @@ class Producer extends React.Component {
             </Lightbox>
           </div>
         </Container>
-        <div className={styles['profile-meta']}>
+        <div className={styles.meta}>
           <Container>
-            <ListInline className={styles['profile-meta__list']}>
-              {producer.website ? (<li>{producer.website}</li>) : null}
-              {producer.contact_email ? (<li>{producer.contact_email}</li>) : null}
-              {producer.contact_telephone ? (<li>{producer.contact_telephone}</li>) : null}
-            </ListInline>
+            <ListBare className={styles.meta__list}>
+              {producer.website ? (
+                <li className={styles.meta__item}>
+                  <a className={styles.meta__link} href={producer.website} target="_blank">
+                    <Icon type="link" size="12" /> <span>{removeUrlPrefix(producer.website)}</span>
+                  </a>
+                </li>
+              ) : null}
+              {producer.twitter_handle ? (
+                <li className={styles.meta__item}>
+                  <a className={styles.meta__link} href={`https://twitter.com/${producer.twitter_handle}`} target="_blank">
+                    <Icon type="twitter" size="12" /> <span>{producer.twitter_handle}</span>
+                  </a>
+                </li>
+              ) : null}
+              {producer.instagram_handle ? (
+                <li className={styles.meta__item}>
+                  <a className={styles.meta__link} href={`https://instagram.com/${producer.instagram_handle}`} target="_blank">
+                    <Icon type="instagram" size="12" /> <span>{producer.instagram_handle}</span>
+                  </a>
+                </li>
+              ) : null}
+            </ListBare>
           </Container>
         </div>
       </div>
