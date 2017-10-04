@@ -2,6 +2,12 @@
 
 import React from 'react'
 
+import Icon from '../Icon'
+
+/* eslint-disable no-unused-vars */
+import closeIcon from '../../images/icons/close.svg'
+/* eslint-enable no-unused-vars */
+
 import styles from '../../styles/6-components/_components.lightbox.scss'
 
 type Props = {
@@ -29,7 +35,7 @@ const Lightbox = ({ children, className, isVisible, toggleVisibility }: Props) =
         onClick={(e) => { onOverlayClick(e, toggleVisibility) }}
       >
         <div className={styles.wrapper}>
-          <button className={styles.close} onClick={toggleVisibility}>X</button>
+          <button className={styles.close} onClick={toggleVisibility}><Icon type="close" size="20" /></button>
           <div className={styles.content}>
             {children}
           </div>
