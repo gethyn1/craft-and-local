@@ -4,12 +4,14 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Redirect } from 'react-router-dom'
 
-import { APP_NAME, APP_URL, SHARE_HASHTAGS, TWITTER_HANDLE, NOT_FOUND_ROUTE } from '../config'
+import { ASSET_BASE, APP_NAME, APP_URL, SHARE_HASHTAGS, TWITTER_HANDLE, NOT_FOUND_ROUTE } from '../config'
 
+import Avatar from './Avatar'
 import Button from './Button'
 import Container from './Container'
 import Lightbox from './Lightbox'
 import ListBare from './ListBare'
+import ListInline from './ListInline'
 
 import styles from '../styles/6-components/_components.producer.scss'
 
@@ -46,10 +48,10 @@ class Producer extends React.Component {
       fetchInstagramFeed,
     } = nextProps
 
-    if (producer && producer.social_handles.instagram) {
+    if (producer && producer.instagram_handle) {
       if (!this.instagramFeedIsLoading) {
         this.instagramFeedIsLoading = true
-        fetchInstagramFeed(producer.social_handles.instagram)
+        fetchInstagramFeed(producer.instagram_handle)
       }
     }
   }
@@ -114,10 +116,19 @@ class Producer extends React.Component {
       <div className={styles.root}>
         {this.renderHelmetMeta()}
         <Container>
-          <div className="u-margin-bottom-lg">
-            <h1 className={`${styles.title} u-h1`}>{producer.title}</h1>
-            <p>{categories}</p>
-            <Button onClick={this.handleShareProfile}>Share</Button>
+          <div>
+            <header className={styles.header}>
+              <Avatar className="u-margin-bottom-sm" alt={producer.title} src={`${ASSET_BASE}/${producer.avatar}`} />
+              <h1 className={`${styles.title} u-h1`}>{producer.title}</h1>
+              <p className={styles.categories}>{categories}</p>
+            </header>
+
+            <p>{producer.description}</p>
+
+            <div className="u-margin-bottom-lg u-text-center">
+              <Button onClick={this.handleShareProfile}>Share with friends</Button>
+            </div>
+
             <Lightbox isVisible={isSharing} toggleVisibility={this.handleShareProfile}>
               <h3 className="u-h2">Share {producer.title} with your friends</h3>
               <ListBare className="u-margin-none">
@@ -143,12 +154,17 @@ class Producer extends React.Component {
                 </li>
               </ListBare>
             </Lightbox>
-            <p>{producer.description}</p>
-            {producer.website ? (<p>{producer.website}</p>) : null}
-            {producer.contact_email ? (<p>{producer.contact_email}</p>) : null}
-            {producer.contact_telephone ? (<p>{producer.contact_telephone}</p>) : null}
           </div>
         </Container>
+        <div className={styles['profile-meta']}>
+          <Container>
+            <ListInline className={styles['profile-meta__list']}>
+              {producer.website ? (<li>{producer.website}</li>) : null}
+              {producer.contact_email ? (<li>{producer.contact_email}</li>) : null}
+              {producer.contact_telephone ? (<li>{producer.contact_telephone}</li>) : null}
+            </ListInline>
+          </Container>
+        </div>
       </div>
     )
   }

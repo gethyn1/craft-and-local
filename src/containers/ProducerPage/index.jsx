@@ -25,7 +25,7 @@ const ProducerPage = () => (
     <div>
       <SingleProducer />
     </div>
-    <div className="u-margin-bottom-lg">
+    <div className="u-margin-bottom-lg" style={{ height: '400px' }}>
       <ProducerGoogleMap />
     </div>
     <Container>
