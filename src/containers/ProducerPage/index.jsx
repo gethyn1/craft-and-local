@@ -9,8 +9,6 @@ import ProducerGoogleMap from './ProducerGoogleMap'
 import ProducerInstagramFeed from './ProducerInstagramFeed'
 import SingleProducer from './SingleProducer'
 
-import Container from '../../components/Container'
-
 const title = 'Producer page'
 
 const ProducerPage = () => (
@@ -25,12 +23,10 @@ const ProducerPage = () => (
     <div>
       <SingleProducer />
     </div>
-    <div className="u-margin-bottom-lg">
+    <ProducerInstagramFeed />
+    <div style={{ height: '400px' }}>
       <ProducerGoogleMap />
     </div>
-    <Container>
-      <ProducerInstagramFeed />
-    </Container>
   </div>
 )
 

@@ -16,8 +16,7 @@ const year = date.getFullYear()
 const Footer = () => (
   <footer className={styles.root}>
     <Container>
-      <p>&copy; {year} {APP_NAME}</p>
-      <ListInline className={styles.nav}>
+      <ListInline className={`${styles.nav} u-margin-bottom`}>
         <li className={styles.nav__item}>
           <Link className={styles.nav__link} to="/signup">Signup</Link>
         </li>
@@ -28,6 +27,7 @@ const Footer = () => (
           <Link className={styles.nav__link} to="/privacy-policy">Privacy policy</Link>
         </li>
       </ListInline>
+      <p>&copy; {year} {APP_NAME}</p>
     </Container>
   </footer>
 )

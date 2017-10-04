@@ -7,7 +7,7 @@ import styles from '../styles/5-objects/_objects.layout.scss'
 type Props = {
   children: React.Element<*>,
   direction?: ?string,
-  size?: string,
+  size?: ?string,
 }
 
 type ItemProps = {
@@ -43,6 +43,7 @@ export const LayoutItem = ({ children, cols, className }: ItemProps) => {
 
 Layout.defaultProps = {
   direction: null,
+  size: null,
   className: '',
 }
 

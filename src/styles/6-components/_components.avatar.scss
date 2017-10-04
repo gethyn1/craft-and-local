@@ -1,0 +1,15 @@
+/* ==========================================================================
+   #APP
+   ========================================================================== */
+
+@import '../global-import';
+
+.wrapper {
+  background: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  width: rem(120px);
+  height: rem(120px);
+  line-height: rem(120px);
+  overflow: hidden;
+}
