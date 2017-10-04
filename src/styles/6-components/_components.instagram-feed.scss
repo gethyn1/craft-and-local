@@ -1,0 +1,18 @@
+/* ==========================================================================
+   #INSTAGRAM FEED
+   ========================================================================== */
+
+@import '../global-import';
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  flex-basis: 50%;
+
+  @include mq($from: 'tablet') {
+    flex-basis: 25%;
+  }
+}

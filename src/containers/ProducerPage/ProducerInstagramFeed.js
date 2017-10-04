@@ -8,6 +8,7 @@ const mapStateToProps = (state: Object) => ({
   isLoading: state.producer.instagramFeedIsLoading,
   hasErrored: state.producer.instagramFeedHasErrored,
   items: state.producer.instagramFeed,
+  limit: 4,
 })
 
 const ProducerInstagramFeed = connect(
