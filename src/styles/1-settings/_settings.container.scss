@@ -19,6 +19,10 @@ $container-bp-widths: (
 /// @group container
 $container-max-width: 1020px;
 
+/// Large container max-width
+/// @group container
+$container-max-width-lg: 1400px;
+
 /// Breakpoint overides for container max-widths. Sass map properties names
 /// should map to breakpoint properties defined in $mq-breakpoints map in
 /// `1-settings/settings.breakpoints.scss`

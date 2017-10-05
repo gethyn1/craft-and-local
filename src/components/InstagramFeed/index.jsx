@@ -2,6 +2,8 @@
 
 import React from 'react'
 
+import Ratio from '../Ratio'
+
 import styles from '../../styles/6-components/_components.instagram-feed.scss'
 
 type Props = {
@@ -30,9 +32,11 @@ const InstagramFeed = ({ limit, items, isLoading, hasErrored }: Props) => {
 
       return (
         <div key={item.id} className={styles.item}>
-          <div className="o-ratio">
-            <img src={item.images.standard_resolution.url} alt={caption} />
-          </div>
+          <Ratio>
+            <a href={item.link} target="_blank">
+              <img src={item.standard_resolution} alt={caption} />
+            </a>
+          </Ratio>
         </div>
       )
     })
