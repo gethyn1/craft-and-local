@@ -15,6 +15,26 @@ export const initialState = {
   instagramFeed: null,
 }
 
+const refineInstagramFeed = (feed: Array<Object>) =>
+  feed.map((item) => {
+    const { caption, created_time, id, link } = item
+    const thumbnail = item.images.thumbnail.url
+    /* eslint-disable camelcase */
+    const low_resolution = thumbnail.replace(/s150x150/, 's320x320')
+    const standard_resolution = thumbnail.replace(/s150x150/, 's640x640')
+    /* eslint-enable camelcase */
+
+    return {
+      caption,
+      created_time,
+      id,
+      link,
+      thumbnail,
+      low_resolution,
+      standard_resolution,
+    }
+  })
+
 export const producer = (state: Object = initialState, action: { type: string, payload: any }) => {
   switch (action.type) {
     case types.PRODUCER_IS_LOADING:
@@ -51,7 +71,7 @@ export const producer = (state: Object = initialState, action: { type: string, p
       })
     case types.PRODUCER_FETCH_INSTAGRAM_FEED_SUCCESS:
       return Object.assign({}, state, {
-        instagramFeed: action.payload,
+        instagramFeed: refineInstagramFeed(action.payload),
       })
     case types.PRODUCER_FETCH_INSTAGRAM_FEED_CLEAR_STATE:
       return Object.assign({}, state, {

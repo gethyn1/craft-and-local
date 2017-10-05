@@ -31,7 +31,7 @@ const InstagramFeed = ({ limit, items, isLoading, hasErrored }: Props) => {
       return (
         <div key={item.id} className={styles.item}>
           <div className="o-ratio">
-            <img src={item.images.standard_resolution.url} alt={caption} />
+            <img src={item.standard_resolution} alt={caption} />
           </div>
         </div>
       )
