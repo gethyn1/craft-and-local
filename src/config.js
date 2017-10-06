@@ -25,7 +25,7 @@ export const API_URL_UPLOADS = `${API_URL}/uploads`
 export const API_URL_UPLOADS_AVATAR = `${API_URL_UPLOADS}/avatar`
 export const API_URL_UPLOADS_DELETE = `${API_URL_UPLOADS}/delete`
 
-export const ASSET_BASE = 'https://s3-eu-west-1.amazonaws.com/craft-and-local'
+export const ASSET_BASE = 'https://d3ov3mwru83yk6.cloudfront.net'
 
 export const STORAGE_JSON_WEB_TOKEN = 'jwt'
 export const STORAGE_IS_ADMIN = 'isAdmin'
