@@ -66,7 +66,7 @@ describe('<TextListInput />', () => {
     props.options = mockOptions
     const option = textListInput().find('li').first()
     option.simulate('click')
-    expect(props.onOptionSelect.mock.calls[0][0]).toBe('value 1')
+    expect(props.onOptionSelect.mock.calls[0][0]).toBe(mockOptions[0])
   })
 
   it('sets selected option as input value when selected', () => {

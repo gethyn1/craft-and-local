@@ -12,7 +12,7 @@ type Props = {
   options: ?Array<Option>,
   name: string,
   onChange: Function,
-  onOptionSelect: (value: string) => void,
+  onOptionSelect: (value: Object) => void,
 }
 
 type State = {
@@ -47,7 +47,7 @@ class TextListInput extends React.Component {
   }
 
   handleOptionSelect(option: Option) {
-    this.props.onOptionSelect(option.value)
+    this.props.onOptionSelect(option)
 
     this.setState({
       value: option.option,

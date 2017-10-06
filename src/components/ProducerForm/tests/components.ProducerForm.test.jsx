@@ -74,10 +74,16 @@ describe('<ProducerForm />', () => {
     expect(component.state('categories')).toEqual(null)
   })
 
-  it('sets lng and lat state when value is passed to `handleAddressSelect`', () => {
+  it('sets lng and lat state when data is passed to `handleAddressSelect`', () => {
     const component = producerForm()
-    component.instance().handleAddressSelect('123,456')
+    component.instance().handleAddressSelect({ id: '1', value: '123,456', option: 'test' })
     expect(component.state('lng')).toBe(123)
     expect(component.state('lat')).toBe(456)
+  })
+
+  it('sets address state when data is passed to `handleAddressSelect`', () => {
+    const component = producerForm()
+    component.instance().handleAddressSelect({ id: '1', value: '123,456', option: 'test' })
+    expect(component.state('address')).toBe('test')
   })
 })

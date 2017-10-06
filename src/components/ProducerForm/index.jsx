@@ -28,6 +28,7 @@ type State = {
   categories: ?Array<string>,
   delivery: boolean,
   box_scheme: boolean,
+  address: string,
   lng: number,
   lat: number,
   instagram_handle: ?string,
@@ -42,6 +43,7 @@ class ProducerForm extends React.Component {
     super(props)
 
     this.state = {
+      address: '',
       title: '',
       user_id: '',
       description: '',
@@ -133,12 +135,13 @@ class ProducerForm extends React.Component {
     this.props.geoCodingLookup(address)
   }
 
-  handleAddressSelect(value: string) {
-    const lngLat = value.split(',')
+  handleAddressSelect(data: Object) {
+    const lngLat = data.value.split(',')
 
     this.props.onGeoCodingSelect()
 
     this.setState({
+      address: data.option,
       lng: parseFloat(lngLat[0]),
       lat: parseFloat(lngLat[1]),
     })
@@ -209,7 +212,7 @@ class ProducerForm extends React.Component {
             <textarea onChange={this.handleChange} name="description" value={this.state.description} />
           </div>
           <div>
-            <label htmlFor="address_lookup">Postcode</label><br />
+            <label htmlFor="address_lookup">Address</label><br />
             <TextListInput
               options={this.props.geoCodingOptions}
               onChange={this.handleGeoCoding}
