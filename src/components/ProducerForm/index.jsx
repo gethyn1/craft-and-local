@@ -85,7 +85,6 @@ class ProducerForm extends React.Component {
   }
 
   mapProducerToState(producer: Object) {
-    console.log(producer)
     this.setState({
       title: producer.title,
       user_id: producer.user_id,
