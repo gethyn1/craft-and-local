@@ -85,11 +85,13 @@ class ProducerForm extends React.Component {
   }
 
   mapProducerToState(producer: Object) {
+    console.log(producer)
     this.setState({
       title: producer.title,
       user_id: producer.user_id,
       description: producer.description || '',
       categories: producer.categories.map(category => category._id),
+      address: producer.address || '',
       lng: producer.location.coordinates[0] || 0,
       lat: producer.location.coordinates[1] || 0,
       instagram_handle: producer.instagram_handle || '',
@@ -214,6 +216,7 @@ class ProducerForm extends React.Component {
           <div>
             <label htmlFor="address_lookup">Address</label><br />
             <TextListInput
+              value={this.state.address}
               options={this.props.geoCodingOptions}
               onChange={this.handleGeoCoding}
               onOptionSelect={this.handleAddressSelect}

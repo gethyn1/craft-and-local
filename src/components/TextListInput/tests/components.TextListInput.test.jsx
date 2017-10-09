@@ -24,6 +24,7 @@ describe('<TextListInput />', () => {
 
   beforeEach(() => {
     props = {
+      value: undefined,
       name: 'test',
       onChange: jest.fn(),
       onOptionSelect: jest.fn(),
@@ -76,5 +77,18 @@ describe('<TextListInput />', () => {
     const input = component.find('input').first()
     option.simulate('click')
     expect(input.props().value).toBe('option 1')
+  })
+
+  it('should set input value if props.value is defined', () => {
+    props.value = 'test value'
+    const input = textListInput().find('input').first()
+    expect(input.props().value).toBe('test value')
+  })
+
+  it('should not set input value after user has interacted with component', () => {
+    props.value = 'test value'
+    const input = textListInput().find('input').first()
+    input.simulate('change', { target: { value: '' } })
+    expect(input.props().value).toBe('')
   })
 })
