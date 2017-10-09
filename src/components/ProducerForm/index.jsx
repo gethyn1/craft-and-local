@@ -29,6 +29,7 @@ type State = {
   delivery: boolean,
   box_scheme: boolean,
   address: string,
+  locality: string,
   lng: number,
   lat: number,
   instagram_handle: ?string,
@@ -44,6 +45,7 @@ class ProducerForm extends React.Component {
 
     this.state = {
       address: '',
+      locality: '',
       title: '',
       user_id: '',
       description: '',
@@ -91,6 +93,7 @@ class ProducerForm extends React.Component {
       description: producer.description || '',
       categories: producer.categories.map(category => category._id),
       address: producer.address || '',
+      locality: producer.locality || '',
       lng: producer.location.coordinates[0] || 0,
       lat: producer.location.coordinates[1] || 0,
       instagram_handle: producer.instagram_handle || '',
@@ -221,6 +224,10 @@ class ProducerForm extends React.Component {
               onOptionSelect={this.handleAddressSelect}
               name="address_lookup"
             />
+          </div>
+          <div>
+            <label htmlFor="locality">Locality</label><br />
+            <input onChange={this.handleChange} type="text" name="locality" value={this.state.locality} />
           </div>
           <div>
             <label htmlFor="lng">Longitude</label><br />
