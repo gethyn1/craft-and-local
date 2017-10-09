@@ -6,6 +6,7 @@ import { categories } from './containers/ProducersPage/reducer.categories'
 import { createProducer } from './containers/CreateProducerPage/reducer'
 import { editProducer } from './containers/EditProducerPage/reducer'
 import { geocoding } from './containers/geocoding/reducer'
+import { localities } from './containers/localities/reducer'
 import { location } from './containers/location/reducer'
 import { producer } from './containers/ProducerPage/reducer'
 import { producers } from './containers/ProducersPage/reducer.producers'
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   createProducer,
   editProducer,
   geocoding,
+  localities,
   location,
   producer,
   producers,

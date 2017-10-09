@@ -11,7 +11,9 @@ type Props = {
   producerId: string,
   producer: Object,
   getCategories: Function,
+  getLocalities: Function,
   categories: Array<Object>,
+  localities: Array<Object>,
   isLoading: boolean,
   hasErrored: boolean,
   onSubmit: Function,
@@ -77,6 +79,10 @@ class ProducerForm extends React.Component {
 
     if (!this.props.categories) {
       this.props.getCategories()
+    }
+
+    if (!this.props.localities) {
+      this.props.getLocalities()
     }
   }
 
@@ -167,6 +173,7 @@ class ProducerForm extends React.Component {
 
   renderStatus: Function
   renderCategories: Function
+  renderLocalities: Function
 
   renderCategories() {
     const { categories } = this.props
@@ -176,6 +183,17 @@ class ProducerForm extends React.Component {
           <input type="checkbox" checked={this.categoryInState(category._id)} onChange={this.handleCategoryChange} id={category._id} value={category._id} name="categories" />&nbsp;
           <label htmlFor={category._id}>{category.title}</label>
         </div>
+      ))
+    }
+
+    return null
+  }
+
+  renderLocalities() {
+    const { localities } = this.props
+    if (localities) {
+      return localities.map((locality: Object) => (
+        <option key={locality._id} value={locality._id}>{locality.title}</option>
       ))
     }
 
@@ -227,7 +245,10 @@ class ProducerForm extends React.Component {
           </div>
           <div>
             <label htmlFor="locality">Locality</label><br />
-            <input onChange={this.handleChange} type="text" name="locality" value={this.state.locality} />
+            <select onChange={this.handleChange} name="locality" value={this.state.locality}>
+              <option value="">Select a locality</option>
+              {this.renderLocalities()}
+            </select>
           </div>
           <div>
             <label htmlFor="lng">Longitude</label><br />
