@@ -31,7 +31,7 @@ type State = {
   delivery: boolean,
   box_scheme: boolean,
   address: string,
-  locality: string,
+  locality: ?Object,
   lng: number,
   lat: number,
   instagram_handle: ?string,
@@ -47,7 +47,7 @@ class ProducerForm extends React.Component {
 
     this.state = {
       address: '',
-      locality: '',
+      locality: null,
       title: '',
       user_id: '',
       description: '',
@@ -99,7 +99,7 @@ class ProducerForm extends React.Component {
       description: producer.description || '',
       categories: producer.categories.map(category => category._id),
       address: producer.address || '',
-      locality: producer.locality || '',
+      locality: producer.locality || null,
       lng: producer.location.coordinates[0] || 0,
       lat: producer.location.coordinates[1] || 0,
       instagram_handle: producer.instagram_handle || '',
@@ -245,7 +245,7 @@ class ProducerForm extends React.Component {
           </div>
           <div>
             <label htmlFor="locality">Locality</label><br />
-            <select onChange={this.handleChange} name="locality" value={this.state.locality}>
+            <select onChange={this.handleChange} name="locality" value={this.state.locality ? this.state.locality._id : ''}>
               <option value="">Select a locality</option>
               {this.renderLocalities()}
             </select>

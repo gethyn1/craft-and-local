@@ -24,7 +24,7 @@ const ProducerPage = () => (
       <SingleProducer />
     </div>
     <ProducerInstagramFeed />
-    <div style={{ height: '400px' }}>
+    <div id="producer-map" style={{ height: '400px' }}>
       <ProducerGoogleMap />
     </div>
   </div>
