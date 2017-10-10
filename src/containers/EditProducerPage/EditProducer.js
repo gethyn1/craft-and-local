@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 import { categoriesFetchData } from '../ProducersPage/actions.categories'
+import { localitiesFetchData } from '../localities/actions'
 import { editProducerPostData } from './actions'
 import { geocodingGetLatLngFromAddress, geocodingAddressLookupReset } from '../geocoding/actions'
 import { producerFetchData } from '../ProducerPage/actions'
@@ -22,6 +23,7 @@ const mapStateToProps = (state: Object, ownProps: Object) => ({
       option: option.address,
       value: `${option.lng},${option.lat}`,
     })) : null,
+  localities: state.localities.localities,
   notFound: state.producer.notFound,
 })
 
@@ -31,6 +33,9 @@ const mapDispatchToProps = (dispatch: Function) => ({
   },
   getCategories: () => {
     dispatch(categoriesFetchData())
+  },
+  getLocalities: () => {
+    dispatch(localitiesFetchData())
   },
   onSubmit: (producer: Object, userId: string) => {
     dispatch(editProducerPostData(producer, userId))

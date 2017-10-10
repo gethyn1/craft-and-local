@@ -26,7 +26,9 @@ describe('<ProducerForm />', () => {
     props = {
       getProducer: jest.fn(),
       getCategories: jest.fn(),
+      getLocalities: jest.fn(),
       categories: undefined,
+      localities: undefined,
       isLoading: undefined,
       hasErrored: undefined,
       onSubmit: jest.fn(),
@@ -74,10 +76,23 @@ describe('<ProducerForm />', () => {
     expect(component.state('categories')).toEqual(null)
   })
 
-  it('sets lng and lat state when value is passed to `handleAddressSelect`', () => {
+  it('sets lng and lat state when data is passed to `handleAddressSelect`', () => {
     const component = producerForm()
-    component.instance().handleAddressSelect('123,456')
+    component.instance().handleAddressSelect({ id: '1', value: '123,456', option: 'test' })
     expect(component.state('lng')).toBe(123)
     expect(component.state('lat')).toBe(456)
+  })
+
+  it('sets address state when data is passed to `handleAddressSelect`', () => {
+    const component = producerForm()
+    component.instance().handleAddressSelect({ id: '1', value: '123,456', option: 'test' })
+    expect(component.state('address')).toBe('test')
+  })
+
+  it('creates a dropdown with available localities', () => {
+    props.localities = [{ _id: '1', title: 'test 1' }, { _id: '2', title: 'test 2' }]
+    const select = producerForm().find('select[name="locality"]').first()
+    const options = select.find('option')
+    expect(options.length).toBe(3)
   })
 })

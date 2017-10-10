@@ -12,10 +12,12 @@ type Props = {
   options: ?Array<Option>,
   name: string,
   onChange: Function,
-  onOptionSelect: (value: string) => void,
+  onOptionSelect: (value: Object) => void,
+  value: string,
 }
 
 type State = {
+  dirty: boolean,
   value: string,
 }
 
@@ -26,7 +28,8 @@ class TextListInput extends React.Component {
     super(props)
 
     this.state = {
-      value: '',
+      dirty: false,
+      value: this.props.value || '',
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -34,6 +37,16 @@ class TextListInput extends React.Component {
   }
 
   state: State
+
+  componentWillReceiveProps(nextProps: Object) {
+    if (!this.state.value && !this.state.dirty) {
+      this.setState({
+        dirty: false,
+        value: nextProps.value,
+      })
+    }
+  }
+
   props: Props
   handleChange: Function
   handleOptionSelect: Function
@@ -42,12 +55,13 @@ class TextListInput extends React.Component {
     this.props.onChange(event.target.value)
 
     this.setState({
+      dirty: true,
       value: event.target.value,
     })
   }
 
   handleOptionSelect(option: Option) {
-    this.props.onOptionSelect(option.value)
+    this.props.onOptionSelect(option)
 
     this.setState({
       value: option.option,

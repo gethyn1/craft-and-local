@@ -18,6 +18,7 @@ import * as categories from './containers/ProducersPage/reducer.categories'
 import * as createProducer from './containers/CreateProducerPage/reducer'
 import * as editProducer from './containers/EditProducerPage/reducer'
 import * as geocoding from './containers/geocoding/reducer'
+import * as localities from './containers/localities/reducer'
 import * as location from './containers/location/reducer'
 import * as producer from './containers/ProducerPage/reducer'
 import * as producers from './containers/ProducersPage/reducer.producers'
@@ -34,6 +35,7 @@ const defaultState = {
   createProducer: createProducer.initialState,
   editProducer: editProducer.initialState,
   geocoding: geocoding.initialState,
+  localities: localities.initialState,
   location: location.initialState,
   producer: producer.initialState,
   producers: producers.initialState,

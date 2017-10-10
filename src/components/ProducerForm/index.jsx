@@ -11,7 +11,9 @@ type Props = {
   producerId: string,
   producer: Object,
   getCategories: Function,
+  getLocalities: Function,
   categories: Array<Object>,
+  localities: Array<Object>,
   isLoading: boolean,
   hasErrored: boolean,
   onSubmit: Function,
@@ -28,6 +30,8 @@ type State = {
   categories: ?Array<string>,
   delivery: boolean,
   box_scheme: boolean,
+  address: string,
+  locality: ?Object,
   lng: number,
   lat: number,
   instagram_handle: ?string,
@@ -42,6 +46,8 @@ class ProducerForm extends React.Component {
     super(props)
 
     this.state = {
+      address: '',
+      locality: null,
       title: '',
       user_id: '',
       description: '',
@@ -74,6 +80,10 @@ class ProducerForm extends React.Component {
     if (!this.props.categories) {
       this.props.getCategories()
     }
+
+    if (!this.props.localities) {
+      this.props.getLocalities()
+    }
   }
 
   componentWillReceiveProps(nextProps: Props) {
@@ -88,6 +98,8 @@ class ProducerForm extends React.Component {
       user_id: producer.user_id,
       description: producer.description || '',
       categories: producer.categories.map(category => category._id),
+      address: producer.address || '',
+      locality: producer.locality || null,
       lng: producer.location.coordinates[0] || 0,
       lat: producer.location.coordinates[1] || 0,
       instagram_handle: producer.instagram_handle || '',
@@ -133,12 +145,13 @@ class ProducerForm extends React.Component {
     this.props.geoCodingLookup(address)
   }
 
-  handleAddressSelect(value: string) {
-    const lngLat = value.split(',')
+  handleAddressSelect(data: Object) {
+    const lngLat = data.value.split(',')
 
     this.props.onGeoCodingSelect()
 
     this.setState({
+      address: data.option,
       lng: parseFloat(lngLat[0]),
       lat: parseFloat(lngLat[1]),
     })
@@ -160,6 +173,7 @@ class ProducerForm extends React.Component {
 
   renderStatus: Function
   renderCategories: Function
+  renderLocalities: Function
 
   renderCategories() {
     const { categories } = this.props
@@ -169,6 +183,17 @@ class ProducerForm extends React.Component {
           <input type="checkbox" checked={this.categoryInState(category._id)} onChange={this.handleCategoryChange} id={category._id} value={category._id} name="categories" />&nbsp;
           <label htmlFor={category._id}>{category.title}</label>
         </div>
+      ))
+    }
+
+    return null
+  }
+
+  renderLocalities() {
+    const { localities } = this.props
+    if (localities) {
+      return localities.map((locality: Object) => (
+        <option key={locality._id} value={locality._id}>{locality.title}</option>
       ))
     }
 
@@ -209,13 +234,21 @@ class ProducerForm extends React.Component {
             <textarea onChange={this.handleChange} name="description" value={this.state.description} />
           </div>
           <div>
-            <label htmlFor="address_lookup">Postcode</label><br />
+            <label htmlFor="address_lookup">Address</label><br />
             <TextListInput
+              value={this.state.address}
               options={this.props.geoCodingOptions}
               onChange={this.handleGeoCoding}
               onOptionSelect={this.handleAddressSelect}
               name="address_lookup"
             />
+          </div>
+          <div>
+            <label htmlFor="locality">Locality</label><br />
+            <select onChange={this.handleChange} name="locality" value={this.state.locality ? this.state.locality._id : ''}>
+              <option value="">Select a locality</option>
+              {this.renderLocalities()}
+            </select>
           </div>
           <div>
             <label htmlFor="lng">Longitude</label><br />

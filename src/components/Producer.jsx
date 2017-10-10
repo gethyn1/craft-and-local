@@ -18,6 +18,7 @@ import Icon from './Icon'
 import twitterIcon from '../images/icons/twitter.svg'
 import instagramIcon from '../images/icons/instagram.svg'
 import linkIcon from '../images/icons/link.svg'
+import locationIcon from '../images/icons/location.svg'
 /* eslint-enable no-unused-vars */
 
 import styles from '../styles/6-components/_components.producer.scss'
@@ -114,7 +115,7 @@ class Producer extends React.Component {
 
     const categories = producer.categories.map((category, i) => (
       <span key={category._id}>
-        <span>{category.title}</span>
+        {category.title}
         {i + 1 === producer.categories.length ? null : ', '}
       </span>
     ))
@@ -166,6 +167,13 @@ class Producer extends React.Component {
         <div className={styles.meta}>
           <Container>
             <ListBare className={styles.meta__list}>
+              {producer.locality ? (
+                <li className={styles.meta__item}>
+                  <a className={styles.meta__link} href="#producer-map">
+                    <Icon type="location" size="12" /> <span>{producer.locality.title}</span>
+                  </a>
+                </li>
+              ) : null}
               {producer.website ? (
                 <li className={styles.meta__item}>
                   <a className={styles.meta__link} href={producer.website} target="_blank">

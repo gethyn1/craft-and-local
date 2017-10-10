@@ -19,6 +19,7 @@ export const APP_URL = isProd ? 'https://piano-tuner-eagle-18310.netlify.com' : 
 export const API_URL_PRODUCERS = `${API_URL}/producers`
 export const API_URL_PRODUCERS_CREATE = `${API_URL_PRODUCERS}/create`
 export const API_URL_CATEGORIES = `${API_URL}/categories`
+export const API_URL_LOCALITIES = `${API_URL}/localities`
 export const API_URL_INSTAGRAM_FEED = `${API_URL}/instagram`
 export const API_URL_USER_AUTH = `${API_URL}/user/authenticate`
 export const API_URL_UPLOADS = `${API_URL}/uploads`
