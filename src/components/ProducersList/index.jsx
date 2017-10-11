@@ -154,10 +154,14 @@ class ProducersList extends React.Component {
     }
 
     if (this.state.noMoreProducers) {
-      return <p>That is all we have at the moment</p>
+      return (
+        <div className="u-margin-vertical">
+          <p className="u-text-center">That is all the producers we have at the moment</p>
+        </div>
+      )
     }
 
-    return <Button onClick={this.handleLoadMore}>Load more</Button>
+    return <Button block level="recede" onClick={this.handleLoadMore}>Load more</Button>
   }
 
   renderProducers: Function

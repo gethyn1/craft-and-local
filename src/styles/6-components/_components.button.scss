@@ -31,6 +31,15 @@
 
 .block {
   display: block;
+  width: 100%;
+}
+
+.recede {
+  background-color: rgba(0,0,0,.1);
+
+  &:hover {
+    background-color: darken($palette-body-lighten, 10);
+  }
 }
 
 .facebook {
