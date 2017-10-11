@@ -33,10 +33,14 @@ const HomePage = () => (
         <ProducersGoogleMap />
       </div>
     </div>
-    <Container>
-      <Categories />
-      <AllProducers />
-    </Container>
+    <div className="u-margin-bottom-lg">
+      <Container>
+        <div className="u-margin-bottom-lg">
+          <Categories />
+        </div>
+        <AllProducers />
+      </Container>
+    </div>
   </div>
 )
 
