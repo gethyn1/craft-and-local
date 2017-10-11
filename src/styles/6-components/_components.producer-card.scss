@@ -6,10 +6,9 @@
 
 .card {
   border: 1px solid $silver-satin;
-  border-radius: $global-radius;
   color: inherit;
   display: block;
-  padding: rem($global-spacing-unit);
+  padding: rem($global-spacing-unit-lg) rem($global-spacing-unit);
   text-align: center;
   text-decoration: none;
 
@@ -23,8 +22,20 @@
 .title {
   font-size: rem(16);
   text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+.categories,
+.distance {
+  color: $palette-body-lighten;
 }
 
 .distance {
   font-size: rem($small-font-size);
+
+  svg {
+    margin-right: rem($global-spacing-unit-xsm);
+    position: relative;
+    top: 1px;
+  }
 }
