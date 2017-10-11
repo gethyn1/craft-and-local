@@ -2,6 +2,8 @@ import React from 'react'
 import { mount } from 'enzyme'
 import Avatar from '../index'
 
+import styles from '../../../styles/6-components/_components.avatar.scss'
+
 describe('<Avatar />', () => {
   let props
   let mountedComponent
@@ -21,6 +23,7 @@ describe('<Avatar />', () => {
       className: undefined,
       alt: 'alternative text',
       src: 'test.jpg',
+      size: undefined,
     }
 
     mountedComponent = undefined
@@ -45,5 +48,11 @@ describe('<Avatar />', () => {
     props.className = 'test'
     const avatar = renderedComponent()
     expect(avatar.hasClass('test')).toBe(true)
+  })
+
+  it('should add props.size as a class', () => {
+    props.size = 'small'
+    const avatar = renderedComponent()
+    expect(avatar.hasClass(styles.small)).toBe(true)
   })
 })

@@ -8,10 +8,11 @@ type Props = {
   className?: string,
   alt: string,
   src: string,
+  size?: string,
 }
 
-const Avatar = ({ className, alt, src }: Props) => {
-  const classList = `${styles.wrapper} ${String(className)}`
+const Avatar = ({ className, alt, src, size }: Props) => {
+  const classList = `${styles.wrapper} ${String(className)} ${size ? String(styles[size]) : ''}`
 
   return (
     <div className={classList}>
@@ -21,7 +22,8 @@ const Avatar = ({ className, alt, src }: Props) => {
 }
 
 Avatar.defaultProps = {
-  className: null,
+  className: '',
+  size: '',
 }
 
 export default Avatar
