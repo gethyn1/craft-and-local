@@ -6,6 +6,7 @@ import {
 } from '../../config'
 
 import createPostHeaders from '../session/headers'
+import { sessionAuthenticate } from '../session/actions'
 import types from './constants'
 
 export const fileIsUploadingAdd = (payload: string) => ({
@@ -63,7 +64,8 @@ export const fileUploadFile = (
   })
     .then((response) => {
       if (!response.ok) {
-        throw Error(response.statusText)
+        dispatch(sessionAuthenticate(response.status))
+        throw new Error(response.statusText)
       }
 
       dispatch(fileIsUploadingRemove(id))

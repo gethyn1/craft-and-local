@@ -40,6 +40,17 @@ export const sessionLogout = () => (dispatch: Function) => {
   dispatch(sessionLogoutSuccess())
 }
 
+export const sessionAuthenticate = (statusCode: number) => (dispatch: Function) => {
+  switch (statusCode) {
+    case 401:
+      return dispatch(sessionLogout())
+    case 403:
+      return null
+    default:
+      return null
+  }
+}
+
 export const sessionPostLoginCredentials = (
   username: string,
   password: string,

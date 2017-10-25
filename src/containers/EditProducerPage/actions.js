@@ -6,6 +6,7 @@ import {
 } from '../../config'
 
 import createPostHeaders from '../session/headers'
+import { sessionAuthenticate } from '../session/actions'
 
 import types from './constants'
 
@@ -36,6 +37,7 @@ export const editProducerPostData = (producer: Object, userId: string) => (dispa
   })
     .then((response) => {
       if (!response.ok) {
+        dispatch(sessionAuthenticate(response.status))
         throw new Error(response.statusText)
       }
 
