@@ -43,6 +43,7 @@ const mapStateToProps = (state: Object, ownProps: Object) => {
     lat: state.location.latitude,
     lng: state.location.longitude,
     loadCount: 2,
+    path: params.category,
     producers: state.producers.producers,
   }
 }

@@ -5,8 +5,9 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import { AppContainer } from 'react-hot-loader'
 import thunkMiddleware from 'redux-thunk'
+import ReactGA from 'react-ga'
 
-import { isProd } from './config'
+import { GA_DEBUG, GA_ID, isProd } from './config'
 
 import App from './containers/App'
 
@@ -25,6 +26,11 @@ import * as producers from './containers/ProducersPage/reducer.producers'
 import * as session from './containers/session/reducer'
 import * as uploads from './containers/uploads/reducer'
 import rootReducer from './rootReducer'
+
+// Google Analytics
+ReactGA.initialize(GA_ID, {
+  debug: GA_DEBUG,
+})
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose

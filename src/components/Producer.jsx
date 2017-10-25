@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom'
 
 import { ASSET_BASE, APP_NAME, APP_URL, SHARE_HASHTAGS, TWITTER_HANDLE, NOT_FOUND_ROUTE } from '../config'
 import { removeUrlPrefix } from '../lib/utils'
+import * as track from '../containers/analytics/events'
 
 import Avatar from './Avatar'
 import Button from './Button'
@@ -74,6 +75,7 @@ class Producer extends React.Component {
 
   handleShareProfile() {
     this.props.toggleShareProfile(!this.props.isSharing)
+    track.shareProducerModal(this.props.producer.user_id)
   }
 
   renderHelmetMeta: Function
@@ -99,9 +101,10 @@ class Producer extends React.Component {
   }
 
   render() {
-    const { producer, isLoading, hasErrored, isSharing, notFound } = this.props
+    const { producer, producerId, isLoading, hasErrored, isSharing, notFound } = this.props
 
     if (notFound) {
+      track.pageNotFound('producer', producerId)
       return <Redirect to={`/${NOT_FOUND_ROUTE}`} />
     }
 
@@ -144,6 +147,7 @@ class Producer extends React.Component {
                   <Button
                     level="facebook"
                     target="_blank"
+                    onClick={() => { track.shareProducerButton('facebook', producer.user_id) }}
                     href={`https://facebook.com/sharer/sharer.php?u=${APP_URL}/producer/${producer.user_id}`}
                     block
                   >
@@ -154,6 +158,7 @@ class Producer extends React.Component {
                   <Button
                     level="twitter"
                     target="_blank"
+                    onClick={() => { track.shareProducerButton('twitter', producer.user_id) }}
                     href={`https://twitter.com/intent/tweet/?url=${APP_URL}/producer/${producer.user_id}&text=${producer.title}&hashtags=${SHARE_HASHTAGS}&via=${TWITTER_HANDLE}`}
                     block
                   >
@@ -169,28 +174,28 @@ class Producer extends React.Component {
             <ListBare className={styles.meta__list}>
               {producer.locality ? (
                 <li className={styles.meta__item}>
-                  <a className={styles.meta__link} href="#producer-map">
+                  <a onClick={() => { track.producerMetaLink('location', producer.user_id) }} className={styles.meta__link} href="#producer-map">
                     <Icon type="location" size="12" /> <span>{producer.locality.title}</span>
                   </a>
                 </li>
               ) : null}
               {producer.website ? (
                 <li className={styles.meta__item}>
-                  <a className={styles.meta__link} href={producer.website} target="_blank">
+                  <a onClick={() => { track.producerMetaLink('website', producer.user_id) }} className={styles.meta__link} href={producer.website} target="_blank">
                     <Icon type="link" size="12" /> <span>{removeUrlPrefix(producer.website)}</span>
                   </a>
                 </li>
               ) : null}
               {producer.twitter_handle ? (
                 <li className={styles.meta__item}>
-                  <a className={styles.meta__link} href={`https://twitter.com/${producer.twitter_handle}`} target="_blank">
+                  <a onClick={() => { track.producerMetaLink('twitter', producer.user_id) }} className={styles.meta__link} href={`https://twitter.com/${producer.twitter_handle}`} target="_blank">
                     <Icon type="twitter" size="12" /> <span>{producer.twitter_handle}</span>
                   </a>
                 </li>
               ) : null}
               {producer.instagram_handle ? (
                 <li className={styles.meta__item}>
-                  <a className={styles.meta__link} href={`https://instagram.com/${producer.instagram_handle}`} target="_blank">
+                  <a onClick={() => { track.producerMetaLink('instagram', producer.user_id) }} className={styles.meta__link} href={`https://instagram.com/${producer.instagram_handle}`} target="_blank">
                     <Icon type="instagram" size="12" /> <span>{producer.instagram_handle}</span>
                   </a>
                 </li>

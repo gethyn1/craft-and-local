@@ -3,6 +3,8 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 
+import * as track from '../../containers/analytics/events'
+
 import { NOT_FOUND_ROUTE } from '../../config'
 
 import Button from '../Button'
@@ -14,6 +16,7 @@ import ProducerCard from '../ProducerCard'
 type Props = {
   category: ?string,
   categoryDoesNotExist: boolean,
+  path: string,
   producers: ?Array<Object>,
   fetchData: Function,
   hasErrored: boolean,
@@ -91,6 +94,8 @@ class ProducersList extends React.Component {
 
   handleLoadMore() {
     const { category, lat, lng, loadCount, producers } = this.props
+
+    track.loadMoreProducers(category, producers ? producers.length : null)
 
     if (producers) {
       this.props.loadMore(
@@ -170,6 +175,7 @@ class ProducersList extends React.Component {
 
   render() {
     if (this.props.categoryDoesNotExist) {
+      track.pageNotFound('category', this.props.path)
       return <Redirect to={`/${NOT_FOUND_ROUTE}`} />
     }
 
