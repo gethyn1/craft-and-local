@@ -50,7 +50,7 @@ const Button = ({ block, children, className, href, level, onClick, target, type
   // Render an <a> tag if href prop is defined
   if (href) {
     return (
-      <a href={href} target={target} className={classList}>
+      <a href={href} target={target} onClick={onClick} className={classList}>
         {children}
       </a>
     )

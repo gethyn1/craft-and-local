@@ -3,12 +3,6 @@
 import React from 'react'
 import ReactGA from 'react-ga'
 
-import { GA_DEBUG, GA_ID } from '../../config'
-
-ReactGA.initialize(GA_ID, {
-  debug: GA_DEBUG,
-})
-
 type Props = {
   location: Object,
 }
