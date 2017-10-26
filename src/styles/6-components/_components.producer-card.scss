@@ -6,6 +6,7 @@
 
 .card {
   border: 1px solid $silver-satin;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.08);
   color: inherit;
   display: block;
   padding: rem($global-spacing-unit-lg) rem($global-spacing-unit);

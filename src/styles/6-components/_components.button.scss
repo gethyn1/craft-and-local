@@ -35,7 +35,7 @@
 }
 
 .recede {
-  background-color: rgba(0,0,0,.1);
+  background-color: rgba(0,0,0,0.3);
 
   &:hover {
     background-color: darken($palette-body-lighten, 10);

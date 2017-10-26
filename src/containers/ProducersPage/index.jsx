@@ -35,7 +35,7 @@ const HomePage = () => (
     </div>
     <div className="u-margin-bottom-lg">
       <Container>
-        <div className="u-margin-bottom-lg">
+        <div>
           <Categories />
         </div>
         <AllProducers />

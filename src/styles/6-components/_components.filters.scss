@@ -26,7 +26,8 @@
 }
 
 .filter {
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid $silver-satin;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.08);
   color: inherit;
   cursor: pointer;
   border-radius: $global-radius;
@@ -40,8 +41,9 @@
 
   &:hover,
   &.active {
+    background: $palette-primary;
     border-color: $palette-primary;
-    color: $palette-primary;
+    color: #fff;
   }
 
   &:focus {

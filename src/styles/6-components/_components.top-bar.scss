@@ -22,7 +22,7 @@
 }
 
 .logo {
-  color: $palette-primary;
+  color: inherit;
   display: inline-block;
   font-weight: 700;
   font-size: rem(30);
@@ -78,11 +78,6 @@
   &:hover {
     color: $palette-primary;
   }
-}
-
-
-.login {
-  font-weight: $bold;
 }
 
 .login__link {
